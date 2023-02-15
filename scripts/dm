@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# vi: ft=bash
+#================================================================
+# HEADER
+#================================================================
+#% SYNOPSIS
+#+    ${SCRIPT_NAME} [command] ...
+#%
+#% DESCRIPTION
+#%    d(otfile) m(anager)
+#%    Helps shorten common operations in NixOS configuration
+#%
+#% COMMANDS
+#%    home-switch <user@hostname>   rebuild and switch home-manager profile
+#%    nix-switch <hostname>         rebuild and switch NixOS profile
+#%    help                          show this message
+#%
+#================================================================
+#- IMPLEMENTATION
+#-    version         ${SCRIPT_NAME} 0.0.4
+#-    author          solemnattic
+#-
+#================================================================
+#  HISTORY
+#     2022/02/15 : solemnattic : Script creation
+# 
+#================================================================
+#  DEBUG OPTION
+#    set -n  # Uncomment to check your syntax, without execution.
+#    set -x  # Uncomment to debug this shell script
+#
+#================================================================
+# END_OF_HEADER
+#================================================================
+
+OPTS1=$1
+OPTS2=$2
+
+
+  #== needed variables ==#
+SCRIPT_HEADSIZE=$(head -200 ${0} |grep -n "^# END_OF_HEADER" | cut -f1 -d:)
+SCRIPT_NAME="$(basename ${0})"
+
+  #== usage functions ==#
+usage() { printf "Usage: "; head -${SCRIPT_HEADSIZE:-99} ${0} | grep -e "^#+" | sed -e "s/^#+[ ]*//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g" ; }
+usagefull() { head -${SCRIPT_HEADSIZE:-99} ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g" ; }
+scriptinfo() { head -${SCRIPT_HEADSIZE:-99} ${0} | grep -e "^#-" | sed -e "s/^#-//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g"; }
+
+if [ $# == 0 ]
+then
+    usage
+fi
+
+if [ "$OPTS1" = "nix-switch" ] 
+then
+    if [ -z "$2" ]
+    then
+        NIX_ARG=$(hostname)
+    else
+        NIX_ARG=$2
+    fi
+    echo "rebuilding nixos profile for $NIX_ARG"
+    sudo nixos-rebuild switch --flake ".#$NIX_ARG"
+elif [ "$OPTS1" = "home-switch" ]
+then
+    if [ -z "$2" ]
+    then
+        HOME_ARG="$(whoami)@$(hostname)"
+    else
+        HOME_ARG=$2
+    fi
+    echo "rebuilding home-manager profile for $HOME_ARG"
+    home-manager switch --flake ".#$HOME_ARG"
+elif [ "$OPTS1" = "help" ]
+then
+    usagefull
+elif [ "$OPTS1" = "scriptinfo" ]
+then
+    scriptinfo
+fi
+
+

@@ -27,7 +27,8 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-    in rec {
+    in
+    rec {
       # Your custom packages
       # Acessible through 'nix build', 'nix shell', etc
       packages = forAllSystems (system:
@@ -55,7 +56,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [
             # > Our main nixos configuration file <
-            ./nixos/configuration.nix
+            ./nixos/nixos-vm.nix
           ];
         };
       };
