@@ -12,8 +12,10 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-	./AstroNvim.nix
-	./nyoom.nix
+    ./AstroNvim.nix
+    ./nyoom.nix
+    ./nvpunk-nvim.nix
+    ./nvchad-nvim.nix
   ];
 
   nixpkgs = {
@@ -47,17 +49,17 @@
     username = "luqman";
     homeDirectory = "/home/luqman";
     sessionVariables = {
-        COLORTERM = "truecolor";
+      COLORTERM = "truecolor";
     };
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ exa starship fish fzf ripgrep fd bat helix keychain ];
+  home.packages = with pkgs; [ exa starship fish fzf ripgrep fd bat helix keychain tmux ];
 
   # home manager please manage yourself
   programs.home-manager.enable = true;
 
-  programs.starship  = {
+  programs.starship = {
     enable = true;
     enableFishIntegration = true;
   };
@@ -81,7 +83,7 @@
     enable = true;
     userName = "luqmanishere";
     userEmail = "luqmanulhakim1720@gmail.com";
-    };
+  };
 
   programs.helix = {
     enable = true;
@@ -98,33 +100,67 @@
   programs.bat = {
     enable = true;
     themes = {
-      Catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "bat";
-        rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
-        sha256 = "6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
-      } + "/Catppuccin-mocha.tmTheme");
+      Catppuccin-mocha = builtins.readFile (pkgs.fetchFromGitHub
+        {
+          owner = "catppuccin";
+          repo = "bat";
+          rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
+          sha256 = "6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
+        } + "/Catppuccin-mocha.tmTheme");
     };
     config = {
       theme = "Catppuccin-mocha";
     };
   };
 
-programs.keychain = {
+  programs.tmux = {
+    enable = true;
+    baseIndex = 1;
+    clock24 = true;
+    historyLimit = 10000;
+    #mouse = true;
+    sensibleOnTop = true;
+    prefix = "`";
+    plugins = with pkgs.tmuxPlugins; [
+      yank
+      {
+        plugin = dracula;
+        extraConfig = ''
+          set -g @dracula-plugins "battery cpu-usage ram-usage network time"
+          set -g @dracula-show-powerline true
+          set -g @dracula-show-flags true
+          set -g @dracula-military-time true
+        '';
+      }
+      sensible
+      resurrect
+      continuum
+      fzf-tmux-url
+      extrakto
+      better-mouse-mode
+    ];
+    extraConfig = ''
+    '';
+  };
+
+  programs.keychain = {
     enable = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
     inheritType = "any";
     agents = [ "gpg" "ssh" ];
-    keys = [ "id_rsa" ];
+    keys = [ "gitmain" ];
   };
-  
+
   programs.neovim = {
-  	enable = true;
+    enable = true;
   };
   astronvim.enable = false;
-  nyoom.enable = true;
-  nyoom.userConfig = ./nyoom-conf;
+  nyoom.enable = false;
+  #nyoom.userConfig = ./nyoom-conf;
+  nvpunk.enable = false;
+  nvchad.enable = true;
+  nvchad.userConfig = ./nvchad-conf;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
