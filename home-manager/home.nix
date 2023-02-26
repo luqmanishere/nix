@@ -12,10 +12,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./AstroNvim.nix
-    ./nyoom.nix
-    ./nvpunk-nvim.nix
-    ./nvchad-nvim.nix
+    ./nvim/nvchad-nvim.nix
   ];
 
   nixpkgs = {
@@ -155,12 +152,8 @@
   programs.neovim = {
     enable = true;
   };
-  astronvim.enable = false;
-  nyoom.enable = false;
-  #nyoom.userConfig = ./nyoom-conf;
-  nvpunk.enable = false;
   nvchad.enable = true;
-  nvchad.userConfig = ./nvchad-conf;
+  nvchad.userConfig = ./nvim/nvchad-conf;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

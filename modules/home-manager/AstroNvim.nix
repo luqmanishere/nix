@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib; let
   cfg = config.astronvim;
@@ -12,7 +11,8 @@ with lib; let
     rev = "542b9186a5017f8ed4fcbd120244eb550b43c752";
     sha256 = "1spszsd1nhvviwx8v10qa1z7qkvnipkwdg7r8zb9gkaf9iqfnbk3";
   };
-in {
+in
+{
   options.astronvim = {
     enable = mkOption {
       default = false;
