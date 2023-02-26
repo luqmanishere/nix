@@ -59,12 +59,27 @@
             ./nixos/nixos-vm.nix
           ];
         };
+	nixos-honor = nixpkgs.lib.nixosSystem {
+		specialArgs = { inherit inputs outputs; };
+		modules = [
+		 ./nixos/nixos-honor.nix
+		];
+	};
       };
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
         "luqman@nixos-vm" = home-manager.lib.homeManagerConfiguration {
+          pkgs =
+            nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            # > Our main home-manager configuration file <
+            ./home-manager/home.nix
+          ];
+        };
+        "luqman@nixos-honor" = home-manager.lib.homeManagerConfiguration {
           pkgs =
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
