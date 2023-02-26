@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
@@ -15,32 +16,38 @@
   boot.supportedFilesystems = [ "zfs" "ext4" ];
 
   fileSystems."/" =
-    { device = "tank/system/root";
+    {
+      device = "tank/system/root";
       fsType = "zfs";
     };
 
   fileSystems."/home/luqman" =
-    { device = "tank/user/home/luqman";
+    {
+      device = "tank/user/home/luqman";
       fsType = "zfs";
     };
 
   fileSystems."/var" =
-    { device = "tank/system/var";
+    {
+      device = "tank/system/var";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8fae09aa-00fe-442a-b31a-671fa96ee5ec";
+    {
+      device = "/dev/disk/by-uuid/8fae09aa-00fe-442a-b31a-671fa96ee5ec";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/5CEE-84FA";
+    {
+      device = "/dev/disk/by-uuid/5CEE-84FA";
       fsType = "vfat";
     };
 
   fileSystems."/nix" =
-    { device = "tank/local/nix";
+    {
+      device = "tank/local/nix";
       fsType = "zfs";
     };
 

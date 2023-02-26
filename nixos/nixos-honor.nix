@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hw-conf/nixos-honor-hc.nix
     ];
 
@@ -17,7 +18,7 @@
   networking.hostName = "nixos-honor"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
@@ -25,16 +26,16 @@
 
   nixpkgs = { config.allowUnfree = true; };
   nix = {
-  	registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
-	nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
-	settings = {
-		experimental-features = "nix-command flakes";
+    settings = {
+      experimental-features = "nix-command flakes";
 
-		auto-optimise-store = true;
-	};
-};
+      auto-optimise-store = true;
+    };
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -51,7 +52,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -67,11 +68,11 @@
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   services.pipewire = {
-	enable = true;
-	audio.enable = true;
-	wireplumber.enable = true;
-	pulse.enable = true;
-	alsa.enable = true;
+    enable = true;
+    audio.enable = true;
+    wireplumber.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -83,11 +84,12 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
-      tmux neovim
+      tmux
+      neovim
       byobu
     ];
-   };
-   programs.fish.enable = true;
+  };
+  programs.fish.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -102,7 +104,7 @@
     clang
   ];
 
-	systemd = { tmpfiles = { rules = [ "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib" ]; }; };
+  systemd = { tmpfiles = { rules = [ "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib" ]; }; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -115,7 +117,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

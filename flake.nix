@@ -59,12 +59,12 @@
             ./nixos/nixos-vm.nix
           ];
         };
-	nixos-honor = nixpkgs.lib.nixosSystem {
-		specialArgs = { inherit inputs outputs; };
-		modules = [
-		 ./nixos/nixos-honor.nix
-		];
-	};
+        nixos-honor = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./nixos/nixos-honor.nix
+          ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint

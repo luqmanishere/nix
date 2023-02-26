@@ -16,11 +16,11 @@ in
     startMenuLaunchers = true;
 
     interop = {
-    	register = false;
+      register = false;
     };
 
     wslConf = {
-	network.hostname = "nixos-wsl";
+      network.hostname = "nixos-wsl";
     };
 
     # Enable native Docker support
@@ -58,16 +58,16 @@ in
     experimental-features = nix-command flakes
   '';
 
-  environment.noXlibs =  true;
-  documentation.enable =  true;
-  documentation.doc.enable =  true;
-  documentation.info.enable =  true;
-  documentation.man.enable =  true;
-  documentation.nixos.enable =  true;
+  environment.noXlibs = true;
+  documentation.enable = true;
+  documentation.doc.enable = true;
+  documentation.info.enable = true;
+  documentation.man.enable = true;
+  documentation.nixos.enable = true;
 
   programs.command-not-found.enable = true;
   services.logrotate.enable = false;
-  services.udisks2.enable =  false;
+  services.udisks2.enable = false;
 
   system.stateVersion = "22.05";
 }
