@@ -1,6 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-
 { inputs, outputs, lib, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
@@ -9,10 +6,9 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
     ./nvim/nvchad-nvim.nix
+    ./graphical.nix
+    #./kitty.nix
   ];
 
   nixpkgs = {
@@ -34,14 +30,12 @@
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "luqman";
     homeDirectory = "/home/luqman";
@@ -51,10 +45,26 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ exa starship fish fzf ripgrep fd bat helix keychain tmux ];
+  home.packages = with pkgs; [
+    exa
+    starship
+    fish
+    # FIXME: seperate cli, desktop profiles
+    fzf
+    ripgrep
+    fd
+    bat
+    helix
+    keychain
+    tmux
+  ];
 
   # home manager please manage yourself
   programs.home-manager.enable = true;
+
+  programs.firefox = {
+    enable = true;
+  };
 
   programs.starship = {
     enable = true;
@@ -64,6 +74,9 @@
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
+    defaultOptions = [
+      "--preview 'bat --color=always {}'"
+    ];
   };
 
   programs.fish = {
@@ -92,6 +105,11 @@
         indent-guides.render = true;
       };
     };
+  };
+
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
   };
 
   programs.bat = {
@@ -155,6 +173,8 @@
   nvchad.enable = true;
   nvchad.userConfig = ./nvim/nvchad-conf;
 
+  graphical.enable = true;
+  kitty-conf.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

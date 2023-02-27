@@ -53,6 +53,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  programs.dconf.enable = true;
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -128,7 +129,8 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
+  # system.copySystemConfiguration = true;
+  # WARN: the above option causes an impure warning
 
   # Below is added from ZFS configuration
   systemd.services.zfs-mount.enable = false;
