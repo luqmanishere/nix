@@ -82,7 +82,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      ls = "exa --git --group-directories-first --time-style=long-is";
+      ls = "exa --git --group-directories-first --time-style=long-iso";
       l = "ls -1";
       sl = "ls";
       ll = "ls -al";
