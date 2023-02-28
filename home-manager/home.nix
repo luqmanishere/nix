@@ -7,8 +7,8 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
     ./nvim/nvchad-nvim.nix
+    ./nvim/lazyvim-nvim.nix
     ./graphical.nix
-    #./kitty.nix
   ];
 
   nixpkgs = {
@@ -81,6 +81,22 @@
 
   programs.fish = {
     enable = true;
+    shellAliases = {
+      ls = "exa --git --group-directories-first --time-style=long-is";
+      l = "ls -1";
+      sl = "ls";
+      ll = "ls -al";
+      la = "ls -lbhHigUmuSa";
+      tree = "exa --tree";
+
+      ip = "ip --color=auto";
+
+      tm = "tmux attach -t main || tmux new -s main";
+
+    };
+    shellAbbrs = {
+      psg = "ps ax | grep -i";
+    };
   };
 
   programs.direnv = {
@@ -109,7 +125,11 @@
 
   programs.exa = {
     enable = true;
-    enableAliases = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.bat = {
@@ -136,6 +156,7 @@
     #mouse = true;
     sensibleOnTop = true;
     prefix = "`";
+    mouse = true;
     plugins = with pkgs.tmuxPlugins; [
       yank
       {
@@ -155,6 +176,35 @@
       better-mouse-mode
     ];
     extraConfig = ''
+      bind a last-window
+
+      # Switch panes with hjkl
+      bind -r h select-pane -L
+      bind -r j select-pane -D
+      bind -r k select-pane -U
+      bind -r l select-pane -R
+
+      # resize panes
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
+
+      # split panes using | and -
+      bind | split-window -h
+      bind - split-window -v
+      unbind '"'
+      unbind %
+
+      # switch panes using Alt-arrow without prefix
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
+
+      ## Quickly switch panes
+      unbind ^J
+      bind ^J select-pane -t :.+
     '';
   };
 
@@ -169,9 +219,11 @@
 
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
   };
-  nvchad.enable = true;
-  nvchad.userConfig = ./nvim/nvchad-conf;
+  nvchad.enable = false;
+  #nvchad.userConfig = ./nvim/nvchad-conf;
+  lazyvim.enable = true;
 
   graphical.enable = true;
   kitty-conf.enable = true;

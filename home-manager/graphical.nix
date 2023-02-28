@@ -29,6 +29,9 @@ in
         fira-code
         fira-code-symbols
         (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+
+#desktop apps
+        tdesktop
       ];
     };
 

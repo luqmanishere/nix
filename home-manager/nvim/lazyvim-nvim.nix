@@ -1,28 +1,18 @@
-{ config
-, pkgs
-, lib
-, ...
-}:
+{ config, pkgs, lib, ... }:
 with lib; let
-  cfg = config.nvchad;
-  nvchad = pkgs.fetchFromGitHub {
-    owner = "NvChad";
-    repo = "NvChad";
-    rev = "32b0a008a96a3dd04675659e45a676b639236a98";
-    sha256 = "IfVcysO6LTm7xFv5m7+GExmplj0P+IVGSeoMCT9qvBY=";
-  };
+  cfg = config.lazyvim;
 in
 {
-  options.nvchad = {
+  options.lazyvim = {
     enable = mkOption {
       default = false;
-      description = "Enable nvchad.nvim";
+      description = "Enable lazyvim";
       type = types.bool;
     };
 
     userConfig = mkOption {
       default = null;
-      description = "nvchad User Config";
+      description = "lazyvim extra config";
       type = with types; nullOr path;
     };
   };
@@ -31,7 +21,7 @@ in
       file = {
         ".config/nvim" = {
           recursive = true;
-          source = nvchad;
+          source = ./lazyvim-conf;
         };
         ".config/nvim/lua/custom" = mkIf (cfg.userConfig != null) {
           recursive = true;
@@ -43,6 +33,8 @@ in
         ripgrep
         python3
         cargo
+        lua51Packages.jsregexp
+        unzip
       ];
     };
   };

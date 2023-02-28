@@ -90,12 +90,19 @@
       byobu
     ];
   };
+  security.sudo.extraRules = [
+    {
+      users = [ "luqman" ];
+      commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
+    }
+  ];
+
   programs.fish.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     neovim
     git
@@ -103,6 +110,8 @@
     fish
     gcc
     clang
+    python3
+    python310Packages.pip
   ];
 
   systemd = { tmpfiles = { rules = [ "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib" ]; }; };
@@ -129,12 +138,25 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
+  # WARN: this option causes an impure warning
   # system.copySystemConfiguration = true;
-  # WARN: the above option causes an impure warning
 
   # Below is added from ZFS configuration
   systemd.services.zfs-mount.enable = false;
   programs.git.enable = true;
+
+  virtualisation = {
+    waydroid.enable = true;
+    lxd.enable = true;
+  };
+
+  # zram swap
+  zramSwap = {
+    enable = true;
+    swapDevices = 1;
+    memoryPercent = 25;
+    algorithm = "zstd";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -145,4 +167,3 @@
   system.stateVersion = "22.11"; # Did you read the comment?
 
 }
-
