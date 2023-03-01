@@ -6,7 +6,6 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-    ./nvim/nvchad-nvim.nix
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
   ];
@@ -222,8 +221,6 @@
     enable = true;
     defaultEditor = true;
   };
-  nvchad.enable = false;
-  #nvchad.userConfig = ./nvim/nvchad-conf;
   lazyvim.enable = true;
 
   graphical.enable = true;
