@@ -29,12 +29,16 @@ in
         };
       };
       packages = with pkgs; [
-        nodejs
+        # telescope dependency
         ripgrep
+        # build language servers
+        nodejs
         python3
         cargo
         lua51Packages.jsregexp
         unzip
+        # for git ui
+        lazygit
       ];
     };
   };

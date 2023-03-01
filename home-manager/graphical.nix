@@ -30,8 +30,10 @@ in
         fira-code-symbols
         (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
 
-#desktop apps
+        #desktop apps
         tdesktop
+        firefox
+        chromium
       ];
     };
 

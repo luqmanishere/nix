@@ -57,6 +57,7 @@
     helix
     keychain
     tmux
+    discord
   ];
 
   # home manager please manage yourself
