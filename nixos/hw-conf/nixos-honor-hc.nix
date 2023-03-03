@@ -14,6 +14,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.supportedFilesystems = [ "zfs" "ext4" ];
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel model=auto,dell-headset-multi
+  '';
 
   fileSystems."/" =
     {
