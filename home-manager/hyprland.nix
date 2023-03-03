@@ -1,8 +1,10 @@
-{ config, pkg, lib, ... }: with lib; let
+{ inputs, outputs, config, pkg, lib, ... }: with lib; let
   cfg = config.hyprland;
 in
 {
-  imports = [ ];
+  imports = [
+    inputs.hyprland.homeManagerModules.default
+  ];
 
   options.hyprland = {
     enable = mkOption {
@@ -17,6 +19,11 @@ in
       packages = with pkgs; [ ];
     };
 
-    wayland.windowManager.hyprland.enable = true;
+    wayland.windowManager.hyprland = {
+      enable = true;
+      systemdIntegration = true;
+      recommendedEnvironment = true;
+      extraConfig = null;
+    };
   };
 }

@@ -1,10 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, ... }:
 with lib; let
   cfg = config.graphical;
 in
 {
   imports = [
     ./kitty.nix
+    ./hyprland.nix
   ];
   options.graphical = {
     enable = mkOption {
@@ -34,6 +35,9 @@ in
         tdesktop
         firefox
         chromium
+        pavucontrol
+        easyeffects
+        osu-lazer
       ];
     };
 

@@ -48,6 +48,10 @@
     exa
     starship
     fish
+
+    git
+    delta
+
     # FIXME: seperate cli, desktop profiles
     fzf
     ripgrep
@@ -109,6 +113,25 @@
     enable = true;
     userName = "luqmanishere";
     userEmail = "luqmanulhakim1720@gmail.com";
+    extraConfig = let deltaCommand = "${pkgs.delta}/bin/delta"; in {
+      core = {
+        pager = "${deltaCommand} --diff-so-fancy";
+      };
+      delta = {
+        navigate = true;
+        light = false;
+        side-by-side = true;
+      };
+      merge = {
+        conflictstyle = "diff3";
+      };
+      diff = {
+        colorMoved = "default";
+      };
+      interactive = {
+        diffFilter = "${deltaCommand} --color-only";
+      };
+    };
   };
 
   programs.helix = {
@@ -166,6 +189,7 @@
           set -g @dracula-show-powerline true
           set -g @dracula-show-flags true
           set -g @dracula-military-time true
+          set -g @dracula-show-left-icon session
         '';
       }
       sensible
@@ -205,6 +229,8 @@
       ## Quickly switch panes
       unbind ^J
       bind ^J select-pane -t :.+
+
+      bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded"
     '';
   };
 
@@ -224,6 +250,7 @@
   lazyvim.enable = true;
 
   graphical.enable = true;
+  hyprland.enable = true;
   kitty-conf.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
