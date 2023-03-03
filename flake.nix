@@ -61,10 +61,10 @@
             ./nixos/nixos-vm.nix
           ];
         };
-        nixos-honor = nixpkgs.lib.nixosSystem {
+        asuna = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./nixos/nixos-honor.nix
+            ./nixos/asuna.nix
           ];
         };
       };
@@ -80,7 +80,7 @@
             ./home-manager/home.nix
           ];
         };
-        "luqman@nixos-honor" = home-manager.lib.homeManagerConfiguration {
+        "luqman@asuna" = home-manager.lib.homeManagerConfiguration {
           pkgs =
             nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
