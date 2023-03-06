@@ -9,6 +9,7 @@ in
 {
   imports = [
     inputs.hyprland.homeManagerModules.default
+    ./waybar.nix
   ];
 
   options.hyprland = {

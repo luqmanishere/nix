@@ -256,6 +256,9 @@
   kitty-conf.enable = true;
   dunst.enable = true;
   rofi.enable = true;
+  waybar.enable = true;
+
+  xdg.userDirs.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
