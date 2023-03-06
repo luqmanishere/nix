@@ -16,6 +16,7 @@
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.modifications
       outputs.overlays.additions
+      inputs.hyprland.overlays.default
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -51,6 +52,7 @@
 
     git
     delta
+    age
 
     # FIXME: seperate cli, desktop profiles
     fzf
@@ -252,6 +254,8 @@
   graphical.enable = true;
   hyprland.enable = true;
   kitty-conf.enable = true;
+  dunst.enable = true;
+  rofi.enable = true;
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 

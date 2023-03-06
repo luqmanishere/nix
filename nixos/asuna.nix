@@ -46,12 +46,14 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
 
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+
+  hardware.opengl.enable = true;
 
   programs.dconf.enable = true;
 
@@ -77,7 +79,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  #services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
@@ -90,6 +92,7 @@
       byobu
     ];
   };
+  security.pam.services.swaylock = { };
   security.sudo.extraRules = [
     {
       users = [ "luqman" ];
@@ -102,6 +105,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    wayland
+    wayland.dev
+    wayland-protocols
+    wayland-utils
+    wayland-scanner
     vim
     wget
     neovim

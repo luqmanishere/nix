@@ -4,4 +4,5 @@
 {
   # List your module files here
   # my-module = import ./my-module.nix;
+  systemd-secure-boot = ./systemd-secure-boot/default.nix;
 }

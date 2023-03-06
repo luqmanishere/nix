@@ -6,6 +6,8 @@ in
   imports = [
     ./kitty.nix
     ./hyprland.nix
+    ./dunst.nix
+    ./rofi.nix
   ];
   options.graphical = {
     enable = mkOption {
