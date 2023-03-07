@@ -76,6 +76,7 @@
     wireplumber.enable = true;
     pulse.enable = true;
     alsa.enable = true;
+    jack.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -84,7 +85,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "video" "networkmanager" ];
     shell = pkgs.fish;
     packages = with pkgs; [
       tmux
@@ -101,6 +102,13 @@
   ];
 
   programs.fish.enable = true;
+
+  programs.light.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = { };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
