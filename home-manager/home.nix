@@ -200,6 +200,17 @@
       fzf-tmux-url
       extrakto
       better-mouse-mode
+      (mkTmuxPlugin {
+        pluginName = "tmux-session-wizard";
+        version = "unstable-2021-06-20";
+        src = pkgs.fetchFromGitHub {
+          owner = "27medkamal";
+          repo = "tmux-session-wizard";
+          rev = "1b547d2b8e6435c3b825e8e7616911d74ea6ec4d";
+          sha256 = "4EquWiR8ercuhC/+qNUQQn8WfrjZiDCU0Z3/yeHJlBA=";
+        };
+        rtpFilePath = "session-wizard.tmux";
+      })
     ];
     extraConfig = ''
       bind a last-window

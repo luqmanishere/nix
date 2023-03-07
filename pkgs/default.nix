@@ -3,5 +3,4 @@
 
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   # example = pkgs.callPackage ./example { };
-  catppuccin = pkgs.callPackage ./customTmuxPlugins.nix { };
 }
