@@ -11,5 +11,16 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+
+    # waybar with Hyprland IPC support, allow workspace switching
+    waybar = prev.waybar.overrideAttrs (oldAttrs: rec {
+      mesonFlags = (oldAttrs.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
+      preConfigurePhases = [
+        "hyprPhase"
+      ] ++ (oldAttrs.preConfigurePhase or [ ]);
+      hyprPhase = ''
+        sed -i 's/zext_workspace_handle_v1_activate(workspace_handle_);/const std::string command = "hyprctl dispatch workspace " + name_;\n\tsystem(command.c_str());/g' src/modules/wlr/workspace_manager.cpp
+      '';
+    });
   };
 }
