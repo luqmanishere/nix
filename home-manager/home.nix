@@ -17,7 +17,7 @@
       outputs.overlays.modifications
       outputs.overlays.additions
       inputs.hyprland.overlays.default
-
+      inputs.wayper.overlays.default
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -264,6 +264,7 @@
 
   graphical.enable = true;
   hyprland.enable = true;
+  wayper.enable = true;
   kitty-conf.enable = true;
   dunst.enable = true;
   rofi.enable = true;
