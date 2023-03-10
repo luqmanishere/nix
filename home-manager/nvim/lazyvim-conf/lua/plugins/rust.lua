@@ -7,11 +7,11 @@ return {
   { 'saecki/crates.nvim',
     config = true },
 
-  { "hrsh7th/nvim-cmp",
-    opts = {
-      sources = {
-        { name = "crates" }
-      }
-    }
-  }
+  -- { "hrsh7th/nvim-cmp",
+  --   opts = {
+  --     sources = {
+  --       { name = "crates" }
+  --     }
+  --   }
+  -- }
 }
