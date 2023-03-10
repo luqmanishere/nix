@@ -8,6 +8,7 @@
     # inputs.nix-colors.homeManagerModules.default
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
+    outputs.homeManagerModules.a2ln
   ];
 
   nixpkgs = {
@@ -269,6 +270,7 @@
   dunst.enable = true;
   rofi.enable = true;
   waybar.enable = true;
+  services.a2ln.enable = true;
 
   xdg.userDirs.enable = true;
   # Nicely reload system units when changing configs
