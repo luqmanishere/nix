@@ -13,6 +13,8 @@
 
     homeage.url = "github:jordanisaacs/homeage";
     homeage.inputs.nixpkgs.follows = "nixpkgs";
+
+    wayper.url = "github:luqmanishere/wayper";
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 
