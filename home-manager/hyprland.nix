@@ -23,6 +23,7 @@ in
   config = mkIf (cfg.enable) {
     home = {
       packages = with pkgs; [
+        cliphist
         wl-clipboard
         wlr-randr
         swayidle
