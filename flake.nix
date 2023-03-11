@@ -15,6 +15,10 @@
     homeage.inputs.nixpkgs.follows = "nixpkgs";
 
     wayper.url = "github:luqmanishere/wayper";
+
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 

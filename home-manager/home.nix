@@ -8,7 +8,9 @@
     # inputs.nix-colors.homeManagerModules.default
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
+    ./emacs.nix
     outputs.homeManagerModules.a2ln
+    inputs.nix-doom-emacs.hmModule
   ];
 
   nixpkgs = {
@@ -19,6 +21,7 @@
       outputs.overlays.additions
       inputs.hyprland.overlays.default
       inputs.wayper.overlays.default
+      #inputs.emacs-overlay.overlays.default
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
@@ -42,6 +45,8 @@
     homeDirectory = "/home/luqman";
     sessionVariables = {
       COLORTERM = "truecolor";
+      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      MEOW = "cat";
     };
   };
 
@@ -265,14 +270,35 @@
 
   graphical.enable = true;
   hyprland.enable = true;
-  wayper.enable = true;
+  wayper = {
+    enable = true;
+    systemdIntegration = {
+      enable = true;
+      #target = "hyprland-session.target";
+    };
+  };
   kitty-conf.enable = true;
   dunst.enable = true;
   rofi.enable = true;
   waybar.enable = true;
   services.a2ln.enable = true;
 
+  modules.editors.emacs =
+    {
+      enable = true;
+      doom.enable = true;
+      doom.doomConfigFiles = ./doom-emacs;
+    };
+  /* programs.emacs = { */
+  /*   enable = true; */
+  /*   package = pkgs.emacsPgtk; */
+  /*   #doomPrivateDir = ./doom-emacs; */
+  /*   #emacsPackage = pkgs.emacsPgtk; */
+  /* }; */
+
   xdg.userDirs.enable = true;
+  xdg.enable = true;
+  xdg.configHome = "${config.home.homeDirectory}/.config";
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
