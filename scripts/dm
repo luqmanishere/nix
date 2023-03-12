@@ -61,8 +61,10 @@ then
     else
         NIX_ARG=$2
     fi
+    NIX_COMM="sudo nixos-rebuild switch --flake .#$NIX_ARG"
     echo "rebuilding nixos profile for $NIX_ARG"
-    sudo nixos-rebuild switch --flake ".#$NIX_ARG"
+    echo "running command $NIX_COMM"
+    $NIX_COMM
 elif [ "$OPTS1" = "home-switch" ]
 then
     if [ -z "$2" ]
@@ -71,11 +73,14 @@ then
     else
         HOME_ARG=$2
     fi
+    HOME_COMM="home-manager switch --flake .#$HOME_ARG"
     echo "rebuilding home-manager profile for $HOME_ARG"
-    home-manager switch --flake ".#$HOME_ARG"
+    echo "running command $HOME_COMM"
+    $HOME_COMM
 elif [ "$OPTS1" = "updateall" ]
 then
   NIX_ARG=$(hostname)
+  NIX_COMM="sudo nixos-rebuild switch --flake .#$NIX_ARG"
   HOME_ARG="$(whoami)@$(hostname)"
   HOME_COMM="home-manager switch --flake .#$HOME_ARG"
   UPD_FLAKE="nix flake update"
@@ -94,8 +99,8 @@ then
     $UPD_FLAKE
 
     echo "rebuilding nixos profile for $NIX_ARG"
-    echo "running command sudo nixos-rebuild switch --flake .#$NIX_ARG"
-    sudo nixos-rebuild switch --flake ".#$NIX_ARG"
+    echo "running command $NIX_COMM"
+    $NIX_COMM
 
     echo "rebuilding home-manager profile for $HOME_ARG"
     echo "running command $HOME_COMM"
