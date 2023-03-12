@@ -14,6 +14,8 @@
 #%    home-switch <user@hostname>   rebuild and switch home-manager profile
 #%    nix-switch <hostname>         rebuild and switch NixOS profile
 #%    help                          show this message
+#%    updateall                     update all inputs, then rebuilds all configurations
+#%                                  requires clean git
 #%
 #================================================================
 #- IMPLEMENTATION
@@ -71,12 +73,42 @@ then
     fi
     echo "rebuilding home-manager profile for $HOME_ARG"
     home-manager switch --flake ".#$HOME_ARG"
+elif [ "$OPTS1" = "updateall" ]
+then
+  NIX_ARG=$(hostname)
+  HOME_ARG="$(whoami)@$(hostname)"
+  HOME_COMM="home-manager switch --flake .#$HOME_ARG"
+  UPD_FLAKE="nix flake update"
+
+  echo "updating flake inputs and rebuilding configurations..."
+  # check if git is dirty, then fail if it is unless flag is passed
+  if [[ $(git diff --stat) != '' ]]; then
+    echo 'Detected uncomitted changes, cancelling operations'
+    echo 'run with (wip) flag to override'
+    exit 1
+  else
+    echo 'git is clean, ready to go'
+
+    echo "updating flake inputs"
+    echo "running command $UPD_FLAKE"
+    $UPD_FLAKE
+
+    echo "rebuilding nixos profile for $NIX_ARG"
+    echo "running command sudo nixos-rebuild switch --flake .#$NIX_ARG"
+    sudo nixos-rebuild switch --flake ".#$NIX_ARG"
+
+    echo "rebuilding home-manager profile for $HOME_ARG"
+    echo "running command $HOME_COMM"
+    $HOME_COMM
+  fi
 elif [ "$OPTS1" = "help" ]
 then
     usagefull
 elif [ "$OPTS1" = "scriptinfo" ]
 then
     scriptinfo
+else
+    usagefull
 fi
 
 
