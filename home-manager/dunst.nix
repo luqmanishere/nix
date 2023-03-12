@@ -21,8 +21,39 @@ in
 
     services.dunst = {
       enable = true;
-      configFile = "";
-      settings = { };
+      settings = {
+        global = {
+          monitor = 0;
+          follow = "mouse";
+          origin = "top-center";
+          idle-threshold = 30;
+          dmenu = "${pkgs.rofi}/bin/rofi -dmenu -i -p ''";
+          layer = "overlay";
+
+          mouse_left_click = "do_action";
+          mouse_right_click = "context";
+
+          corner-radius = 10;
+          frame_color = "#89B4FA";
+          separator_color = "frame";
+        };
+
+        urgency_low = {
+          background = "#1E1E2E";
+          foreground = "#CDD6F4";
+        };
+
+        urgency_normal = {
+          background = "#1E1E2E";
+          foreground = "#CDD6F4";
+        };
+
+        urgency_critical = {
+          background = "#1E1E2E";
+          foreground = "#CDD6F4";
+          frame_color = "#FAB387";
+        };
+      };
     };
   };
 }
