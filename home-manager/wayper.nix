@@ -47,6 +47,7 @@ in {
 
       Service = {
         ExecStart = "${cfg.package}/bin/wayper";
+        Restart = "on-failure";
       };
 
       Install = { WantedBy = [ cfg.systemdIntegration.target ]; };
