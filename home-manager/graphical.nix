@@ -39,12 +39,13 @@ in
         firefox
         chromium
         pavucontrol
-        easyeffects
         osu-lazer
       ];
     };
 
     fonts.fontconfig.enable = true;
+
+    services.easyeffects.enable = true;
 
     # configure gnome shell
     dconf = {

@@ -9,6 +9,8 @@
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
     ./emacs.nix
+    ./mpd.nix
+    ./syncthing.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -282,6 +284,8 @@
   rofi.enable = true;
   waybar.enable = true;
   services.a2ln.enable = true;
+  mpd.enable = true;
+  syncthing.enable = true;
 
   modules.editors.emacs =
     {
