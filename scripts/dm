@@ -87,7 +87,7 @@ then
 
   echo "updating flake inputs and rebuilding configurations..."
   # check if git is dirty, then fail if it is unless flag is passed
-  if [[ $(git diff --stat) != '' ]]; then
+  if [[ $(git status -s) != '' ]]; then
     echo 'Detected uncomitted changes, cancelling operations'
     echo 'run with (wip) flag to override'
     exit 1
