@@ -36,6 +36,9 @@ in
           corner-radius = 10;
           frame_color = "#89B4FA";
           separator_color = "frame";
+          max_icon_size = 128;
+          min_icon_size = 128;
+          font = "Noto Sans Display Nerd Font 12";
         };
 
         urgency_low = {

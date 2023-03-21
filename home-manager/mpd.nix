@@ -85,6 +85,8 @@ let cfg = config.mpd; in {
         small_text = "Hoshiyomi gang";
       };
     };
+
+    services.playerctld.enable = true;
   };
 
 }

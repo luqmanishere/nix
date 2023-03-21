@@ -32,14 +32,21 @@ in
         fira-code
         fira-code-symbols
         jetbrains-mono
-        (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
+        (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "Noto" ]; })
 
         #desktop apps
         tdesktop
         firefox
         chromium
         pavucontrol
+
+        prismlauncher
+        #openjdk17-bootstrap
         osu-lazer
+        itch
+
+        grim
+        slurp
       ];
     };
 

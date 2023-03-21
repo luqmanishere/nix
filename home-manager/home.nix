@@ -40,6 +40,7 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
+      permittedInsecurePackages = [ "electron-11.5.0" ];
     };
   };
 
@@ -289,6 +290,7 @@
   syncthing.enable = true;
 
   oci-script.enable = true;
+
   modules.editors.emacs =
     {
       enable = true;
