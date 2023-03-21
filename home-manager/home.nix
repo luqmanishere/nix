@@ -11,6 +11,7 @@
     ./emacs.nix
     ./mpd.nix
     ./syncthing.nix
+    ./oci.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -287,6 +288,7 @@
   mpd.enable = true;
   syncthing.enable = true;
 
+  oci-script.enable = true;
   modules.editors.emacs =
     {
       enable = true;
