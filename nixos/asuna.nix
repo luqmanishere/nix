@@ -129,7 +129,19 @@
     clang
     python3
     python310Packages.pip
+
+
+    steam-tui
+    steamcmd
   ];
+
+
+  # am gamer, so...
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   systemd = { tmpfiles = { rules = [ "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib" ]; }; };
 
