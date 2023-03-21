@@ -4,3 +4,6 @@
 
 -- show relative line numbers
 vim.wo.number = "relativenumber"
+vim.cmd [[
+set mousemodel=extend
+]]

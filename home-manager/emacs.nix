@@ -1,7 +1,6 @@
 # this module was adapted from hlissner, the creator of Doom Emacs
 
 { config, lib, pkgs, inputs, ... }:
-
 with lib;
 let
   cfg = config.modules.editors.emacs;
@@ -42,6 +41,7 @@ in
       # 28.2 + native-comp
 
       emacs
+      cmake
       ## Doom dependencies
       git
       (ripgrep.override { withPCRE2 = true; })
