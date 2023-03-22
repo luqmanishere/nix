@@ -44,6 +44,7 @@ in
       systemdIntegration = true;
       recommendedEnvironment = true;
       extraConfig = builtins.readFile ./hyprland.conf;
+      package = pkgs.hyprland-hidpi;
     };
 
     services.swayidle = {
