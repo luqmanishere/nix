@@ -1,10 +1,14 @@
-{ inputs, config, pkgs, lib, ... }:
-with lib;
-let
-  cfg = config.waybar;
-in
 {
-  imports = [ ];
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.waybar;
+in {
+  imports = [];
 
   options.waybar = {
     enable = mkOption {
@@ -15,8 +19,7 @@ in
   };
 
   config = mkIf (cfg.enable) {
-    home.packages = with pkgs;[
-
+    home.packages = with pkgs; [
       font-awesome_5
     ];
     programs.waybar = {

@@ -1,9 +1,14 @@
-{ inputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib; let
   cfg = config.dunst;
-in
-{
-  imports = [ ];
+in {
+  imports = [];
   options.dunst = {
     enable = mkOption {
       default = false;
@@ -15,7 +20,6 @@ in
   config = mkIf (cfg.enable) {
     home = {
       packages = [
-
       ];
     };
 

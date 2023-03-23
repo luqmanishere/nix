@@ -1,4 +1,10 @@
-{ inputs, outputs, config, pkgs, ... }: {
+{
+  inputs,
+  outputs,
+  config,
+  pkgs,
+  ...
+}: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -41,8 +47,8 @@
     config = {
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = (_: true);
-      permittedInsecurePackages = [ "electron-11.5.0" ];
+      allowUnfreePredicate = _: true;
+      permittedInsecurePackages = ["electron-11.5.0"];
     };
   };
 
@@ -110,7 +116,6 @@
       ip = "ip --color=auto";
 
       tm = "tmux attach -t main || tmux new -s main";
-
     };
     shellAbbrs = {
       psg = "ps ax | grep -i";
@@ -127,7 +132,9 @@
     enable = true;
     userName = "luqmanishere";
     userEmail = "luqmanulhakim1720@gmail.com";
-    extraConfig = let deltaCommand = "${pkgs.delta}/bin/delta"; in {
+    extraConfig = let
+      deltaCommand = "${pkgs.delta}/bin/delta";
+    in {
       core = {
         pager = "${deltaCommand} --diff-so-fancy";
       };
@@ -178,7 +185,8 @@
           repo = "bat";
           rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
           sha256 = "6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
-        } + "/Catppuccin-mocha.tmTheme");
+        }
+        + "/Catppuccin-mocha.tmTheme");
     };
     config = {
       theme = "Catppuccin-mocha";
@@ -264,8 +272,8 @@
     enableZshIntegration = true;
     enableFishIntegration = true;
     inheritType = "any";
-    agents = [ "gpg" "ssh" ];
-    keys = [ "gitmain" ];
+    agents = ["gpg" "ssh"];
+    keys = ["gitmain"];
   };
 
   programs.neovim = {
@@ -293,18 +301,29 @@
 
   oci-script.enable = true;
 
-  modules.editors.emacs =
-    {
-      enable = true;
-      doom.enable = true;
-      doom.doomConfigFiles = ./doom-emacs;
-    };
-  /* programs.emacs = { */
-  /*   enable = true; */
-  /*   package = pkgs.emacsPgtk; */
-  /*   #doomPrivateDir = ./doom-emacs; */
-  /*   #emacsPackage = pkgs.emacsPgtk; */
-  /* }; */
+  modules.editors.emacs = {
+    enable = true;
+    doom.enable = true;
+    doom.doomConfigFiles = ./doom-emacs;
+  };
+  /*
+  programs.emacs = {
+  */
+  /*
+  enable = true;
+  */
+  /*
+  package = pkgs.emacsPgtk;
+  */
+  /*
+  #doomPrivateDir = ./doom-emacs;
+  */
+  /*
+  #emacsPackage = pkgs.emacsPgtk;
+  */
+  /*
+  };
+  */
 
   xdg.userDirs.enable = true;
   xdg.enable = true;

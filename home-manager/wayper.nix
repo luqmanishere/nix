@@ -1,7 +1,13 @@
-{ config, pkgs, lib, ... }: with lib;
-let cfg = config.wayper;
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.wayper;
 in {
-  imports = [ ];
+  imports = [];
 
   options = {
     wayper = {
@@ -30,7 +36,6 @@ in {
           default = "graphical-session.target";
         };
       };
-
     };
   };
 
@@ -42,7 +47,7 @@ in {
     systemd.user.services.wayper = mkIf (cfg.systemdIntegration.enable) {
       Unit = {
         Description = "Wayland wallpaper setter";
-        After = [ cfg.systemdIntegration.target ];
+        After = [cfg.systemdIntegration.target];
       };
 
       Service = {
@@ -50,7 +55,7 @@ in {
         Restart = "on-failure";
       };
 
-      Install = { WantedBy = [ cfg.systemdIntegration.target ]; };
+      Install = {WantedBy = [cfg.systemdIntegration.target];};
     };
   };
 }

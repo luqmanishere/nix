@@ -1,6 +1,13 @@
-{ config, pkgs, lib, ... }: with lib; let cfg = config.kitty-conf; in {
-
-  imports = [ ];
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.kitty-conf;
+in {
+  imports = [];
 
   options.kitty-conf = {
     enable = mkOption {

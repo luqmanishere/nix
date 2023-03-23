@@ -1,10 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
-with lib;
-let
-  cfg = config.syncthing;
-in
 {
-  imports = [ ];
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+with lib; let
+  cfg = config.syncthing;
+in {
+  imports = [];
 
   options.syncthing = {
     enable = mkOption {

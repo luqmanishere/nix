@@ -1,7 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
-with lib;
-let cfg = config.mpd; in {
-  imports = [ ];
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+with lib; let
+  cfg = config.mpd;
+in {
+  imports = [];
 
   options = {
     mpd = {
@@ -37,7 +44,7 @@ let cfg = config.mpd; in {
           path      "/tmp/mpd.fifo"
           format    "44100:16:2"
         }
-        
+
         # output to pulse on linux
         audio_output {
           type      "pulse"
@@ -88,5 +95,4 @@ let cfg = config.mpd; in {
 
     services.playerctld.enable = true;
   };
-
 }

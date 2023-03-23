@@ -1,10 +1,13 @@
-{ lib, pkgs, config, modulesPath, ... }:
-
-with lib;
-let
-  nixos-wsl = import ./nixos-wsl;
-in
 {
+  lib,
+  pkgs,
+  config,
+  modulesPath,
+  ...
+}:
+with lib; let
+  nixos-wsl = import ./nixos-wsl;
+in {
   imports = [
     nixos-wsl.nixosModules.wsl
   ];
@@ -28,12 +31,11 @@ in
 
     # Enable integration with Docker Desktop (needs to be installed)
     # docker-desktop.enable = true;
-
   };
 
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
       tmux

@@ -1,6 +1,13 @@
-{ config, pkgs, lib, ... }: with lib;
-let cfg = config.services.a2ln; in {
-  imports = [ ];
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.services.a2ln;
+in {
+  imports = [];
 
   options.services = {
     a2ln = {
@@ -19,19 +26,19 @@ let cfg = config.services.a2ln; in {
   };
 
   config = mkIf (cfg.enable) {
-    home.packages = [ cfg.package ];
+    home.packages = [cfg.package];
 
     systemd.user.services.a2ln = {
       Unit = {
         Description = "Android 2 Linux notification server";
-        After = [ cfg.target ];
+        After = [cfg.target];
       };
 
       Service = {
         ExecStart = "${cfg.package}/bin/a2ln --no-pairing-server";
       };
 
-      Install = { WantedBy = [ cfg.target ]; };
+      Install = {WantedBy = [cfg.target];};
     };
   };
 }

@@ -1,12 +1,15 @@
 # this module was adapted from hlissner, the creator of Doom Emacs
-
-{ config, lib, pkgs, inputs, ... }:
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+with lib; let
   cfg = config.modules.editors.emacs;
   configDir = config.dotfiles.configDir;
-in
-{
+in {
   options.modules.editors.emacs = {
     enable = mkOption {
       description = "enable emacs config";
@@ -33,7 +36,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    /* nixpkgs.overlays = [ inputs.emacs-overlay.overlay ]; */
+    /*
+    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+    */
 
     home.packages = with pkgs; [
       ## Emacs itself
@@ -44,19 +49,23 @@ in
       cmake
       ## Doom dependencies
       git
-      (ripgrep.override { withPCRE2 = true; })
+      (ripgrep.override {withPCRE2 = true;})
       gnutls # for TLS connectivity
 
       ## Optional dependencies
       fd # faster projectile indexing
       imagemagick # for image-dired
-      /* (mkIf (config.programs.gnupg.agent.enable) */
-      /*   pinentry_emacs) # in-emacs gnupg prompts */
+      /*
+      (mkIf (config.programs.gnupg.agent.enable)
+      */
+      /*
+      pinentry_emacs) # in-emacs gnupg prompts
+      */
       zstd # for undo-fu-session/undo-tree compression
 
       ## Module dependencies
       # :checkers spell
-      (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
+      (aspellWithDicts (ds: with ds; [en en-computers en-science]))
       # :tools editorconfig
       editorconfig-core-c # per-project style config
       # :tools lookup & :lang org +roam
@@ -71,7 +80,7 @@ in
     ];
 
     #env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
-    home.sessionPath = [ "$XDG_CONFIG_HOME/emacs/bin" ];
+    home.sessionPath = ["$XDG_CONFIG_HOME/emacs/bin"];
 
     # modules.shell.zsh.rcFiles = [ "${configDir}/emacs/aliases.zsh" ];
 

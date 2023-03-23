@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib; let
   cfg = config.lazyvim;
-in
-{
+in {
   options.lazyvim = {
     enable = mkOption {
       default = false;

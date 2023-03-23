@@ -1,15 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, outputs, lib, config, pkgs, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hw-conf/asuna-hc.nix
-    ];
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hw-conf/asuna-hc.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -25,9 +28,9 @@
   time.timeZone = "Asia/Kuala_Lumpur";
   time.hardwareClockInLocalTime = true;
 
-  nixpkgs = { config.allowUnfree = true; };
+  nixpkgs = {config.allowUnfree = true;};
   nix = {
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
@@ -48,7 +51,6 @@
 
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
-
 
   # Enable the GNOME Desktop Environment.
   #services.xserver.displayManager.gdm.enable = true;
@@ -86,7 +88,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" ];
+    extraGroups = ["wheel" "audio" "video" "networkmanager"];
     shell = pkgs.fish;
     packages = with pkgs; [
       tmux
@@ -94,11 +96,16 @@
       byobu
     ];
   };
-  security.pam.services.swaylock = { };
+  security.pam.services.swaylock = {};
   security.sudo.extraRules = [
     {
-      users = [ "luqman" ];
-      commands = [{ command = "ALL"; options = [ "NOPASSWD" ]; }];
+      users = ["luqman"];
+      commands = [
+        {
+          command = "ALL";
+          options = ["NOPASSWD"];
+        }
+      ];
     }
   ];
 
@@ -108,7 +115,7 @@
 
   services.tlp = {
     enable = true;
-    settings = { };
+    settings = {};
   };
 
   # List packages installed in system profile. To search, run:
@@ -130,11 +137,9 @@
     python3
     python310Packages.pip
 
-
     steam-tui
     steamcmd
   ];
-
 
   # am gamer, so...
   programs.steam = {
@@ -143,7 +148,7 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
-  systemd = { tmpfiles = { rules = [ "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib" ]; }; };
+  systemd = {tmpfiles = {rules = ["L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib"];};};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -194,5 +199,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
