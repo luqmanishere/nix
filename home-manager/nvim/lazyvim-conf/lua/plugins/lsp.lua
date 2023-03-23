@@ -44,7 +44,8 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
-        rnix = {},
+        -- rnix = {},
+        nil_ls = {}
       },
     },
   },
@@ -103,6 +104,7 @@ return {
     opts = {
       sources = {
         require("null-ls").builtins.formatting.nixpkgs_fmt,
+        require("null-ls").builtins.formatting.alejandra
       },
     },
   },

@@ -39,6 +39,12 @@ in
         unzip
         # for git ui
         lazygit
+
+        # lsps
+        nil
+
+        # formatters
+        alejandra
       ];
     };
   };

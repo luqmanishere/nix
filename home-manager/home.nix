@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }: {
+{ inputs, outputs, config, pkgs, ... }: {
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -24,6 +24,8 @@
       outputs.overlays.additions
       inputs.hyprland.overlays.default
       inputs.wayper.overlays.default
+      inputs.nil.overlays.default
+      inputs.alejandra.overlays.default
       #inputs.emacs-overlay.overlays.default
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
