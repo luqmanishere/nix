@@ -43,6 +43,7 @@ in {
         firefox
         chromium
         pavucontrol
+        zathura
 
         prismlauncher
         #openjdk17-bootstrap
