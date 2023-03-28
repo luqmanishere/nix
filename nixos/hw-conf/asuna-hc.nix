@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -15,11 +14,13 @@
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
+  boot.kernelParams = ["nohibernate"];
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["zfs" "ext4"];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=auto,dell-headset-multi
   '';
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   fileSystems."/" = {
     device = "tank/system/root";
@@ -51,7 +52,18 @@
     fsType = "zfs";
   };
 
-  swapDevices = [];
+  swapDevices = [
+    {
+      device = "/dev/zvol/tank/system/swapvol";
+      #size = 16 * 1024;
+    }
+  ];
+
+  # zfs things
+  services.zfs = {
+    trim.enable = true;
+    autoScrub.enable = true;
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
