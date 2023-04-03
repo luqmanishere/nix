@@ -52,6 +52,19 @@
     fsType = "zfs";
   };
 
+  fileSystems."/mnt/usbdrive" = {
+    device = "/dev/disk/by-uuid/26F8-062F";
+    fsType = "exfat";
+    options = [
+      "defaults"
+      "user"
+      "rw"
+      "noatime"
+      "nofail"
+      "noauto"
+    ];
+  };
+
   swapDevices = [
     {
       device = "/dev/zvol/tank/system/swapvol";
