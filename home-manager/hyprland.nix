@@ -36,6 +36,8 @@ in {
         wlr-randr
         swayidle
         swaylock-effects
+        grim
+        slurp
       ];
       pointerCursor = {
         gtk.enable = true;
