@@ -87,6 +87,7 @@
         modules = [
           #nixosModules.systemd-secure-boot
           inputs.impermanence.nixosModules.impermanence
+          inputs.hyprland.nixosModules.default
           ./nixos/asuna.nix
         ];
       };

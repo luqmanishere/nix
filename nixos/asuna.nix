@@ -62,6 +62,18 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
     git.enable = true;
+    hyprland.enable = true;
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      vt = 2;
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "greeter";
+      };
+    };
   };
 
   # Configure keymap in X11
