@@ -11,45 +11,60 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
-  boot.kernelParams = ["nohibernate"];
+  boot.kernelParams = [];
   boot.extraModulePackages = [];
-  boot.supportedFilesystems = ["zfs" "ext4"];
+  boot.supportedFilesystems = ["btrfs" "ext4"];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=auto,dell-headset-multi
   '';
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   fileSystems."/" = {
-    device = "tank/system/root";
-    fsType = "zfs";
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=root" "compress=zstd" "noatime"];
   };
 
-  fileSystems."/home/luqman" = {
-    device = "tank/user/home/luqman";
-    fsType = "zfs";
-  };
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/2f22d311-7714-4816-a444-39c1b87fbe20";
 
-  fileSystems."/var" = {
-    device = "tank/system/var";
-    fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/8fae09aa-00fe-442a-b31a-671fa96ee5ec";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/5CEE-84FA";
-    fsType = "vfat";
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=home" "compress=zstd" "noatime"];
   };
 
   fileSystems."/nix" = {
-    device = "tank/local/nix";
-    fsType = "zfs";
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=nix" "compress=zstd" "noatime"];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=persist" "compress=zstd" "noatime"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/log" = {
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=log" "compress=zstd" "noatime"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/lib" = {
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=var_lib" "compress=zstd" "noatime"];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/E8FE-853C";
+    fsType = "vfat";
   };
 
   fileSystems."/mnt/usbdrive" = {
@@ -66,17 +81,7 @@
   };
 
   swapDevices = [
-    {
-      device = "/dev/zvol/tank/system/swapvol";
-      #size = 16 * 1024;
-    }
   ];
-
-  # zfs things
-  services.zfs = {
-    trim.enable = true;
-    autoScrub.enable = true;
-  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

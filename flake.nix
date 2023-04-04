@@ -5,6 +5,8 @@
     # Nixpkgs unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    impermanence.url = "github:nix-community/impermanence";
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -84,6 +86,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           #nixosModules.systemd-secure-boot
+          inputs.impermanence.nixosModules.impermanence
           ./nixos/asuna.nix
         ];
       };

@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
@@ -18,7 +17,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   networking.hostName = "asuna"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -43,11 +41,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  # };
 
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
@@ -58,7 +51,17 @@
 
   hardware.opengl.enable = true;
 
-  programs.dconf.enable = true;
+  programs = {
+    dconf.enable = true;
+    fish.enable = true;
+    light.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+    git.enable = true;
+  };
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -90,28 +93,33 @@
     isNormalUser = true;
     extraGroups = ["wheel" "audio" "video" "networkmanager"];
     shell = pkgs.fish;
+    hashedPassword = "$6$qCj8Szs3ReZHsRHN$nE0ASG2jCRcpryBGXcH9fhJyem1IzH2e1RQzTffkI0bCBOJ1FsOst1Dy8m53nQpzSsEhCR6JVIZ5tcHPmH0bL.";
     packages = with pkgs; [
       tmux
       neovim
       byobu
     ];
   };
+
+  console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+
   security.pam.services.swaylock = {};
-  security.sudo.extraRules = [
-    {
-      users = ["luqman"];
-      commands = [
-        {
-          command = "ALL";
-          options = ["NOPASSWD"];
-        }
-      ];
-    }
-  ];
-
-  programs.fish.enable = true;
-
-  programs.light.enable = true;
+  security.sudo = {
+    extraRules = [
+      {
+        users = ["luqman"];
+        commands = [
+          {
+            command = "ALL";
+            options = ["NOPASSWD"];
+          }
+        ];
+      }
+    ];
+    extraConfig = ''
+      Defaults lecture = never
+    '';
+  };
 
   services.tlp = {
     enable = true;
@@ -141,25 +149,6 @@
     steamcmd
   ];
 
-  # am gamer, so...
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  systemd = {tmpfiles = {rules = ["L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}" "L+ /lib64 - - - - /lib"];};};
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -168,16 +157,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # WARN: this option causes an impure warning
-  # system.copySystemConfiguration = true;
-
-  # Below is added from ZFS configuration
-  systemd.services.zfs-mount.enable = false;
-  programs.git.enable = true;
 
   virtualisation = {
     waydroid.enable = true;
@@ -191,6 +170,72 @@
     memoryPercent = 25;
     algorithm = "zstd";
   };
+
+  # warning, here there be dragons
+  # use impermanence
+  environment.persistence."/persist" = {
+    # hideMounts = true;
+    directories = [
+      "/etc/NetworkManager/system-connections"
+      "/etc/nixos"
+    ];
+
+    files = [
+      "/etc/NIXOS"
+      "/etc/machine-id"
+      /*
+      "/var/lib/NetworkManger/secret_key"
+      "/var/lib/NetworkManger/seen_bssids"
+      "/var/lib/NetworkManger/timestamps"
+      */
+    ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}"
+    "L+ /lib64 - - - - /lib"
+  ];
+
+  # Note `lib.mkBefore` is used instead of `lib.mkAfter` here.
+  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
+    mkdir -p /mnt
+
+    # We first mount the btrfs root to /mnt
+    # so we can manipulate btrfs subvolumes.
+    mount -o subvol=/ /dev/mapper/enc /mnt
+
+    # While we're tempted to just delete /root and create
+    # a new snapshot from /root-blank, /root is already
+    # populated at this point with a number of subvolumes,
+    # which makes `btrfs subvolume delete` fail.
+    # So, we remove them first.
+    #
+    # /root contains subvolumes:
+    # - /root/var/lib/portables
+    # - /root/var/lib/machines
+    #
+    # I suspect these are related to systemd-nspawn, but
+    # since I don't use it I'm not 100% sure.
+    # Anyhow, deleting these subvolumes hasn't resulted
+    # in any issues so far, except for fairly
+    # benign-looking errors from systemd-tmpfiles.
+    btrfs subvolume list -o /mnt/root |
+    cut -f9 -d' ' |
+    while read subvolume; do
+      echo "deleting /$subvolume subvolume..."
+      btrfs subvolume delete "/mnt/$subvolume"
+    done &&
+    echo "deleting /root subvolume..." &&
+    btrfs subvolume delete /mnt/root
+
+    echo "restoring blank /root subvolume..."
+    btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+    # Once we're done rolling back to a blank snapshot,
+    # we can unmount /mnt and continue on the boot process.
+    echo "unmounting /mnt ..."
+    umount /mnt
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
