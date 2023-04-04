@@ -20,7 +20,6 @@
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=auto,dell-headset-multi
   '';
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
