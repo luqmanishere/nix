@@ -44,6 +44,8 @@ in {
         chromium
         pavucontrol
         zathura
+        webcord
+        foliate
 
         prismlauncher
         #openjdk17-bootstrap
@@ -59,6 +61,7 @@ in {
 
     services.easyeffects.enable = true;
 
+    # TODO: Mmove to gtk module
     # configure gnome shell
     dconf = {
       enable = true;
