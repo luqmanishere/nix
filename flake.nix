@@ -11,7 +11,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland/41f7736c8521162cb3ea5f3c003e0643c1bcf616";
+    hyprland.url = "github:hyprwm/Hyprland/366ebc123bc17165a599f44768c7338d166124ae";
 
     homeage.url = "github:jordanisaacs/homeage";
     homeage.inputs.nixpkgs.follows = "nixpkgs";
