@@ -2,24 +2,28 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
+  pkgs,
   config,
   lib,
   modulesPath,
   ...
-}: {
+}: let
+  KEY1 = "4721-F86B";
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "uas" "usbcore" "vfat" "nls_cp437" "nls_iso8859_1"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
-  boot.kernelParams = [];
+  boot.kernelParams = ["resume_offset=7873792"];
   boot.extraModulePackages = [];
   boot.supportedFilesystems = ["btrfs" "ext4"];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=auto,dell-headset-multi
   '';
+  boot.resumeDevice = "/dev/mapper/enc";
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
@@ -27,7 +31,60 @@
     options = ["subvol=root" "compress=zstd" "noatime"];
   };
 
-  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/2f22d311-7714-4816-a444-39c1b87fbe20";
+  # refer to https://nixos.wiki/wiki/Full_Disk_Encryption
+  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
+    mkdir -m 0755 -p /key
+    sleep 2 # To make sure the usb key has been loaded
+    mount -n -t vfat -o ro `findfs UUID=${KEY1}` /key
+  '';
+
+  boot.initrd.luks.devices."enc" = {
+    device = "/dev/disk/by-uuid/2f22d311-7714-4816-a444-39c1b87fbe20";
+    keyFile = "/key/suikey.jpg";
+    fallbackToPassword = true;
+    preLVM = false;
+    postOpenCommands = pkgs.lib.mkBefore ''
+      umount /key
+
+      mkdir -p /mnt
+
+      # We first mount the btrfs root to /mnt
+      # so we can manipulate btrfs subvolumes.
+      mount -o subvol=/ /dev/mapper/enc /mnt
+
+      # While we're tempted to just delete /root and create
+      # a new snapshot from /root-blank, /root is already
+      # populated at this point with a number of subvolumes,
+      # which makes `btrfs subvolume delete` fail.
+      # So, we remove them first.
+      #
+      # /root contains subvolumes:
+      # - /root/var/lib/portables
+      # - /root/var/lib/machines
+      #
+      # I suspect these are related to systemd-nspawn, but
+      # since I don't use it I'm not 100% sure.
+      # Anyhow, deleting these subvolumes hasn't resulted
+      # in any issues so far, except for fairly
+      # benign-looking errors from systemd-tmpfiles.
+      btrfs subvolume list -o /mnt/root |
+      cut -f9 -d' ' |
+      while read subvolume; do
+        echo "deleting /$subvolume subvolume..."
+        btrfs subvolume delete "/mnt/$subvolume"
+      done &&
+      echo "deleting /root subvolume..." &&
+      btrfs subvolume delete /mnt/root
+
+      echo "restoring blank /root subvolume..."
+      btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+      # Once we're done rolling back to a blank snapshot,
+      # we can unmount /mnt and continue on the boot process.
+      echo "unmounting /mnt ..."
+      umount /mnt
+    '';
+  };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
@@ -61,6 +118,12 @@
     options = ["subvol=var_lib" "compress=zstd" "noatime"];
   };
 
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/4552826e-cbe0-43c4-abd4-1d86248ac5ab";
+    fsType = "btrfs";
+    options = ["subvol=swap" "nodatacow" "compress=none" "noatime"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E8FE-853C";
     fsType = "vfat";
@@ -79,7 +142,16 @@
     ];
   };
 
+  fileSystems."/mnt/usb" = {
+    device = "/dev/disk/by-uuid/F53F-38F3";
+    fsType = "exfat";
+    options = ["defaults" "user" "rw" "noatime" "nofail" "noauto"];
+  };
+
   swapDevices = [
+    {
+      device = "/swap/swapfile";
+    }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
