@@ -88,7 +88,15 @@
           #nixosModules.systemd-secure-boot
           inputs.impermanence.nixosModules.impermanence
           inputs.hyprland.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
           ./nixos/asuna.nix
+          {
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.luqman = ./home-manager/home.nix;
+            };
+          }
         ];
       };
     };

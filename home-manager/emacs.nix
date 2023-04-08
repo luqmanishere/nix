@@ -88,8 +88,8 @@ in {
 
     home.activation = mkIf cfg.doom.enable {
       installDoomEmacs = ''
-        if [ ! -d "$XDG_CONFIG_HOME/emacs" ]; then
-           ${pkgs.git}/bin/git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$XDG_CONFIG_HOME/emacs"
+        if [ ! -d "$HOME/.config/emacs" ]; then
+           ${pkgs.git}/bin/git clone --depth=1 --single-branch "${cfg.doom.repoUrl}" "$HOME/.config/emacs"
         fi
       '';
     };
