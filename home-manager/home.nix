@@ -301,8 +301,6 @@
 
   oci-script.enable = true;
 
-  services.lorri.enable = true;
-
   modules.editors.emacs = {
     enable = true;
     doom.enable = true;
