@@ -14,7 +14,7 @@
 #%    home-switch <user@hostname>   rebuild and switch home-manager profile
 #%    nix-switch <hostname>         rebuild and switch NixOS profile
 #%    help                          show this message
-#%    updateall                     update all inputs, then rebuilds all configurations
+#%    update                         update all inputs, then rebuilds all configurations
 #%                                  requires clean git
 #%
 #================================================================
@@ -77,7 +77,7 @@ then
     echo "rebuilding home-manager profile for $HOME_ARG"
     echo "running command $HOME_COMM"
     $HOME_COMM
-elif [ "$OPTS1" = "updateall" ]
+elif [ "$OPTS1" = "update" ]
 then
   NIX_ARG=$(hostname)
   NIX_COMM="sudo nixos-rebuild switch --flake .#$NIX_ARG"
@@ -92,19 +92,23 @@ then
     echo 'run with (wip) flag to override'
     exit 1
   else
-    echo 'git is clean, ready to go'
+    echo 'git is clean, proceeding with update'
 
     echo "updating flake inputs"
     echo "running command $UPD_FLAKE"
     $UPD_FLAKE
 
-    echo "rebuilding nixos profile for $NIX_ARG"
-    echo "running command $NIX_COMM"
-    $NIX_COMM
-
-    echo "rebuilding home-manager profile for $HOME_ARG"
-    echo "running command $HOME_COMM"
-    $HOME_COMM
+    if [[ -f "/etc/NIXOS" ]]; then
+      echo "running under NixOS "
+      echo "rebuilding nixos profile for $NIX_ARG"
+      echo "running command $NIX_COMM"
+      $NIX_COMM
+    else 
+      echo "not running under NixOS"
+      echo "rebuilding home-manager profile for $HOME_ARG"
+      echo "running command $HOME_COMM"
+      $HOME_COMM
+    fi
   fi
 elif [ "$OPTS1" = "help" ]
 then
