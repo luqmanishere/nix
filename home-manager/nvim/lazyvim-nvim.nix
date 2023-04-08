@@ -49,6 +49,7 @@ in {
 
         # formatters
         alejandra
+        shfmt
       ];
     };
   };

@@ -45,7 +45,10 @@ return {
       ---@type lspconfig.options
       servers = {
         -- rnix = {},
-        nil_ls = {}
+        nil_ls = {},
+        bashls = {
+          filetypes = { "sh", "bash" }
+        }
       },
     },
   },
@@ -104,7 +107,8 @@ return {
     opts = {
       sources = {
         require("null-ls").builtins.formatting.nixpkgs_fmt,
-        require("null-ls").builtins.formatting.alejandra
+        require("null-ls").builtins.formatting.alejandra,
+        require("null-ls").builtins.formatting.shfmt
       },
     },
   },
@@ -151,8 +155,8 @@ return {
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
-          elseif luasnip.jumpable( -1) then
-            luasnip.jump( -1)
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
           else
             fallback()
           end
