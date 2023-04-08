@@ -25,6 +25,7 @@
 #================================================================
 #  HISTORY
 #     2022/02/15 : solemnattic : Script creation
+#     2023/04/09 : solemnattic : do not use home-manager when rebuilding in nix
 # 
 #================================================================
 #  DEBUG OPTION
