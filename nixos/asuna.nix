@@ -138,6 +138,7 @@
       Defaults lecture = never
     '';
   };
+  security.polkit.enable = true;
 
   services.tlp = {
     enable = true;
@@ -162,10 +163,27 @@
     clang
     python3
     python310Packages.pip
+    polkit-kde-agent
 
     steam-tui
     steamcmd
   ];
+
+  systemd = {
+    user.services.polkit-kde-authentication-agent-1 = {
+      description = "polkit-kde-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
