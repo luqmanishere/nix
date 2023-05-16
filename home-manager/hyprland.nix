@@ -38,6 +38,7 @@ in {
         swaylock-effects
         grim
         slurp
+        anyrun
       ];
       pointerCursor = {
         gtk.enable = true;
@@ -87,5 +88,7 @@ in {
         }
       ];
     };
+
+    xdg.configFile."anyrun".source = ./anyrun;
   };
 }

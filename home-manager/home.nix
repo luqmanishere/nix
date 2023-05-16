@@ -32,6 +32,7 @@
       inputs.wayper.overlays.default
       inputs.nil.overlays.default
       inputs.alejandra.overlays.default
+      inputs.anyrun.overlay
       #inputs.emacs-overlay.overlays.default
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
