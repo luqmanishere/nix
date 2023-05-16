@@ -11,7 +11,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland/366ebc123bc17165a599f44768c7338d166124ae";
+    hyprland.url = "github:hyprwm/Hyprland/5b84b0fb445bc4485510bba516c84141aaeafd04";
 
     homeage.url = "github:jordanisaacs/homeage";
     homeage.inputs.nixpkgs.follows = "nixpkgs";
@@ -86,7 +86,7 @@
         modules = [
           #nixosModules.systemd-secure-boot
           inputs.impermanence.nixosModules.impermanence
-          inputs.hyprland.nixosModules.default
+          # inputs.hyprland.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           ./nixos/asuna.nix
           {

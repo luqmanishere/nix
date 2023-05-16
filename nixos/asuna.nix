@@ -67,7 +67,10 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
     git.enable = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    };
   };
 
   services.greetd = {

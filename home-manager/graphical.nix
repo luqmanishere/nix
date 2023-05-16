@@ -46,6 +46,8 @@ in {
         zathura
         webcord
         foliate
+        teams
+        operaone
 
         prismlauncher
         #openjdk17-bootstrap
