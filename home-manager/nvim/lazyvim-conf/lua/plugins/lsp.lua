@@ -76,6 +76,7 @@ return {
         "rust",
         "nix",
         "fish",
+        "ron"
       },
       highlight = {
         enable = true,
