@@ -18,6 +18,7 @@
     ./mpd.nix
     ./syncthing.nix
     ./oci.nix
+    ./task.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -307,6 +308,8 @@
     doom.enable = true;
     doom.doomConfigFiles = ./doom-emacs;
   };
+
+  modules.cli.taskwarrior.enable = true;
   /*
   programs.emacs = {
   */
