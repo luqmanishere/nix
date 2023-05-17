@@ -86,6 +86,7 @@
       asuna = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          self.nixosModules.cloudflare-warp
           #nixosModules.systemd-secure-boot
           inputs.impermanence.nixosModules.impermanence
           # inputs.hyprland.nixosModules.default

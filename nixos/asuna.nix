@@ -17,7 +17,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
 
   networking.hostName = "asuna"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -167,6 +167,7 @@
     python3
     python310Packages.pip
     polkit-kde-agent
+    cloudflare-warp
 
     steam-tui
     steamcmd
@@ -196,6 +197,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  /*
+  services.cloudflare-warp = {
+    enable = true;
+    certificate = "/home/luqman/Cloudflare_CA.crt";
+    user = "root";
+    group = "root";
+  };
+  */
 
   virtualisation = {
     waydroid.enable = true;
