@@ -50,6 +50,13 @@ in {
           labels = "ID,Proj,Desc,Tags";
           filter = "+today status:pending -WAITING -BLOCKED -notify_only";
         };
+
+        taskd.certificate = "/home/luqman/.task/private.certificate.pem";
+        taskd.key = "/home/luqman/.task/private.key.pem";
+        taskd.ca = "/home/luqman/.task/ca.cert.pem";
+        taskd.server = "inthe.am:53589";
+        taskd.credentials = "inthe_am/luqmanulhakim1720/65bcddea-fc27-4af8-8cad-8582f385d4fa";
+        taskd.trust = "strict";
       };
     };
 
