@@ -60,6 +60,6 @@ in {
       };
     };
 
-    # services.taskwarrior-sync.enable = true;
+    services.taskwarrior-sync.enable = true;
   };
 }
