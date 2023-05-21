@@ -41,4 +41,12 @@ return {
       colorscheme = "tokyonight",
     },
   },
+
+  -- better escaping without delay
+  {
+    "max397574/better-escape.nvim",
+    opts = {
+      mapping = { "kj" }
+    }
+  }
 }
