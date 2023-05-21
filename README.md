@@ -1,5 +1,16 @@
 # NixOS configuration
 
+## WIP Fresh Install
+
+1. Install minimal profile
+
+2. Setup impermeanance (if used)
+
+3. Setup secureboot keys (if used)
+```bash
+sudo sbctl create-keys
+```
+
 ## To Install
 ```bash
 git clone https://github.com/luqmanishere/nix

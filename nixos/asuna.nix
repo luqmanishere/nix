@@ -13,11 +13,20 @@
     ./hw-conf/asuna-hc.nix
   ];
 
+  # This is disabled to let lanzaboote manage it
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.configurationLimit = 10;
+  # boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
+
+  # use the experimental bootspec
+  boot.bootspec.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   networking.hostName = "asuna"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -171,6 +180,8 @@
 
     steam-tui
     steamcmd
+
+    sbctl
   ];
 
   systemd = {
@@ -226,6 +237,7 @@
     directories = [
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
+      "/etc/secureboot"
     ];
 
     files = [

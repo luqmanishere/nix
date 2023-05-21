@@ -6,6 +6,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     impermanence.url = "github:nix-community/impermanence";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -88,6 +92,7 @@
         modules = [
           self.nixosModules.cloudflare-warp
           #nixosModules.systemd-secure-boot
+          inputs.lanzaboote.nixosModules.lanzaboote
           inputs.impermanence.nixosModules.impermanence
           # inputs.hyprland.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
