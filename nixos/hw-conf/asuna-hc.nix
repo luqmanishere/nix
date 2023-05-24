@@ -139,6 +139,7 @@ in {
       "noatime"
       "nofail"
       "noauto"
+      "exec"
     ];
   };
 

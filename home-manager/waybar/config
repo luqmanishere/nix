@@ -15,7 +15,7 @@
       "wlr/taskbar"
     ],
     "modules-right": [
-      "pulseaudio",
+      "wireplumber",
       "network",
       "cpu",
       "memory",
@@ -145,6 +145,16 @@
         ]
       },
       "on-click": "pavucontrol"
+    },
+    "wireplumber": {
+      "format": "{volume}% {icon}",
+      "format-muted": "󰝟 muted",
+      "on-click": "helvum",
+      "format-icons": [
+        "",
+        "",
+        ""
+      ]
     }
   },
   {
@@ -227,7 +237,7 @@
     ],
     "modules-center": [],
     "modules-right": [
-      "pulseaudio",
+      "wireplumber",
       "network",
       "cpu",
       "memory",
@@ -356,6 +366,16 @@
         ]
       },
       "on-click": "pavucontrol"
+    },
+    "wireplumber": {
+      "format": "{volume}% {icon}",
+      "format-muted": "󰝟 muted",
+      "on-click": "helvum",
+      "format-icons": [
+        "",
+        "",
+        ""
+      ]
     }
   },
   {

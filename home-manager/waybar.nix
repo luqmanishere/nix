@@ -21,6 +21,7 @@ in {
   config = mkIf (cfg.enable) {
     home.packages = with pkgs; [
       font-awesome_5
+      helvum
     ];
     programs.waybar = {
       enable = true;
