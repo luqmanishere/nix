@@ -15,7 +15,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland/5b84b0fb445bc4485510bba516c84141aaeafd04";
+    hyprland.url = "github:hyprwm/Hyprland/a2bb95fc60c717c873eff273f5ee035e622565d0";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
