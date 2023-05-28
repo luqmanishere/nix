@@ -18,7 +18,8 @@
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.systemd-boot.configurationLimit = 10;
   # boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # use the experimental bootspec
   boot.bootspec.enable = true;
@@ -32,6 +33,7 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.wifi.powersave = false;
 
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
@@ -177,6 +179,7 @@
     python310Packages.pip
     polkit-kde-agent
     cloudflare-warp
+    aria2
 
     steam-tui
     steamcmd
@@ -238,6 +241,7 @@
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
       "/etc/secureboot"
+      "/usr/share/waydroid-extra"
     ];
 
     files = [
