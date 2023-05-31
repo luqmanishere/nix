@@ -37,6 +37,7 @@ in {
         fira-code-symbols
         jetbrains-mono
         (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto"];})
+        iosevka-custom
 
         #desktop apps
         tdesktop
@@ -48,11 +49,14 @@ in {
         foliate
         teams
         operaone
+        obsidian
 
         prismlauncher
         #openjdk17-bootstrap
         osu-lazer
         itch
+        gamescope
+        mangohud
 
         grim
         slurp

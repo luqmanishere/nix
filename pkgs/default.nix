@@ -4,4 +4,5 @@
   # example = pkgs.callPackage ./example { };
   a2ln = pkgs.callPackage ./a2ln.nix {buildPythonApplication = pkgs.python3Packages.buildPythonApplication;};
   operaone = pkgs.callPackage ./operaone.nix {};
+  iosevka-custom = pkgs.callPackage ./iosevka.nix {};
 }
