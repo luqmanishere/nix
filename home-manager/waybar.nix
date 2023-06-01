@@ -32,6 +32,7 @@ in {
       };
       style = ./waybar/style.css;
       settings = builtins.fromJSON (builtins.readFile ./waybar/config);
+      package = inputs.hyprland.packages."${pkgs.system}".waybar-hyprland;
     };
   };
 }
