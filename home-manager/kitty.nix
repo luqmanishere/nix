@@ -27,8 +27,8 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        name = "JetBrainsMono Nerd Font";
-        size = 12.0;
+        name = "Iosevka SolemnAttic";
+        size = 16.0;
       };
       theme = "Catppuccin-Mocha";
     };
