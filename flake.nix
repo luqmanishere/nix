@@ -18,6 +18,7 @@
     hyprland.url = "github:hyprwm/Hyprland/a2bb95fc60c717c873eff273f5ee035e622565d0";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    xremap-flake.url = "github:xremap/nix-flake";
 
     homeage.url = "github:jordanisaacs/homeage";
     homeage.inputs.nixpkgs.follows = "nixpkgs";

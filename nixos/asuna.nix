@@ -9,6 +9,7 @@
   ...
 }: {
   imports = [
+    inputs.xremap-flake.nixosModules.default
     # Include the results of the hardware scan.
     ./hw-conf/asuna-hc.nix
   ];
@@ -133,6 +134,26 @@
     ];
   };
 
+  services.xremap = {
+    withHypr = true;
+    config = {
+      modmap = [
+        {
+          name = "Emacs pinky";
+          remap = {
+            CapsLock = {
+              held = "CTRL_L";
+              alone = "CapsLock";
+              alone_timeout_millis = 200;
+            };
+          };
+        }
+      ];
+    };
+    userName = "luqman";
+    watch = true;
+  };
+
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   security.pam.services.swaylock = {};
@@ -180,6 +201,7 @@
     polkit-kde-agent
     cloudflare-warp
     aria2
+    helvum
 
     steam-tui
     steamcmd
