@@ -36,16 +36,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    /*
-    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
-    */
+    nixpkgs.overlays = [inputs.emacs-overlay.overlay];
 
     home.packages = with pkgs; [
       ## Emacs itself
       binutils # native-comp needs 'as', provided by this
       # 28.2 + native-comp
+      emacsUnstablePgtk
 
-      emacs
+      # emacs
       cmake
       ## Doom dependencies
       git
