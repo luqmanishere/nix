@@ -28,6 +28,7 @@
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
+    configurationLimit = 10;
   };
 
   networking.hostName = "asuna"; # Define your hostname.
@@ -267,7 +268,7 @@
     ];
 
     files = [
-      "/etc/NIXOS"
+      # "/etc/NIXOS"
       "/etc/machine-id"
       /*
       "/var/lib/NetworkManger/secret_key"
