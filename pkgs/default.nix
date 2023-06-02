@@ -10,6 +10,7 @@
         family = "Iosevka SolemnAttic"
         spacing = "fontconfig-mono"
         serifs = "slab"
+        export-glyph-names = true
     '';
   };
   set = "solemn-attic";
