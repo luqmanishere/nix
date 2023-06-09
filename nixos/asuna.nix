@@ -125,7 +125,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = ["wheel" "audio" "video" "networkmanager"];
+    extraGroups = ["wheel" "audio" "video" "networkmanager" "podman"];
     shell = pkgs.fish;
     hashedPassword = "$6$qCj8Szs3ReZHsRHN$nE0ASG2jCRcpryBGXcH9fhJyem1IzH2e1RQzTffkI0bCBOJ1FsOst1Dy8m53nQpzSsEhCR6JVIZ5tcHPmH0bL.";
     packages = with pkgs; [
@@ -246,6 +246,9 @@
   virtualisation = {
     waydroid.enable = true;
     lxd.enable = true;
+    podman = {
+      enable = true;
+    };
   };
 
   # zram swap
