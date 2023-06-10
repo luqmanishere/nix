@@ -157,6 +157,14 @@
 
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "8192";
+    }
+  ];
   security.pam.services.swaylock = {};
   security.sudo = {
     extraRules = [
