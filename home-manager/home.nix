@@ -304,7 +304,7 @@
   oci-script.enable = true;
 
   modules.editors.emacs = {
-    enable = true;
+    enable = false;
     # doom.enable = false;
     doom.doomConfigFiles = ./doom-emacs;
   };
