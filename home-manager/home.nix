@@ -19,6 +19,7 @@
     ./syncthing.nix
     ./oci.nix
     ./task.nix
+    ./neomutt.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -300,6 +301,7 @@
   services.a2ln.enable = true;
   mpd.enable = true;
   syncthing.enable = true;
+  neomutt.enable = true;
 
   oci-script.enable = true;
 
