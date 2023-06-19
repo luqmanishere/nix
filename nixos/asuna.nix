@@ -84,6 +84,7 @@
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
+    adb.enable = true;
   };
 
   services.greetd = {
@@ -125,7 +126,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = ["wheel" "audio" "video" "networkmanager" "podman"];
+    extraGroups = ["wheel" "audio" "video" "networkmanager" "podman" "adbusers"];
     shell = pkgs.fish;
     hashedPassword = "$6$qCj8Szs3ReZHsRHN$nE0ASG2jCRcpryBGXcH9fhJyem1IzH2e1RQzTffkI0bCBOJ1FsOst1Dy8m53nQpzSsEhCR6JVIZ5tcHPmH0bL.";
     packages = with pkgs; [

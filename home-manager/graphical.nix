@@ -57,6 +57,7 @@ in {
         itch
         gamescope
         mangohud
+        scrcpy
 
         grim
         slurp
