@@ -26,8 +26,7 @@ in {
     programs.waybar = {
       enable = true;
       systemd = {
-        # this is somehow broken, so we start waybar from Hyprland
-        enable = false;
+        enable = true;
         target = "hyprland-session.target";
       };
       style = ./waybar/style.css;
