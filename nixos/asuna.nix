@@ -68,7 +68,18 @@
   #services.xserver.displayManager.gdm.enable = true;
   #services.xserver.desktopManager.gnome.enable = true;
 
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    extraPackages = with pkgs; [
+      # Vulkan
+      #amdvlk # Outdated
+
+      # VAAPI
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
 
   programs = {
     dconf.enable = true;

@@ -15,7 +15,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland/a2bb95fc60c717c873eff273f5ee035e622565d0";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/cabdf38ce41f628f6c81e1ac05d3788d8f30b101";
+      inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
+    };
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     xremap-flake.url = "github:xremap/nix-flake";
