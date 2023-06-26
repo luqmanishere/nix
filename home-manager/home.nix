@@ -276,7 +276,7 @@
     enableFishIntegration = true;
     inheritType = "any";
     agents = ["gpg" "ssh"];
-    keys = ["gitmain"];
+    keys = ["gitmain" "general"];
   };
 
   programs.neovim = {
