@@ -50,6 +50,11 @@ in {
         teams
         operaone
         obsidian
+        (vivaldi.override {
+          proprietaryCodecs = true;
+          enableWidevine = true;
+        })
+        logseq
 
         # prismlauncher
         inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
