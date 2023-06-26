@@ -108,7 +108,7 @@
               useUserPackages = true;
               # useGlobalPkgs = true;
               extraSpecialArgs = {inherit inputs outputs;};
-              users.luqman = ./home-manager/home.nix;
+              users.luqman = ./home-manager/luqman-desktop.nix;
             };
           }
         ];
@@ -123,7 +123,7 @@
           nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/home.nix
+          ./home-manager/luqman-desktop.nix
         ];
       };
       "luqman@asuna" = home-manager.lib.homeManagerConfiguration {
@@ -131,7 +131,7 @@
         #nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/home.nix
+          ./home-manager/luqman-desktop.nix
         ];
       };
     };
