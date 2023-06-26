@@ -22,6 +22,8 @@ in {
   boot.supportedFilesystems = ["btrfs" "ext4"];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=auto,dell-headset-multi
+    options hid_apple swap_fn_leftctrl=1
+    options hid_apple swap_opt_cmd=1
   '';
   boot.resumeDevice = "/dev/mapper/enc";
 

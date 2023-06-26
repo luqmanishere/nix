@@ -81,6 +81,19 @@
     ];
   };
 
+  # bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    /*
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+    */
+  };
+  services.blueman.enable = true;
+
   programs = {
     dconf.enable = true;
     fish.enable = true;
@@ -120,8 +133,9 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  sound.enable = false;
   hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     audio.enable = true;
@@ -130,6 +144,8 @@
     alsa.enable = true;
     jack.enable = true;
   };
+
+  services.tailscale.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   #services.xserver.libinput.enable = true;
