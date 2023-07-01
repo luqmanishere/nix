@@ -342,6 +342,12 @@
   xdg.userDirs.enable = true;
   xdg.enable = true;
   xdg.configHome = "${config.home.homeDirectory}/.config";
+  xdg = {
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+    };
+  };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
