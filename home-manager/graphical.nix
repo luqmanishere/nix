@@ -10,6 +10,7 @@ with lib; let
 in {
   imports = [
     ./kitty.nix
+    ./wezterm.nix
     ./hyprland.nix
     ./dunst.nix
     ./rofi.nix

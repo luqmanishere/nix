@@ -267,6 +267,7 @@
       bind ^J select-pane -t :.+
 
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded"
+      set -g allow-passthrough on
     '';
   };
 
@@ -295,6 +296,7 @@
     };
   };
   kitty-conf.enable = true;
+  wezterm-conf.enable = true;
   dunst.enable = true;
   rofi.enable = true;
   waybar.enable = true;
