@@ -123,6 +123,9 @@
     shellAbbrs = {
       psg = "ps ax | grep -i";
     };
+    interactiveShellInit = "
+    set -U XDG_DATA_DIRS $XDG_DATA_DIRS /var/lib/flatpak/exports/share /home/luqman/.local/share/flatpak/exports/share
+    ";
   };
 
   programs.direnv = {
@@ -236,6 +239,8 @@
       })
     ];
     extraConfig = ''
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
       bind a last-window
 
       # Switch panes with hjkl
@@ -267,6 +272,7 @@
       bind ^J select-pane -t :.+
 
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded"
+
       set -g allow-passthrough on
     '';
   };
