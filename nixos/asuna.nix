@@ -144,7 +144,8 @@
     alsa.enable = true;
     jack.enable = true;
   };
-
+  # to ease mount of usbs
+  services.udisks2.enable = true;
   services.tailscale.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).

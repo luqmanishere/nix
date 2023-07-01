@@ -131,19 +131,24 @@ in {
     fsType = "vfat";
   };
 
+  # currently mounting this disk here is bugged
+  /*
   fileSystems."/mnt/usbdrive" = {
     device = "/dev/disk/by-uuid/26F8-062F";
     fsType = "exfat";
     options = [
-      "defaults"
       "user"
       "rw"
       "noatime"
       "nofail"
       "noauto"
       "exec"
+      "async"
+      "suid"
+      "dev"
     ];
   };
+  */
 
   fileSystems."/mnt/usb" = {
     device = "/dev/disk/by-uuid/F53F-38F3";
