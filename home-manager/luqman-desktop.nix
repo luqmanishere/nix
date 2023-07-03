@@ -17,7 +17,7 @@
     ./emacs.nix
     ./mpd.nix
     ./syncthing.nix
-    ./oci.nix
+    ./modules/tools/oci.nix
     ./task.nix
     ./neomutt.nix
     outputs.homeManagerModules.a2ln
@@ -311,7 +311,7 @@
   syncthing.enable = true;
   neomutt.enable = true;
 
-  oci-script.enable = true;
+  modules.tools.oci-script.enable = true;
 
   modules.editors.emacs = {
     enable = false;

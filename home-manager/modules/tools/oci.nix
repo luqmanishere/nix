@@ -1,22 +1,21 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  cfg = config.oci-script;
-  name = "oci-script";
+  cfg = config.modules.tools.oci-script;
+  script_name = "oci-script";
 in {
   imports = [];
 
-  options.oci-script.enable = mkEnableOption "bruh";
+  options.modules.tools.oci-script.enable = mkEnableOption "bruh";
 
   config = let
     phpBin = "${pkgs.php82}/bin/php";
-    script = name:
-      pkgs.writeShellScript "${name}.sh" ''
+    script = script_name:
+      pkgs.writeShellScript "${script_name}.sh" ''
         set -eou pipefail
         PATH=/run/current-system/sw/bin:
         cd ${config.home.homeDirectory}/projects/oci-arm-host-capacity
@@ -32,7 +31,7 @@ in {
           WantedBy = ["default.target"];
         };
         Service = {
-          ExecStart = "${script name}";
+          ExecStart = "${script script_name}";
         };
       };
       systemd.user.timers.oci-script = {
