@@ -240,6 +240,7 @@
     cloudflare-warp
     aria2
     helvum
+    ntfsprogs
 
     steam-tui
     steamcmd

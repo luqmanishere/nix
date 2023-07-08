@@ -55,6 +55,7 @@ in {
           proprietaryCodecs = true;
           enableWidevine = true;
         })
+        libreoffice
         logseq
 
         # prismlauncher
