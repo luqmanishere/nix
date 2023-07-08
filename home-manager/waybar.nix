@@ -30,7 +30,7 @@ in {
         target = "hyprland-session.target";
       };
       style = ./waybar/style.css;
-      settings = builtins.fromJSON (builtins.readFile ./waybar/config);
+      settings = builtins.fromJSON (builtins.readFile ./waybar/config.json);
       package = inputs.hyprland.packages."${pkgs.system}".waybar-hyprland;
     };
   };
