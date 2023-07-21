@@ -39,6 +39,7 @@
 
     prismlauncher.url = "github:PrismLauncher/PrismLauncher";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
     # hardware.url = "github:nixos/nixos-hardware";
 
     # Shameless plug: looking for a way to nixify your themes and make
@@ -113,6 +114,21 @@
           }
         ];
       };
+      sinon = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          ./nixos/sinon.nix
+
+          {
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.luqman = ./home-manager/luqman-sinon.nix;
+            };
+          }
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
@@ -133,6 +149,11 @@
         modules = [
           ./home-manager/luqman-desktop.nix
         ];
+      };
+      "luqman@sinon" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home-manager/luqman-sinon.nix];
       };
     };
   };
