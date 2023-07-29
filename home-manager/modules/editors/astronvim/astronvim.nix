@@ -1,12 +1,12 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 with lib; let
   cfg = config.modules.editors.astronvim;
-in {
+in
+{
   options.modules.editors.astronvim = {
     enable = mkOption {
       default = false;
@@ -49,6 +49,7 @@ in {
           # diagnostics
           statix
           deadnix
+          lua51Packages.luacheck
         ];
 
         activation = {

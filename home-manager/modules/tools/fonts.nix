@@ -3,7 +3,9 @@
 , config
 , ...
 }:
-with lib; let cfg = config.modules.tools.fonts; in
+with lib; let
+  cfg = config.modules.tools.fonts;
+in
 {
   imports = [ ];
 
@@ -22,6 +24,7 @@ with lib; let cfg = config.modules.tools.fonts; in
       (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "Noto" ]; })
       iosevka-custom
 
+      fontconfig
     ];
 
     fonts.fontconfig.enable = true;
