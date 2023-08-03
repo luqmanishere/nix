@@ -14,8 +14,9 @@
 #%    home-switch <user@hostname>   rebuild and switch home-manager profile
 #%    nix-switch <hostname>         rebuild and switch NixOS profile
 #%    help                          show this message
-#%    update                         update all inputs, then rebuilds all configurations
+#%    update                        update all inputs, then rebuilds all configurations
 #%                                  requires clean git
+#%    test-nix <hostname>           build a test configuration
 #%
 #================================================================
 #- IMPLEMENTATION
@@ -111,6 +112,19 @@ then
       $HOME_COMM
     fi
   fi
+elif [ "$OPTS1" = "test-nix" ]
+then
+  echo "building testing configurations"
+  if [ -z "$OPTS2" ]
+  then
+      NIX_ARG=$(hostname)
+  else
+      NIX_ARG=$2
+  fi
+  NIX_COMM="sudo nixos-rebuild test --flake .#$NIX_ARG"
+  echo "rebuilding nixos profile for $NIX_ARG"
+  echo "running command $NIX_COMM"
+  $NIX_COMM
 elif [ "$OPTS1" = "help" ]
 then
     usagefull
