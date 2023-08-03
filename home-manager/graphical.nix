@@ -25,10 +25,6 @@ in {
   config = mkIf (cfg.enable) {
     home = {
       packages = with pkgs; [
-        # gnome shell extensions
-        gnomeExtensions.pop-shell
-        gnomeExtensions.workspace-indicator
-
         # fonts
         noto-fonts
         noto-fonts-cjk
@@ -42,15 +38,12 @@ in {
 
         #desktop apps
         tdesktop
-        firefox
         chromium
         pavucontrol
+        obsidian
         zathura
-        webcord
         foliate
         teams
-        operaone
-        obsidian
         (vivaldi.override {
           proprietaryCodecs = true;
           enableWidevine = true;
@@ -61,7 +54,6 @@ in {
         # prismlauncher
         inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
         osu-lazer
-        itch
         gamescope
         mangohud
         scrcpy
