@@ -38,7 +38,7 @@ in {
         swaylock-effects
         grim
         slurp
-        anyrun
+        inputs.anyrun.packages.${system}.anyrun-with-all-plugins
       ];
       pointerCursor = {
         gtk.enable = true;

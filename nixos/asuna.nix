@@ -109,6 +109,7 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
     adb.enable = true;
+    command-not-found.enable = false;
   };
 
   services.greetd = {
@@ -289,8 +290,8 @@
   */
 
   virtualisation = {
-    waydroid.enable = true;
-    lxd.enable = true;
+    waydroid.enable = false;
+    lxd.enable = false;
     podman = {
       enable = true;
     };

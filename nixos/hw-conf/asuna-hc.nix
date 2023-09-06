@@ -130,6 +130,11 @@ in {
     device = "/dev/disk/by-uuid/E8FE-853C";
     fsType = "vfat";
   };
+  fileSystems."/mnt/windowsd" = {
+    device = "/dev/disk/by-uuid/DA1AAC921AAC6CE7";
+    fsType = "ntfs3";
+    options = ["user" "noatime" "exec" "umask=000"];
+  };
 
   # currently mounting this disk here is bugged
   /*
