@@ -16,7 +16,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/5c50fac907df3463492a019f01f84d547ab93650";
+      url = "github:hyprwm/Hyprland/v0.29.1";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     anyrun.url = "github:Kirottu/anyrun";
