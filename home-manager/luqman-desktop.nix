@@ -20,6 +20,7 @@
     ./modules/tools/oci.nix
     ./task.nix
     ./neomutt.nix
+    ./modules/editors/astronvim/astronvim.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -289,7 +290,8 @@
     enable = true;
     defaultEditor = true;
   };
-  lazyvim.enable = true;
+  modules.editors.astronvim.enable = true;
+  modules.editors.astronvim.userConfig.enable = true;
 
   graphical.enable = true;
   hyprland.enable = true;

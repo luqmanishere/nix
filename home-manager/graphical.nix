@@ -39,6 +39,7 @@ in {
         #desktop apps
         tdesktop
         chromium
+        microsoft-edge
         pavucontrol
         obsidian
         zathura
