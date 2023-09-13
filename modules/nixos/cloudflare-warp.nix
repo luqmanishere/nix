@@ -82,6 +82,7 @@ in {
       warp = {};
     };
 
+    /*
     systemd = {
       packages = [cfg.package];
       services.warp-svc = {
@@ -108,5 +109,6 @@ in {
         };
       };
     };
+    */
   };
 }
