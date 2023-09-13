@@ -67,7 +67,6 @@
 
   # Add stuff for your user as you see fit:
   home.packages = with pkgs; [
-    exa
     starship
     fish
 
@@ -109,12 +108,12 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      ls = "exa --git --group-directories-first --time-style=long-iso";
+      ls = "eza --git --group-directories-first --time-style=long-iso";
       l = "ls -1";
       sl = "ls";
       ll = "ls -al";
       la = "ls -lbhHigUmuSa";
-      tree = "exa --tree";
+      tree = "eza --tree";
 
       ip = "ip --color=auto";
 
@@ -173,7 +172,7 @@
     };
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
   };
 
@@ -343,12 +342,14 @@
   xdg.userDirs.enable = true;
   xdg.enable = true;
   xdg.configHome = "${config.home.homeDirectory}/.config";
+  /*
   xdg = {
     mime.enable = true;
     mimeApps = {
       enable = true;
     };
   };
+  */
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
