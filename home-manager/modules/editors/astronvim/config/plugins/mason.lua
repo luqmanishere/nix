@@ -1,11 +1,19 @@
 -- customize mason plugins
 return {
+	-- here to append paths only
+	{
+		"williamboman/mason.nvim",
+		opts = function(_, opts)
+			opts.PATH = "append"
+		end,
+	},
 	-- use mason-lspconfig to configure LSP installations
 	{
 		"williamboman/mason-lspconfig.nvim",
 		-- overrides `require("mason-lspconfig").setup(...)`
 		opts = function(_, opts)
 			-- add more things to the ensure_installed table protecting against community packs modifying it
+			opts.PATH = "append"
 			opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
 				-- "lua_ls",
 				"nil_ls",
@@ -17,6 +25,7 @@ return {
 		"jay-babu/mason-null-ls.nvim",
 		-- overrides `require("mason-null-ls").setup(...)`
 		opts = function(_, opts)
+			opts.PATH = "append"
 			-- add more things to the ensure_installed table protecting against community packs modifying it
 			opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
 				-- "prettier",
@@ -28,6 +37,7 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 		-- overrides `require("mason-nvim-dap").setup(...)`
 		opts = function(_, opts)
+			opts.PATH = "append"
 			-- add more things to the ensure_installed table protecting against community packs modifying it
 			opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
 				-- "python",

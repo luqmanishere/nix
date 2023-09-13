@@ -6,11 +6,9 @@ return {
 
 	-- { import = "astrocommunity.colorscheme.catppuccin" },
 	-- { import = "astrocommunity.completion.copilot-lua-cmp" },
+	--
+	-- colorschemes
 	{ import = "astrocommunity.colorscheme.tokyonight-nvim" },
-	{ import = "astrocommunity.pack.lua" },
-	{ import = "astrocommunity.pack.rust" },
-	{ import = "astrocommunity.pack.toml" },
-
 	{
 		"tokyonight.nvim",
 		opts = {
@@ -28,4 +26,25 @@ return {
 			},
 		},
 	},
+
+	-- language packs
+	{ import = "astrocommunity.pack.lua" },
+	{ import = "astrocommunity.pack.rust" },
+	{ import = "astrocommunity.pack.toml" },
+
+	{ import = "astrocommunity.color.ccc-nvim" },
+	{ import = "astrocommunity.color.mini-hipatterns" },
+
+	{ import = "astrocommunity.diagnostics.lsp_lines-nvim" },
+
+	{ import = "astrocommunity.editing-support.todo-comments-nvim" },
+	-- disabled because not working
+	-- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
+	{ import = "astrocommunity.editing-support.nvim-devdocs" },
+	{ import = "astrocommunity.editing-support.suda-vim" },
+
+	{ import = "astrocommunity.motion.leap-nvim" },
+
+	{ import = "astrocommunity.scrolling.mini-animate" },
+	{ import = "astrocommunity.scrolling.neoscroll-nvim" },
 }
