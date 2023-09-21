@@ -21,6 +21,7 @@
     ./task.nix
     ./neomutt.nix
     ./modules/editors/astronvim/astronvim.nix
+    ./modules/terminals/zellij.nix
     outputs.homeManagerModules.a2ln
     inputs.nix-doom-emacs.hmModule
   ];
@@ -320,24 +321,7 @@
   };
 
   modules.cli.taskwarrior.enable = true;
-  /*
-  programs.emacs = {
-  */
-  /*
-  enable = true;
-  */
-  /*
-  package = pkgs.emacsPgtk;
-  */
-  /*
-  #doomPrivateDir = ./doom-emacs;
-  */
-  /*
-  #emacsPackage = pkgs.emacsPgtk;
-  */
-  /*
-  };
-  */
+  modules.terminals.zellij.enable = true;
 
   xdg.userDirs.enable = true;
   xdg.enable = true;

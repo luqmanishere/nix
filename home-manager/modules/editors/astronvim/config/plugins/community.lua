@@ -8,6 +8,7 @@ return {
 	-- { import = "astrocommunity.completion.copilot-lua-cmp" },
 	--
 	-- colorschemes
+	{ import = "astrocommunity.colorscheme.kanagawa-nvim" },
 	{ import = "astrocommunity.colorscheme.tokyonight-nvim" },
 	{
 		"tokyonight.nvim",

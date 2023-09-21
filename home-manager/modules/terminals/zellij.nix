@@ -1,13 +1,12 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 with lib; let
   cfg = config.modules.terminals.zellij;
-in
-{
-  imports = [ ];
+in {
+  imports = [];
 
   options.modules.terminals.zellij = {
     enable = mkEnableOption "enable zellij";
