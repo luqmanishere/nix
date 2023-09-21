@@ -20,7 +20,9 @@
   # boot.loader.systemd-boot.configurationLimit = 10;
   # boot.loader.efi.canTouchEfiVariables = true;
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # use the latest xanmod kerner
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
 
   # use the experimental bootspec
   boot.bootspec.enable = true;
@@ -32,9 +34,7 @@
   };
 
   networking.hostName = "asuna"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
 
   # Set your time zone.
@@ -43,6 +43,7 @@
 
   nixpkgs = {config.allowUnfree = true;};
   nix = {
+    # i have no idea what these lines do
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
@@ -145,6 +146,7 @@
     alsa.enable = true;
     jack.enable = true;
   };
+  services.flatpak.enable = true;
   # to ease mount of usbs
   services.udisks2.enable = true;
   services.tailscale.enable = true;
@@ -319,6 +321,7 @@
     files = [
       # "/etc/NIXOS"
       "/etc/machine-id"
+      "/root/.local/share/nix/trusted-settings.json"
       /*
       "/var/lib/NetworkManger/secret_key"
       "/var/lib/NetworkManger/seen_bssids"
