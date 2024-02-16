@@ -29,3 +29,4 @@ sudo nixos-rebuild switch --flake .#hostname
 
 ## Machine names:
 * asuna - Honor MagicBook Pro
+* kurumi - VirtualBox VM

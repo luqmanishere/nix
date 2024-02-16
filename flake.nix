@@ -163,6 +163,21 @@
           }
         ];
       };
+      kurumi = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.home-manager.nixosModules.home-manager
+          ./nixos/kurumi.nix
+
+          {
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              users.luqman = ./home-manager/luqman-kurumi.nix;
+            };
+          }
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
