@@ -1,13 +1,13 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.modules.tools.fonts;
-in
-{
-  imports = [ ];
+in {
+  imports = [];
 
   options.modules.tools.fonts.enable = mkEnableOption "enable fonts";
 
@@ -21,7 +21,7 @@ in
       fira-code
       fira-code-symbols
       jetbrains-mono
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "Noto" ]; })
+      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto"];})
       iosevka-custom
 
       fontconfig

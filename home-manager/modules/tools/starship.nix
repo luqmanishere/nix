@@ -1,12 +1,12 @@
-{ lib
-, config
-, ...
+{
+  lib,
+  config,
+  ...
 }:
 with lib; let
   cfg = config.modules.tools.starship;
-in
-{
-  imports = [ ];
+in {
+  imports = [];
 
   options.modules.tools.starship.enable = mkEnableOption "enable the starship prompt";
 
