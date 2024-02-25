@@ -14,6 +14,7 @@ in {
     ./hyprland.nix
     ./dunst.nix
     ./rofi.nix
+    ./modules/tools/fonts.nix
   ];
   options.graphical = {
     enable = mkOption {
@@ -25,17 +26,6 @@ in {
   config = mkIf (cfg.enable) {
     home = {
       packages = with pkgs; [
-        # fonts
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        liberation_ttf
-        fira-code
-        fira-code-symbols
-        jetbrains-mono
-        (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto"];})
-        iosevka-custom
-
         #desktop apps
         tdesktop
         chromium
@@ -44,7 +34,6 @@ in {
         obsidian
         zathura
         foliate
-        teams
         (vivaldi.override {
           proprietaryCodecs = true;
           enableWidevine = true;
@@ -53,8 +42,8 @@ in {
         logseq
 
         # prismlauncher
-        inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
-        osu-lazer
+        #inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
+        #osu-lazer
         gamescope
         mangohud
         scrcpy
@@ -65,6 +54,7 @@ in {
     };
 
     fonts.fontconfig.enable = true;
+    modules.tools.fonts.enable = true;
 
     services.easyeffects.enable = true;
 

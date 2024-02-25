@@ -22,7 +22,7 @@ in {
       fira-code-symbols
       jetbrains-mono
       (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto"];})
-      iosevka-custom
+      iosevka-solemnattic
 
       fontconfig
     ];

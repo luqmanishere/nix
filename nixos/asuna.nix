@@ -16,22 +16,22 @@
 
   # This is disabled to let lanzaboote manage it
   # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.systemd-boot.configurationLimit = 10;
-  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
+   boot.loader.efi.canTouchEfiVariables = true;
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
 
-  # use the latest xanmod kerner
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+  # use the latest xanmod kernel
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   # use the experimental bootspec
-  boot.bootspec.enable = true;
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-    configurationLimit = 10;
-  };
+  # boot.bootspec.enable = true;
+  # boot.loader.systemd-boot.enable = lib.mkForce false;
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   pkiBundle = "/etc/secureboot";
+  #   configurationLimit = 10;
+  # };
 
   networking.hostName = "asuna"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -307,28 +307,28 @@
     algorithm = "zstd";
   };
 
-  # warning, here there be dragons
-  # use impermanence
-  environment.persistence."/persist" = {
-    # hideMounts = true;
-    directories = [
-      "/etc/NetworkManager/system-connections"
-      "/etc/nixos"
-      "/etc/secureboot"
-      "/usr/share/waydroid-extra"
-    ];
-
-    files = [
-      # "/etc/NIXOS"
-      "/etc/machine-id"
-      "/root/.local/share/nix/trusted-settings.json"
-      /*
-      "/var/lib/NetworkManger/secret_key"
-      "/var/lib/NetworkManger/seen_bssids"
-      "/var/lib/NetworkManger/timestamps"
-      */
-    ];
-  };
+  # # warning, here there be dragons
+  # # use impermanence
+  # environment.persistence."/persist" = {
+  #   # hideMounts = true;
+  #   directories = [
+  #     "/etc/NetworkManager/system-connections"
+  #     "/etc/nixos"
+  #     "/etc/secureboot"
+  #     "/usr/share/waydroid-extra"
+  #   ];
+  #
+  #   files = [
+  #     # "/etc/NIXOS"
+  #     "/etc/machine-id"
+  #     "/root/.local/share/nix/trusted-settings.json"
+  #     /*
+  #     "/var/lib/NetworkManger/secret_key"
+  #     "/var/lib/NetworkManger/seen_bssids"
+  #     "/var/lib/NetworkManger/timestamps"
+  #     */
+  #   ];
+  # };
 
   systemd.tmpfiles.rules = [
     "L+ /lib/${builtins.baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}"

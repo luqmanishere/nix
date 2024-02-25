@@ -1,0 +1,3 @@
+{
+  firefox = import ./firefox.nix;
+}

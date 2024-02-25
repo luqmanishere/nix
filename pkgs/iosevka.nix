@@ -54,16 +54,16 @@ assert (extraParameters != null) -> set != null;
       if set != null
       then "iosevka-${set}"
       else "iosevka";
-    version = "26.3.2";
+    version = "28.1.0";
 
     src = fetchFromGitHub {
       owner = "be5invis";
       repo = "iosevka";
       rev = "v${version}";
-      hash = "sha256-w+D3ehgIB/qzvD5pc4Tr5Ct6EIJuzdVaBhKPLFf9LZA=";
+      hash = "sha256-dqXr/MVOuEmAMueaRWsnzY9MabhnyBRtLR9IDVLN79I=";
     };
 
-    npmDepsHash = "sha256-2gf61TtqiTxxeFy0UEMf/EJQotT+dLuHhhLVVJztu08=";
+    npmDepsHash = "sha256-bux8aFBP1Pi5pAQY1jkNTqD2Ny2j+QQs+QRaXWJj6xg=";
 
     nativeBuildInputs =
       [
@@ -113,13 +113,11 @@ assert (extraParameters != null) -> set != null;
       runHook postConfigure
     '';
 
-    # npm run build --no-update-notifier --max_executable_size=4096 --max-old-space-size=1000 -- --max-old-space-size=1000 --jCmd=4 --max_executable_size=4096 --verbose=9 ttf::$pname
-    # npm run build --no-update-notifier --  --verbose=9 ttf::$pname
     buildPhase = ''
       export NODE_OPTIONS="--max-old-space-size=1000"
       export HOME=$TMPDIR
       runHook preBuild
-      npm run build --no-update-notifier --  --verbose=9 ttf::$pname
+      npm run build --no-update-notifier -- --jCmd=4 --verbose=9 ttf::$pname
       runHook postBuild
     '';
 
@@ -145,8 +143,6 @@ assert (extraParameters != null) -> set != null;
       license = licenses.ofl;
       platforms = platforms.all;
       maintainers = with maintainers; [
-        cstrahan
-        jfrankenau
         ttuegel
         babariviere
         rileyinman

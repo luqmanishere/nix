@@ -12,6 +12,8 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
+    ./modules/wayland-shell/ags
+    ./modules/browsers/firefox.nix
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
     ./emacs.nix
@@ -52,7 +54,7 @@
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
-      permittedInsecurePackages = ["electron-11.5.0"];
+      permittedInsecurePackages = ["electron-11.5.0" "electron-25.9.0"];
     };
   };
 
@@ -89,9 +91,9 @@
   # home manager please manage yourself
   programs.home-manager.enable = true;
 
-  programs.firefox = {
-    enable = true;
-  };
+  modules.browsers.firefox.enable = true;
+
+  modules.wayland-shell.ags.enable = true;
 
   programs.starship = {
     enable = true;
