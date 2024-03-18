@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -18,10 +19,10 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
-   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
 
-  # use the latest xanmod kernel
+  # use the latest zen kernel
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   # use the experimental bootspec
@@ -62,13 +63,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -85,13 +79,11 @@
   # bluetooth
   hardware.bluetooth = {
     enable = true;
-    /*
     settings = {
       General = {
         Enable = "Source,Sink,Media,Socket";
       };
     };
-    */
   };
   services.blueman.enable = true;
 
@@ -124,15 +116,8 @@
     };
   };
 
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound.
   sound.enable = false;
@@ -151,13 +136,10 @@
   services.udisks2.enable = true;
   services.tailscale.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  #services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
     isNormalUser = true;
-    extraGroups = ["wheel" "audio" "video" "networkmanager" "podman" "adbusers"];
+    extraGroups = ["wheel" "audio" "video" "networkmanager" "podman" "adbusers" "mediacenter"];
     shell = pkgs.fish;
     hashedPassword = "$6$qCj8Szs3ReZHsRHN$nE0ASG2jCRcpryBGXcH9fhJyem1IzH2e1RQzTffkI0bCBOJ1FsOst1Dy8m53nQpzSsEhCR6JVIZ5tcHPmH0bL.";
     packages = with pkgs; [
@@ -165,6 +147,22 @@
       neovim
       byobu
     ];
+  };
+
+  users.groups.mediacenter.gid = 13000;
+  systemd.services.tailscale-funnel = {
+    unitConfig = {
+      Description = "Expose the jellyfin instance via tailscale";
+      After = ["tailscaled.service"];
+    };
+
+    serviceConfig = {
+      ExecStart = "${pkgs.tailscale}/bin/tailscale funnel 8096";
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+
+    wantedBy = ["multi-user.target"];
   };
 
   services.xremap = {
@@ -251,6 +249,7 @@
           -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
           "$@" ''
     )
+    podman-compose
 
     steam-tui
     steamcmd
@@ -296,6 +295,7 @@
     lxd.enable = false;
     podman = {
       enable = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 

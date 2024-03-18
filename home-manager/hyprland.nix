@@ -1,6 +1,5 @@
 {
   inputs,
-  outputs,
   config,
   pkgs,
   lib,
@@ -8,16 +7,12 @@
 }:
 with lib; let
   cfg = config.hyprland;
-  lock = "${pkgs.swaylock-effects}/bin/swaylock -f --clock --indicator --indicator-idle-visible --fade-in 1 -c 000000";
-  screenoff = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-  screenon = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-  lockscreenoff = "${pkgs.procps}/bin/pgrep swaylock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-  lockscreenon = "${pkgs.procps}/bin/pgrep swaylock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
 in {
   imports = [
     inputs.hyprland.homeManagerModules.default
+    inputs.hypridle.homeManagerModules.default
+    inputs.hyprlock.homeManagerModules.default
     ./waybar.nix
-    ./wayper.nix
   ];
 
   options.hyprland = {
@@ -55,35 +50,36 @@ in {
       # package = pkgs.hyprland-hidpi;
     };
 
-    services.swayidle = {
+    programs.hyprlock = {
       enable = true;
-      systemdTarget = "hyprland-session.target";
-
-      events = [
+      general = {
+        disable_loading_bar = false;
+      };
+      backgrounds = [
         {
-          event = "before-sleep";
-          command = "${lock}";
-        }
-        {
-          event = "lock";
-          command = "${lock}";
+          path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
         }
       ];
+    };
 
-      timeouts = [
-        {
-          timeout = 360;
-          command = "${lock}";
-        }
+    services.hypridle = {
+      enable = true;
+      lockCmd = "${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+      listeners = [
+        # turn off screen after 5 minutes
         {
           timeout = 300;
-          command = "${screenoff}";
-          resumeCommand = "${screenon}";
+          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 360;
+          onTimeout = "pgrep hyprlock || loginctl lock-session";
         }
         {
           timeout = 15;
-          command = "${lockscreenoff}";
-          resumeCommand = "${lockscreenon}";
+          onTimeout = "pgrep hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         }
       ];
     };

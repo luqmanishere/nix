@@ -21,18 +21,23 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.35.0";
+      url = "github:hyprwm/Hyprland/v0.37.1";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
+    hypridle = {
+      url = "github:hyprwm/hypridle/4395339a2dc410bcf49f3e24f9ed3024fdb25b0a";
+    };
+    hyprlock = {
+      url = "github:hyprwm/hyprlock/2ae79757d5e5c48de2f4284992a6bfa265853a2d";
+    };
+
+    wayper.url = "github:luqmanishere/wayper";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     xremap-flake.url = "github:xremap/nix-flake";
     ags.url = "github:Aylur/ags";
 
-    homeage.url = "github:jordanisaacs/homeage";
-    homeage.inputs.nixpkgs.follows = "nixpkgs";
-
-    wayper.url = "github:luqmanishere/wayper";
+    agenix.url = "github:ryantm/agenix";
 
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";

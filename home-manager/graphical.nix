@@ -41,7 +41,7 @@ in {
         libreoffice
         logseq
 
-        # prismlauncher
+        prismlauncher
         #inputs.prismlauncher.packages.${pkgs.system}.prismlauncher
         #osu-lazer
         gamescope

@@ -12,15 +12,13 @@
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
-    ./modules/wayland-shell/ags
-    ./modules/browsers/firefox.nix
+    ./modules
     ./nvim/lazyvim-nvim.nix
     ./graphical.nix
     ./emacs.nix
     ./mpd.nix
     ./syncthing.nix
     ./modules/tools/oci.nix
-    ./task.nix
     ./neomutt.nix
     ./modules/editors/astronvim/astronvim.nix
     ./modules/terminals/zellij.nix
@@ -35,7 +33,6 @@
       outputs.overlays.modifications
       outputs.overlays.additions
       inputs.hyprland.overlays.default
-      inputs.wayper.overlays.default
       inputs.nil.overlays.default
       inputs.alejandra.overlays.default
       #inputs.emacs-overlay.overlays.default
@@ -125,6 +122,9 @@
     shellAbbrs = {
       psg = "ps ax | grep -i";
     };
+    shellInit = ''
+      set -U fish_greeting "Welcome SolemnAttic. System initialized."
+    '';
     interactiveShellInit = "
     set -U XDG_DATA_DIRS $XDG_DATA_DIRS /var/lib/flatpak/exports/share /home/luqman/.local/share/flatpak/exports/share
     ";
@@ -297,13 +297,9 @@
 
   graphical.enable = true;
   hyprland.enable = true;
-  wayper = {
-    enable = true;
-    systemdIntegration = {
-      enable = true;
-      #target = "hyprland-session.target";
-    };
-  };
+
+  modules.wayland-shell.wayper.enable = true;
+
   kitty-conf.enable = true;
   wezterm-conf.enable = true;
   dunst.enable = true;
@@ -322,7 +318,7 @@
     doom.doomConfigFiles = ./doom-emacs;
   };
 
-  modules.cli.taskwarrior.enable = true;
+  modules.tools.taskwarrior.enable = true;
   modules.terminals.zellij.enable = true;
 
   xdg.userDirs.enable = true;

@@ -2,14 +2,15 @@
   config,
   lib,
   pkgs,
+  outputs,
   ...
 }:
 with lib; let
-  cfg = config.modules.cli.taskwarrior;
+  cfg = config.modules.tools.taskwarrior;
 in {
-  imports = [];
+  imports = [outputs.homeManagerModules.secrets];
 
-  options.modules.cli.taskwarrior = {
+  options.modules.tools.taskwarrior = {
     enable = mkOption {
       description = "Enable taskwarrior";
       default = false;
@@ -51,13 +52,16 @@ in {
           filter = "+today status:pending -WAITING -BLOCKED -notify_only";
         };
 
-        taskd.certificate = "/home/luqman/.task/private.certificate.pem";
-        taskd.key = "/home/luqman/.task/private.key.pem";
-        taskd.ca = "/home/luqman/.task/ca.cert.pem";
-        taskd.server = "inthe.am:53589";
-        taskd.credentials = "inthe_am/luqmanulhakim1720/65bcddea-fc27-4af8-8cad-8582f385d4fa";
         taskd.trust = "strict";
+        taskd.server = "app.wingtask.com:53589";
+        taskd.key = config.age.secrets.taskd_key.path;
+        taskd.ca = config.age.secrets.taskd_ca.path;
+        taskd.certificate = config.age.secrets.taskd_cert.path;
+        # taskd.credentials = config.age.secrets.taskd_credentials.path;
       };
+      extraConfig = ''
+        include ${config.age.secrets.taskd_credentials.path}
+      '';
     };
 
     services.taskwarrior-sync.enable = true;
