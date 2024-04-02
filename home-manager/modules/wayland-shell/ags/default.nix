@@ -20,6 +20,7 @@ in {
         enable = true;
         # configDir = ./ags-config;
       };
+      home.packages = with pkgs; [bun sassc];
     })
   ];
 }

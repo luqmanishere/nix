@@ -64,7 +64,9 @@ in {
 
     services.hypridle = {
       enable = true;
-      lockCmd = "${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+      lockCmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+      beforeSleepCmd = "loginctl lock-sesion";
+      afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
       listeners = [
         # turn off screen after 5 minutes
         {
@@ -74,11 +76,11 @@ in {
         }
         {
           timeout = 360;
-          onTimeout = "pgrep hyprlock || loginctl lock-session";
+          onTimeout = "pidof hyprlock || loginctl lock-session";
         }
         {
           timeout = 15;
-          onTimeout = "pgrep hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onTimeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
           onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         }
       ];

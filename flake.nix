@@ -35,14 +35,14 @@
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     xremap-flake.url = "github:xremap/nix-flake";
-    ags.url = "github:Aylur/ags";
+    ags.url = "github:Aylur/ags/v1.8.0";
 
     agenix.url = "github:ryantm/agenix";
 
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-    devenv.url = "github:cachix/devenv";
+    devenv.url = "github:cachix/devenv/rust-rewrite";
     nil.url = "github:oxalica/nil";
     alejandra = {
       url = "github:kamadorueda/alejandra/3.0.0";
@@ -103,6 +103,8 @@
                   packages = with pkgs; [
                     hello
                     inputs.home-manager.packages.${system}.default
+                    inputs.nil.packages.${system}.default
+                    inputs.alejandra.packages.${system}.default
                     git
                     neovim
                     curl
