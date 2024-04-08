@@ -7,11 +7,13 @@
 2. Setup impermeanance (if used)
 
 3. Setup secureboot keys (if used)
+
 ```bash
 sudo sbctl create-keys
 ```
 
 ## To Install
+
 ```bash
 git clone https://github.com/luqmanishere/nix
 cd nix
@@ -28,5 +30,6 @@ sudo nixos-rebuild switch --flake .#hostname
 ```
 
 ## Machine names:
-* asuna - Honor MagicBook Pro
-* kurumi - VirtualBox VM
+
+- asuna - Honor MagicBook Pro
+- kurumi - VirtualBox VM

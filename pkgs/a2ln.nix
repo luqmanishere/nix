@@ -10,14 +10,14 @@
 with pkgs.python3Packages;
   buildPythonApplication rec {
     pname = "a2ln";
-    version = "1.1.10";
+    version = "1.1.14";
     format = "pyproject";
 
     src = fetchFromGitHub {
       owner = "patri9ck";
       repo = "a2ln-server";
       rev = version;
-      hash = "sha256-tMTCc9ngSCbDwjzTVCQ9Km8onp/t1hvn3pj5PO+1/Hc=";
+      hash = "sha256-6SVAFeVB/YpddJhSHgjIF43i2BAmFFADMwlygp9IrSU=";
     };
 
     buildInputs = with pkgs; [
@@ -38,7 +38,7 @@ with pkgs.python3Packages;
     ];
 
     meta = {
-      homepage = "https://github.com/pytoolz/toolz/";
-      description = "List processing tools and functional utilities";
+      homepage = "https://github.com/patri9ck/a2ln-server/";
+      description = "A way to display Android phone notifications on Linux (Server) ";
     };
   }

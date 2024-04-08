@@ -1,25 +1,52 @@
 {
-  description = "solemnattic's nix config";
+  description = "Luqman's Nix Config done right";
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
 
   inputs = {
-    # Nixpkgs unstable
+    # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    haumea = {
-      url = "github:nix-community/haumea/v0.2.2";
+    nil.url = "github:oxalica/nil";
+    alejandra = {
+      url = "github:kamadorueda/alejandra/3.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xremap-flake.url = "github:xremap/nix-flake";
 
+    # flake-parts
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    flake-root.url = "github:srid/flake-root";
+
+    # utilities
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    flake-registry = {
+      url = "github:NixOS/flake-registry";
+      flake = false;
+    };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     impermanence.url = "github:nix-community/impermanence";
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     hyprland = {
       url = "github:hyprwm/Hyprland/v0.37.1";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
@@ -30,193 +57,74 @@
     hyprlock = {
       url = "github:hyprwm/hyprlock/2ae79757d5e5c48de2f4284992a6bfa265853a2d";
     };
-
     wayper.url = "github:luqmanishere/wayper";
+    agenix.url = "github:ryantm/agenix";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
-    xremap-flake.url = "github:xremap/nix-flake";
-    ags.url = "github:Aylur/ags/v1.8.0";
 
-    agenix.url = "github:ryantm/agenix";
-
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-
-    devenv.url = "github:cachix/devenv/rust-rewrite";
-    nil.url = "github:oxalica/nil";
-    alejandra = {
-      url = "github:kamadorueda/alejandra/3.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    prismlauncher.url = "github:PrismLauncher/PrismLauncher";
-
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
+    devenv.url = "github:cachix/devenv";
+    # to remove warnings on nix flake check
+    nix2container.url = "github:nlewo/nix2container";
+    nix2container.inputs = {nixpkgs.follows = "nixpkgs";};
+    mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
   };
 
-  nixConfig = {
-    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-    extra-substituters = "https://devenv.cachix.org";
-  };
-
-  outputs = {
+  outputs = inputs @ {
     self,
-    nixpkgs,
+    flake-parts,
+    flake-root,
     home-manager,
+    nixpkgs,
+    treefmt-nix,
     devenv,
     ...
-  } @ inputs: let
-    inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-  in {
-    # Your custom packages
-    # Acessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-      import ./pkgs {inherit pkgs;});
-    # Devshell for bootstrapping
-    # Acessible through 'nix develop' or 'nix-shell' (legacy)
-    devShells =
-      forAllSystems
-      (
-        system: let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in {
-          default =
-            devenv.lib.mkShell
-            {
-              inherit inputs pkgs;
-              modules = [
-                ({pkgs, ...}: {
-                  packages = with pkgs; [
-                    hello
-                    inputs.home-manager.packages.${system}.default
-                    inputs.nil.packages.${system}.default
-                    inputs.alejandra.packages.${system}.default
-                    git
-                    neovim
-                    curl
-                    wget
-                    aria2
-                  ];
-                  enterShell = ''
-                    hello
-                  '';
+  }: let
+    # Use our custom lib enhanced with nixpkgs and home-manager
+    lib = import ./nix/lib {lib = nixpkgs.lib;} // nixpkgs.lib // home-manager.lib;
+  in
+    flake-parts.lib.mkFlake {
+      inherit inputs;
+      specialArgs = {inherit lib;};
+    } {
+      debug = true;
+      imports = [
+        flake-root.flakeModule
+        treefmt-nix.flakeModule
+        devenv.flakeModule
+        ./nix
+        ./nixos
+      ];
 
-                  processes.run.exec = "hello";
-                })
-              ];
-            };
-        }
-      );
+      systems = [
+        "aarch64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
 
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    # Reusable nixos modules you might want to export
-    # These are usually stuff you would upstream into nixpkgs
-    nixosModules = import ./modules/nixos;
-    # Reusable home-manager modules you might want to export
-    # These are usually stuff you would upstream into home-manager
-    homeManagerModules = import ./modules/home-manager;
-
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = {
-      nixos-vm = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./nixos/nixos-vm.nix
-        ];
+      flake = {
+        # overlays?
+        overlays = {
+          # channels = final: prev: {
+          #   # expose other channels via overlays
+          # };
+        };
+        homeManagerModules = import ./modules/home-manager;
       };
-      asuna = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          self.nixosModules.cloudflare-warp
-          #nixosModules.systemd-secure-boot
-          inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.impermanence.nixosModules.impermanence
-          # inputs.hyprland.nixosModules.default
-          inputs.home-manager.nixosModules.home-manager
-          ./nixos/asuna.nix
-          {
-            home-manager = {
-              useUserPackages = true;
-              # useGlobalPkgs = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              users.luqman = ./home-manager/luqman-desktop.nix;
-            };
-          }
-        ];
-      };
-      sinon = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          ./nixos/sinon.nix
 
-          {
-            home-manager = {
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              users.luqman = ./home-manager/luqman-sinon.nix;
-            };
-          }
-        ];
-      };
-      kurumi = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          inputs.home-manager.nixosModules.home-manager
-          ./nixos/kurumi.nix
+      _module.args._inputs = inputs // {inherit self;};
 
-          {
-            home-manager = {
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              users.luqman = ./home-manager/luqman-kurumi.nix;
-            };
-          }
-        ];
+      perSystem = {
+        inputs',
+        pkgs,
+        ...
+      }: {
+        # make pkgs available to all `perSystem` functions
+        _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
+        # make custom lib available to all `perSystem` functions
+        _module.args.lib = lib;
+
+        packages = import ./pkgs {inherit pkgs;};
       };
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      "luqman@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-        pkgs =
-          nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/luqman-desktop.nix
-        ];
-      };
-      "luqman@asuna" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        #nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home-manager/luqman-desktop.nix
-        ];
-      };
-      "luqman@sinon" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/luqman-sinon.nix];
-      };
-    };
-  };
 }

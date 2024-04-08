@@ -1,9 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# {...}: {
+#   imports = [./system.nix];
+# }
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
@@ -11,10 +10,9 @@
 }: {
   imports = [
     inputs.xremap-flake.nixosModules.default
-    outputs.nixosModules.protonvpn
-    outputs.nixosModules.wifi-ap
     # Include the results of the hardware scan.
-    ./hw-conf/asuna-hc.nix
+    # ./hw-conf/asuna-hc.nix
+    ./hardware.nix
   ];
 
   # This is disabled to let lanzaboote manage it
@@ -137,24 +135,6 @@
   # to ease mount of usbs
   services.udisks2.enable = true;
   services.tailscale.enable = true;
-
-  services.protonvpn = {
-    enable = true;
-    autostart = false;
-    interface = {
-      ip = "10.2.0.2/32";
-      privateKeyFile = "/etc/protonkey";
-      dns = {
-        enable = true;
-        ip = "10.2.0.1";
-      };
-    };
-    endpoint = {
-      publicKey = "6vLkUgiS/K8p5dTMwUQo6tiyJ65DrM8E2mwO+QFz/zs=";
-      ip = "138.199.21.206";
-      port = 51820;
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
@@ -309,11 +289,6 @@
     group = "root";
   };
   */
-  solemnattic.modules.system.wifi-relay = {
-    enable = false;
-    network-interface = "wlp1s0";
-    # dns = "8.8.8.8";
-  };
 
   virtualisation = {
     waydroid.enable = false;

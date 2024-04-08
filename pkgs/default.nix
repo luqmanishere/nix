@@ -3,7 +3,6 @@
 {pkgs ? (import ../nixpkgs.nix) {}}: {
   # example = pkgs.callPackage ./example { };
   a2ln = pkgs.callPackage ./a2ln.nix {buildPythonApplication = pkgs.python3Packages.buildPythonApplication;};
-  operaone = pkgs.callPackage ./operaone.nix {};
   iosevka-solemnattic = pkgs.callPackage ./iosevka.nix {
     privateBuildPlan = ''
       [buildPlans.iosevka-solemn-attic]
@@ -13,6 +12,6 @@
       noCvSs = true
       exportGlyphNames = true
     '';
+    set = "solemn-attic";
   };
-  set = "solemn-attic";
 }
