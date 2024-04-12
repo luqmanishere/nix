@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -70,6 +69,12 @@
     device = "/dev/disk/by-uuid/39ea80c4-e748-47eb-835c-64025de53e26";
     fsType = "btrfs";
     options = ["subvol=jellyfin" "compress=zstd" "rw" "user" "exec" "nofail"];
+  };
+
+  fileSystems."/mnt/storage2/rustic-repo" = {
+    device = "/dev/disk/by-uuid/39ea80c4-e748-47eb-835c-64025de53e26";
+    fsType = "btrfs";
+    options = ["subvol=rustic-repo" "compress=zstd" "rw" "user" "exec" "nofail"];
   };
   swapDevices = [];
 
