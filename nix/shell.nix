@@ -42,6 +42,11 @@
       set -euo pipefail
       sudo nixos-rebuild switch --flake .#${host}
     '';
+
+    rebuild-test = host: ''
+      set -euo pipefail
+      sudo nixos-rebuild test --flake .#${host}
+    '';
   in {
     # devShells.default = pkgs.mkShell {
     #   # cf. https://haskell.flake.page/devshell#composing-devshells
@@ -67,6 +72,11 @@
         rebuild-switch-asuna = {
           description = "Switch into the configuration for host asuna";
           exec = rebuild-switch "asuna";
+        };
+
+        rebuild-test-asuna = {
+          description = "Switch (TEST) into the configuration for host asuna";
+          exec = rebuild-test "asuna";
         };
 
         # ISOs
