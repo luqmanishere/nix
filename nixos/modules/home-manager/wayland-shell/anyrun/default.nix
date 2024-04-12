@@ -14,18 +14,17 @@
           inputs.anyrun.packages.${pkgs.system}.rink
           inputs.anyrun.packages.${pkgs.system}.shell
           inputs.anyrun.packages.${pkgs.system}.translate
-          inputs.anyrun.packages.${pkgs.system}.kidex
-          inputs.anyrun.packages.${pkgs.system}.randr
-          inputs.anyrun.packages.${pkgs.system}.stdin
-          inputs.anyrun.packages.${pkgs.system}.dictionary
-          inputs.anyrun.packages.${pkgs.system}.websearch
         ];
         width = {absolute = 800;};
         x = {fraction = 0.5;};
-        y = {absolute = -300;};
+        y = {absolute = 200;};
         hideIcons = false;
         ignoreExclusiveZones = false;
         hidePluginInfo = false;
+        layer = "overlay";
+        closeOnClick = false;
+        showResultsImmediately = false;
+        maxEntries = null;
       };
       extraCss = builtins.readFile ./style.css;
     };
