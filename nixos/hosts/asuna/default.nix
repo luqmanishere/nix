@@ -42,7 +42,6 @@
   time.timeZone = "Asia/Kuala_Lumpur";
   time.hardwareClockInLocalTime = true;
 
-  nixpkgs = {config.allowUnfree = true;};
   nix = {
     # i have no idea what these lines do
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;

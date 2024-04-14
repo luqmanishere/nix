@@ -9,8 +9,11 @@
         MEOW = "cat";
       };
     };
-    xdg.userDirs.enable = true;
-    xdg.enable = true;
-    xdg.configHome = "${config.home.homeDirectory}/.config";
+
+    xdg = {
+      enable = true;
+      userDirs.enable = true;
+      configHome = "${config.home.homeDirectory}/.config";
+    };
   };
 }

@@ -52,8 +52,8 @@ return {
         -- rnix = {},
         nil_ls = {},
         bashls = {
-          filetypes = { "sh", "bash" }
-        }
+          filetypes = { "sh", "bash" },
+        },
       },
     },
   },
@@ -81,7 +81,7 @@ return {
         "rust",
         "nix",
         "fish",
-        "ron"
+        "ron",
       },
       highlight = {
         enable = true,
@@ -114,7 +114,7 @@ return {
       sources = {
         require("null-ls").builtins.formatting.nixpkgs_fmt,
         require("null-ls").builtins.formatting.alejandra,
-        require("null-ls").builtins.formatting.shfmt
+        require("null-ls").builtins.formatting.shfmt,
       },
     },
   },

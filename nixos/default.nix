@@ -9,11 +9,14 @@
     (inputs)
     disko
     home-manager
+    neovim-nightly-overlay
     ;
 
   mkNixosConfig = {
     system ? "x86_64-linux",
     nixpkgs ? inputs.nixpkgs,
+    nixpkgsConfig ? null,
+    nixpkgsOverlay ? [],
     defaultUser ? "luqman",
     hardwareModules ? [],
     baseModules ? [
@@ -23,9 +26,15 @@
     hostModules ? [],
     homeManagerModules ? [],
     # TODO: go crazy and add an extra users module
-  }:
-    nixpkgs.lib.nixosSystem {
+  }: let
+    pkgs = import nixpkgs {
       inherit system;
+      config = nixpkgsConfig;
+      overlay = nixpkgsOverlay;
+    };
+  in
+    nixpkgs.lib.nixosSystem {
+      inherit system pkgs;
       modules =
         baseModules
         ++ hardwareModules
@@ -35,9 +44,10 @@
             home-manager = {
               useUserPackages = true;
               # extraSpecialArgs = {inherit inputs outputs;};
-              extraSpecialArgs = {inherit inputs self;};
+              extraSpecialArgs = {inherit pkgs inputs self;};
               users."${defaultUser}" = {
-                imports = [] ++ homeManagerModules;
+                imports = homeManagerModules;
+                nixpkgs.overlays = nixpkgsOverlay;
                 programs.home-manager.enable = true;
                 systemd.user.startServices = "sd-switch";
                 home.stateVersion = "22.11";
@@ -54,10 +64,12 @@ in {
   imports = [];
 
   flake.nixosConfigurations = {
-    asuna = withSystem "x86_64-linux" ({...}:
+    asuna = withSystem "x86_64-linux" (_:
       mkNixosConfig {
         hardwareModules = [];
         hostModules = [hosts.asuna];
+        nixpkgsConfig = import ./hosts/asuna/nixpkgs-config.nix;
+        nixpkgsOverlay = [neovim-nightly-overlay.overlays.default];
         homeManagerModules = [
           home-modules.nix-config
           home-modules.luqman-home

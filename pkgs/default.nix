@@ -5,13 +5,13 @@
   a2ln = pkgs.callPackage ./a2ln.nix {buildPythonApplication = pkgs.python3Packages.buildPythonApplication;};
   iosevka-solemnattic = pkgs.callPackage ./iosevka.nix {
     privateBuildPlan = ''
-      [buildPlans.iosevka-solemn-attic]
+      [buildPlans.IosevkaSolemnAttic]
       family = "Iosevka SolemnAttic"
       spacing = "fontconfig-mono"
       serifs = "sans"
       noCvSs = true
       exportGlyphNames = true
     '';
-    set = "solemn-attic";
+    set = "SolemnAttic";
   };
 }

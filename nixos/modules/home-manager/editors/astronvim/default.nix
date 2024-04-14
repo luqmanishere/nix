@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -54,9 +55,14 @@ in {
       statix
       deadnix
       selene
+
+      #gui
+      neovide
     ];
+
     programs.neovim = {
       enable = true;
+      package = inputs.neovim-flake.packages.${pkgs.system}.neovim;
       # we avoid using the wrapped neovim thing
     };
   };

@@ -9,7 +9,7 @@ return {
     options = {
       opt = { -- configure vim.opt options
         -- configure font
-        guifont = "Iosevka SolemnAttic,Symbols Nerd Font:h12",
+        guifont = "Iosevka SolemnAttic,Symbols Nerd Font:h14",
         -- line spacing
         linespace = 0,
       },

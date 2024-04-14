@@ -33,6 +33,10 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.svelte" },
+  { import = "astrocommunity.pack.sql" },
+  { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.pack.yaml" },
 
   { import = "astrocommunity.color.ccc-nvim" },
   { import = "astrocommunity.color.mini-hipatterns" },
@@ -44,6 +48,8 @@ return {
   -- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
   { import = "astrocommunity.editing-support.nvim-devdocs" },
   { import = "astrocommunity.editing-support.suda-vim" },
+
+  { import = "astrocommunity.lsp.garbage-day-nvim" },
 
   { import = "astrocommunity.motion.leap-nvim" },
 

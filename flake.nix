@@ -62,6 +62,12 @@
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-flake = {
+      url = "github:neovim/neovim?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     devenv.url = "github:cachix/devenv";
     # to remove warnings on nix flake check
     nix2container.url = "github:nlewo/nix2container";
@@ -117,10 +123,17 @@
       perSystem = {
         inputs',
         pkgs,
+        system,
         ...
       }: {
         # make pkgs available to all `perSystem` functions
-        _module.args.pkgs = inputs'.nixpkgs.legacyPackages;
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.neovim-nightly-overlay.overlay
+          ];
+        };
+
         # make custom lib available to all `perSystem` functions
         _module.args.lib = lib;
 

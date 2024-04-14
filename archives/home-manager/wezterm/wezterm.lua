@@ -1,7 +1,7 @@
 -- wezterm config file
 
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 -- This table will hold the configuration.
 local config = {}
@@ -14,8 +14,8 @@ end
 
 -- Config here
 
-config.color_scheme = 'Catppuccin Macchiato'
-config.font = wezterm.font('Iosevka SolemnAttic', { weight = "Medium" })
+config.color_scheme = "Catppuccin Macchiato"
+config.font = wezterm.font("Iosevka SolemnAttic", { weight = "Medium" })
 config.font_size = 16.0
 
 -- and finally, return the configuration to wezterm

@@ -50,20 +50,17 @@
 assert (privateBuildPlan != null) -> set != null;
 assert (extraParameters != null) -> set != null;
   buildNpmPackage rec {
-    pname =
-      if set != null
-      then "iosevka-${set}"
-      else "iosevka";
-    version = "28.1.0";
+    pname = "Iosevka${toString set}";
+    version = "29.0.5";
 
     src = fetchFromGitHub {
       owner = "be5invis";
       repo = "iosevka";
       rev = "v${version}";
-      hash = "sha256-dqXr/MVOuEmAMueaRWsnzY9MabhnyBRtLR9IDVLN79I=";
+      hash = "sha256-Ir/HS9MFqOO7CDDLnqFX+6vCg06U5cYAcNKFyh5Ioc8=";
     };
 
-    npmDepsHash = "sha256-bux8aFBP1Pi5pAQY1jkNTqD2Ny2j+QQs+QRaXWJj6xg=";
+    npmDepsHash = "sha256-tzrMAZv1ATYwPVBUiDm4GPVj+TVAA3hMdc3MrdblOIw=";
 
     nativeBuildInputs =
       [
@@ -117,7 +114,7 @@ assert (extraParameters != null) -> set != null;
       export NODE_OPTIONS="--max-old-space-size=1000"
       export HOME=$TMPDIR
       runHook preBuild
-      npm run build --no-update-notifier -- --jCmd=4 --verbose=9 ttf::$pname
+      npm run build --no-update-notifier --targets ttf::$pname -- --jCmd=6 --verbose=9
       runHook postBuild
     '';
 
@@ -125,7 +122,8 @@ assert (extraParameters != null) -> set != null;
       runHook preInstall
       fontdir="$out/share/fonts/truetype"
       install -d "$fontdir"
-      install "dist/$pname/ttf"/* "$fontdir"
+      # in the original package TTF was lowercase. this caused errors to us and fixed here
+      install "dist/$pname/TTF"/* "$fontdir"
       runHook postInstall
     '';
 

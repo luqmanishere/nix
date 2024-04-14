@@ -26,7 +26,7 @@ in {
       fira-code
       fira-code-symbols
       jetbrains-mono
-      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto"];})
+      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
       self.packages.${pkgs.system}.iosevka-solemnattic
 
       fontconfig

@@ -1,4 +1,4 @@
 {...}: {
-# TODO: create a disko config
+  # TODO: create a disko config
   disko.devices = {};
 }
