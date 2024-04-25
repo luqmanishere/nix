@@ -1,99 +1,43 @@
 {
   self,
-  inputs,
-  lib,
-  withSystem,
+  config,
   ...
-}: let
-  inherit
-    (inputs)
-    disko
-    home-manager
-    neovim-nightly-overlay
-    ;
+}: {
+  flake = {
+    # declare our modules here
+    nixosModules = {
+      # common modules that should be present on all systems
+      common.imports = [
+        ./nix.nix
+        self.nixosModules.home-manager
 
-  mkNixosConfig = {
-    system ? "x86_64-linux",
-    nixpkgs ? inputs.nixpkgs,
-    nixpkgsConfig ? null,
-    nixpkgsOverlay ? [],
-    defaultUser ? "luqman",
-    hardwareModules ? [],
-    baseModules ? [
-      home-manager.nixosModules.home-manager
-      disko.nixosModules.disko
-    ],
-    hostModules ? [],
-    homeManagerModules ? [],
-    # TODO: go crazy and add an extra users module
-  }: let
-    pkgs = import nixpkgs {
-      inherit system;
-      config = nixpkgsConfig;
-      overlay = nixpkgsOverlay;
-    };
-  in
-    nixpkgs.lib.nixosSystem {
-      inherit system pkgs;
-      modules =
-        baseModules
-        ++ hardwareModules
-        ++ hostModules
-        ++ [
-          {
-            home-manager = {
-              useUserPackages = true;
-              # extraSpecialArgs = {inherit inputs outputs;};
-              extraSpecialArgs = {inherit pkgs inputs self;};
-              users."${defaultUser}" = {
-                imports = homeManagerModules;
-                nixpkgs.overlays = nixpkgsOverlay;
-                programs.home-manager.enable = true;
-                systemd.user.startServices = "sd-switch";
-                home.stateVersion = "22.11";
-              };
-            };
-          }
+        ./users.nix
+        ./groups.nix
+        ./dev.nix
+        ./shells.nix
+      ];
+
+      # system specific configurations
+
+      # main laptop configuration
+      asuna = {
+        imports = [
+          self.nixosModules.common
+          ./experimental/protonvpn.nix
+          ./steam.nix
         ];
-      specialArgs = {inherit self inputs lib;};
-    };
+      };
 
-  hosts = lib.rakeLeaves ./hosts;
-  home-modules = lib.rakeLeaves ./modules/home-manager;
-in {
-  imports = [];
-
-  flake.nixosConfigurations = {
-    asuna = withSystem "x86_64-linux" (_:
-      mkNixosConfig {
-        hardwareModules = [];
-        hostModules = [hosts.asuna];
-        nixpkgsConfig = import ./hosts/asuna/nixpkgs-config.nix;
-        nixpkgsOverlay = [neovim-nightly-overlay.overlays.default];
-        homeManagerModules = [
-          home-modules.nix-config
-          home-modules.luqman-home
-          home-modules.secrets
-
-          home-modules.browsers.firefox
-          home-modules.editors.astronvim
-          home-modules.games.general
-          home-modules.prod.school
-          home-modules.terminals.kitty
-          home-modules.terminals.wezterm
-          home-modules.terminals.zellij
-          home-modules.tools.fonts
-          home-modules.tools.mpd
-          home-modules.tools.shell
-          home-modules.tools.starship
-          home-modules.tools.task
-          home-modules.wayland-shell.dunst
-          home-modules.wayland-shell.hyprland
-          home-modules.wayland-shell.waybar
-          home-modules.wayland-shell.wayper
-          home-modules.wayland-shell.rofi
-          home-modules.wayland-shell.anyrun
+      # wsl setup
+      sinon = {
+        imports = [
+          self.nixosModules.common
+          ./wsl.nix
         ];
-      });
+        home-manager.users.luqman = {
+          imports = [self.homeModules.luqman-sinon];
+        };
+      };
+    };
   };
 }

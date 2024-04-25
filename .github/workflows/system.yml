@@ -1,0 +1,17 @@
+name: 'Build Hosts'
+on: 
+  push:
+
+jobs:
+  asuna:
+    runs-on: ubuntu-latest
+    environment: systemconfig
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DeterminateSystems/nix-installer-action@main
+    - uses: cachix/cachix-action@v14
+      with:
+        name: nix-conf
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - run: nix build .#nixosConfigurations.asuna.config.system.build.toplevel
+    - run: nix-shell --run "echo OK"

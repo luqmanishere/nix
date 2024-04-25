@@ -52,7 +52,7 @@
     #   # cf. https://haskell.flake.page/devshell#composing-devshells
     #   inputsFrom = [config.mission-control.devShell];
     # };
-    devenv.shells."default" = {
+    devenv.shells.default = {
       packages = with pkgs; [
         neovim
         nil
@@ -65,7 +65,7 @@
         };
 
         nix-build-asuna = {
-          description = "Builds toplevel NixOS image for NUC-1 host";
+          description = "Builds toplevel NixOS image for host asuna";
           exec = nix-build "asuna";
         };
 
@@ -81,7 +81,7 @@
 
         # ISOs
         flash-asuna-iso = {
-          description = "Flash installer-iso image for NUC-1";
+          description = "Flash installer-iso image for asuna";
           exec = flash-iso-image "asuna-iso-image";
         };
 
