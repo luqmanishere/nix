@@ -8,24 +8,42 @@ jobs:
     runs-on: ubuntu-latest
     environment: systemconfig
     steps:
+    - name: Maximize build space
+      uses: AdityaGarg8/remove-unwanted-software@v3
+      with:
+        remove-android: 'true'
+        remove-dotnet: 'true'
+        remove-haskell: 'true'
+        remove-codeql: 'true'
+        remove-docker-images: 'true'
+        remove-large-packages: 'true'
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@main
     - uses: cachix/cachix-action@v14
       with:
         name: nix-conf
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build .#nixosConfigurations.$GITHUB_JOB.config.system.build.toplevel
+    - run: nix build .#nixosConfigurations.$GITHUB_JOB.config.system.build.toplevel --accept-flake-config
     - run: echo "host $GITHUB_JOB OK"
 
   sinon:
     runs-on: ubuntu-latest
     environment: systemconfig
     steps:
+    - name: Maximize build space
+      uses: AdityaGarg8/remove-unwanted-software@v3
+      with:
+        remove-android: 'true'
+        remove-dotnet: 'true'
+        remove-haskell: 'true'
+        remove-codeql: 'true'
+        remove-docker-images: 'true'
+        remove-large-packages: 'true'
     - uses: actions/checkout@v4
     - uses: DeterminateSystems/nix-installer-action@main
     - uses: cachix/cachix-action@v14
       with:
         name: nix-conf
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build .#nixosConfigurations.$GITHUB_JOB.config.system.build.toplevel
+    - run: nix build .#nixosConfigurations.$GITHUB_JOB.config.system.build.toplevel --accept-flake-config
     - run: echo "host $GITHUB_JOB OK"
