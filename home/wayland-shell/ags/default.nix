@@ -1,11 +1,12 @@
 {
-  inputs,
+  flake,
   lib,
   config,
   pkgs,
   ...
 }:
 with lib; let
+  inherit (flake) inputs;
   cfg = config.modules.wayland-shell.ags;
 in {
   imports = [inputs.ags.homeManagerModules.default];

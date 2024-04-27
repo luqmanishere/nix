@@ -16,6 +16,10 @@
         ./dev.nix
         ./shells.nix
       ];
+      common = {
+      home-manager.useGlobalPkgs  = true;
+      home-manager.useUserPackages = true;
+      };
 
       # system specific configurations
 
@@ -23,9 +27,13 @@
       asuna = {
         imports = [
           self.nixosModules.common
-          ./experimental/protonvpn.nix
           ./steam.nix
         ];
+
+# never forget to import important things
+        home-manager.users.luqman = {
+          imports = [self.homeModules.luqman-asuna];
+        };
       };
 
       # wsl setup

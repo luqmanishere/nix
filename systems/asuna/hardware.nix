@@ -2,8 +2,13 @@
   config,
   pkgs,
   lib,
+  modulesPath,
   ...
 }: {
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -12,7 +17,7 @@
     };
 
     # use the latest zen kernel
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
 
     initrd = {
       # TODO: resetup impermeanance

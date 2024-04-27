@@ -1,11 +1,12 @@
 {
-  self,
+  flake,
   pkgs,
   lib,
   config,
   ...
 }:
 with lib; let
+  inherit (flake) self;
   cfg = config.modules.tools.fonts;
 in {
   imports = [];

@@ -1,8 +1,10 @@
 {
-  inputs,
+  flake,
   pkgs,
   ...
-}: {
+}: let
+  inherit (flake) inputs;
+in {
   imports = [inputs.anyrun.homeManagerModules.default];
   config = {
     programs.anyrun = {

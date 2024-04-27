@@ -1,10 +1,11 @@
 {
+  flake,
   config,
-  inputs,
   lib,
   ...
 }:
 with lib; let
+  inherit (flake) inputs;
   cfg = config.modules.wayland-shell.wayper;
 in {
   imports = [inputs.wayper.homeManagerModules.default];
