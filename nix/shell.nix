@@ -57,6 +57,7 @@
         neovim
         nil
         alejandra
+        nh
       ];
       scripts = {
         menu = {
