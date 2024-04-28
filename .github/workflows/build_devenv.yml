@@ -28,6 +28,6 @@ jobs:
           name: nix-conf
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build devenv
-        run: nix develop
+        run: nix develop --impure --accept-flake-config
       - name: Check version
         run: devenv version
