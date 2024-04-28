@@ -1,9 +1,8 @@
 name: 'Build Systems'
 on:
   push:
-    branches:
-      - main
-      - dev-*
+    branches-ignore:
+      - update_flake_lock_action
   pull_request:
 
 jobs:

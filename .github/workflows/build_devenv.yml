@@ -30,4 +30,4 @@ jobs:
       - name: Build devenv
         run: nix develop --impure --accept-flake-config
       - name: Check version
-        run: nix devlop --impure --accept-flake-config --command devenv "version"
+        run: nix develop --impure --accept-flake-config --command devenv "version"
