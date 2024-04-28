@@ -1,18 +1,14 @@
-name: 'Build Systems'
+name: 'Build Devenv'
+
 on:
+  pull_request:
   push:
     branches:
       - main
-      - dev-*
-  pull_request:
 
 jobs:
-  build-linux-systems:
+  build-devenv:
     runs-on: ubuntu-latest
-    environment: systemconfig
-    strategy:
-      matrix:
-        system: [asuna, sinon]
     steps:
       - name: Maximize build space
         uses: AdityaGarg8/remove-unwanted-software@v3
@@ -31,6 +27,7 @@ jobs:
         with:
           name: nix-conf
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - name: Build system ${{ matrix.system }}
-        run: nix build .#nixosConfigurations.${{ matrix.system }}.config.system.build.toplevel --accept-flake-config
-      - run: echo "Build for host ${{ matrix.system }} OK"
+      - name: Build devenv
+        run: nix develop
+      - name: Check version
+        run: devenv version
