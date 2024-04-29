@@ -30,6 +30,7 @@ in {
           ./groups.nix
           ./dev.nix
           ./shells.nix
+          ./nh.nix
         ];
 
         home-manager.useGlobalPkgs = true;
@@ -41,7 +42,7 @@ in {
       # main laptop configuration
       asuna = mkSystem {
         hostname = "asuna";
-        nixosModules = [./steam.nix];
+        nixosModules = [./steam.nix ./initrd.nix ./plymouth.nix];
       };
 
       # wsl2 config
