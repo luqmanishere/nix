@@ -41,19 +41,23 @@
       # for specific systems
 
       luqman-asuna = {
-imports = [
-self.homeModules.common
+        imports = [
+          self.homeModules.common
           ./luqman-home.nix
-self.homeModules.gui
-self.homeModules.wayland
-self.homeModules.misc-gui
-];
+
+          self.homeModules.gui
+          self.homeModules.wayland
+          self.homeModules.misc-gui
+        ];
       };
 
       luqman-sinon = {
         imports = [
           self.homeModules.common
           ./luqman-home.nix
+
+          ./tools/fonts.nix
+          ./terminals/kitty.nix
         ];
       };
     };
