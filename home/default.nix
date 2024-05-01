@@ -36,6 +36,7 @@
 
       misc-gui.imports = [
         ./prod/school.nix
+        ./games/general.nix
       ];
 
       # for specific systems
