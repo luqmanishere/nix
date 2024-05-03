@@ -11,7 +11,7 @@ in {
     };
 
     # put nixos overlays here
-    overlays = [inputs.neovim-nightly-overlay.overlays.default];
+    overlays = [inputs.neovim-nightly-overlay.overlays.default inputs.emacs-overlay.overlays.default];
   };
 
   nix = {

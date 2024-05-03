@@ -50,6 +50,12 @@ in {
         hostname = "sinon";
         nixosModules = [./wsl.nix];
       };
+
+      # rpi4 config
+      fenrys = mkSystem {
+        hostname = "fenrys";
+        nixosModules = [];
+      };
     };
   };
 }

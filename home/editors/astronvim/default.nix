@@ -54,9 +54,6 @@ in {
       statix
       deadnix
       selene
-
-      #gui
-      neovide
     ];
 
     programs.neovim = {

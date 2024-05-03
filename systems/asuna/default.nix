@@ -144,7 +144,12 @@ in {
 
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+    resolved = {
+      enable = true;
+      fallbackDns = ["1.1.1.1" "8.8.8.8"];
+    };
   };
+  networking.networkmanager.connectionConfig = {"connection.mdns" = 2;};
 
   programs = {
     dconf.enable = true;

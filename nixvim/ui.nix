@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  imports = [./windline.nix];
   config = {
     colorschemes.kanagawa = {enable = true;};
     plugins = {

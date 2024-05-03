@@ -23,7 +23,7 @@ return {
         variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
         sidebars = "dark", -- style for sidebars, see below
-        floats = "dark", -- style for floating windows
+        floats = "dark",   -- style for floating windows
       },
     },
   },
@@ -37,6 +37,7 @@ return {
   { import = "astrocommunity.pack.sql" },
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.yaml" },
+  { import = "astrocommunity.pack.vue" },
 
   { import = "astrocommunity.color.ccc-nvim" },
   { import = "astrocommunity.color.mini-hipatterns" },

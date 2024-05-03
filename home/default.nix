@@ -23,6 +23,7 @@
         ./browsers/firefox.nix
         ./prod/essentials.nix
         ./terminals/wezterm
+        ./editors/neovide.nix
       ];
 
       wayland.imports = [
@@ -49,6 +50,8 @@
           self.homeModules.gui
           self.homeModules.wayland
           self.homeModules.misc-gui
+
+          ./editors/emacs
         ];
       };
 
@@ -60,6 +63,10 @@
           ./tools/fonts.nix
           ./terminals/kitty.nix
         ];
+      };
+
+      luqman-fenrys = {
+        imports = [self.homeModules.common ./luqman-home.nix];
       };
     };
   };

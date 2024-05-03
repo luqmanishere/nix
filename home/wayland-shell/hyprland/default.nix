@@ -146,6 +146,11 @@ in {
           "opaque, title:(Picture-in-Picture)"
           "float, title:(muzik)"
           "opaque, title:(muzik)"
+          "float, class:(ayaya-project-manager)"
+          "opaque, class:(ayaya-project-manager)"
+          "float, title:(Extension: (Raindrop.io) - Bookmark saved — Mozilla Firefox)"
+
+          "animation slide, class:(pavucontrol)"
         ];
 
         # TODO: segregate these into logical sections
@@ -210,7 +215,7 @@ in {
           "SUPERSHIFT, B, exec, killall -SIGUSR2 waybar" # waybar reload
           "SUPERSHIFT, N, exec, killall -SIGUSR1 waybar" # waybar hide
 
-          "SUPERSHIFT, L, exec, loginctl lock-session"
+          "SUPERSHIFT, L, exec, loginctl lock-session && sleep 5 && hyprctl dispatch dpms off"
           "SUPERSHIFT, S, exec, ${lib.getExe pkgs.grim} -g ${lib.getExe pkgs.slurp} "
 
           # FIXME: WTH IS THIS?

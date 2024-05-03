@@ -10,6 +10,9 @@
   ];
 
   boot = {
+    # build stuff for rpi
+    binfmt.emulatedSystems = ["aarch64-linux"];
+
     loader = {
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 10;

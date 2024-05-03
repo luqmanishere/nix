@@ -39,11 +39,19 @@
       ];
 
       flake = {
-        #main laptop
-        nixosConfigurations.asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
+        nixosConfigurations = {
+          #main laptop
+          asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
 
-        # configuration for WSL
-        nixosConfigurations.sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
+          # configuration for WSL
+          sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
+
+          # configuration for rpi4 (for building on aarch64 systems);
+          fenrys = self.nixos-flake.lib.mkLinuxSystem ./systems/fenrys.nix;
+
+          fenrys-cross =
+            nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform.nixos ./systems/fenrys.nix;
+        };
       };
 
       _module.args._inputs = inputs // {inherit self;};
@@ -60,6 +68,7 @@
             # do not set overlays for the flake here unless absolutely necessary.
             # set them in nixos modules whenever possible
             # inputs.neovim-nightly-overlay.overlay
+            inputs.emacs-overlay.overlays.default
           ];
         };
 
@@ -145,6 +154,8 @@
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     devenv.url = "github:cachix/devenv";
     # to remove warnings on nix flake check

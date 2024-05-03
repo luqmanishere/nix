@@ -5,7 +5,7 @@
       gamescope
       mangohud
       scrcpy
-      discord
+      (discord.override {withVencord = true;})
     ];
   };
 }

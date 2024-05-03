@@ -19,7 +19,7 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       mpc-cli
       playerctl
@@ -81,7 +81,7 @@ in {
     };
 
     # show current playing in discord
-    services.mpd-discord-rpc.enable = true;
+    services.mpd-discord-rpc.enable = false;
     services.mpd-discord-rpc.settings = {
       id = 1084861522888642661;
       format = {

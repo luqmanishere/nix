@@ -41,13 +41,13 @@ _: {
       }
       {
         action = "<cmd>NvimTreeToggle<CR>";
-        key = "<leader>o";
+        key = "<leader>e";
         mode = "n";
         options.desc = "Open (or close) nvim-tree";
       }
       {
         action = "<cmd>NvimTreeFocus<CR>";
-        key = "<leader>e";
+        key = "<leader>o";
         mode = "n";
         options.desc = "Move focus to NvimTree";
       }
