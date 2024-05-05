@@ -148,7 +148,7 @@
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay/403633f6af2703c057707b31b1ca6bec00bdaaca";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixvim = {
       url = "github:nix-community/nixvim";
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
