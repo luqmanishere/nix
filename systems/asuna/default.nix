@@ -216,6 +216,8 @@ in {
   # TODO: refactor into own module
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # TODO: wth do i do with this?
   environment.systemPackages = with pkgs; [
     wayland
@@ -270,8 +272,8 @@ in {
   };
 
   virtualisation = {
-    waydroid.enable = false;
-    lxd.enable = false;
+    waydroid.enable = true;
+    lxd.enable = true;
     podman = {
       enable = true;
       defaultNetwork.settings.dns_enabled = true;

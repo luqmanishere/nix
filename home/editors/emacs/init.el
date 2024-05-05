@@ -1,8 +1,12 @@
+;;; Init --- SolemnAttic's Emacs config
+;;; Commentary: These lines are here because flymake is complaining about them
+;;; not being here
+;;; -*- lexical-binding: t; -*-.
 ;; this opening portion is taken from centaur emacs
 (when (version< emacs-version "27.1")
   (error "Emacs 27.1 and above required!"))
 
-;; delay the gc 
+;; delay the gc
 (setq gc-cons-threshold most-positive-fixnum)
 
 ;; dont show the default mode line
@@ -42,7 +46,10 @@ Otherwise the startup will be very slow."
 
 (update-load-path)
 ;; end of centaur emacs stuff in init
+;; i dont need these warnings hahah
+(setq custom-safe-themes t)
 
+;; just Suppress these
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -68,6 +75,8 @@ Otherwise the startup will be very slow."
 
 ;; Initialize package sources
 (require 'package)
+
+(setq package-user-dir "~/.emacs.d/packages")
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("org" . "https://orgmode.org/elpa/")
@@ -236,6 +245,17 @@ Otherwise the startup will be very slow."
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-c h". centaur-tabs-backward)
+  ("C-c l" . centaur-tabs-forward))
+
+(use-package tree-sitter)
+(use-package tree-sitter-langs)
+
 (require 'init-lsp)
 (use-package rustic
   :init
@@ -256,12 +276,7 @@ Otherwise the startup will be very slow."
    '("8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098"
      "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2"
      default))
- '(package-selected-packages
-   '(command-log-mode counsel dap-mode dashboard doom-modeline
-		      doom-themes embark-consult flycheck helpful
-		      ivy-rich key-chord lsp-mode lsp-ui marginalia
-		      meow orderless projectile rainbow-delimiters
-		      smartparens vertico which-key)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
