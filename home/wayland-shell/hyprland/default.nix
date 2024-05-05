@@ -11,7 +11,6 @@ with lib; let
 in {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    inputs.hypridle.homeManagerModules.default
     inputs.hyprlock.homeManagerModules.default
   ];
 
@@ -268,30 +267,33 @@ in {
       '';
     in {
       enable = true;
-      lockCmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
-      unlockCmd = "killall -q -s SIGUSR1 hyprlock";
-      beforeSleepCmd = "loginctl lock-session";
-      afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      ignoreDbusInhibit = false;
-      listeners = [
-        # turn off screen after 5 minutes
-        {
-          timeout = 300;
-          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-        {
-          timeout = 360;
-          onTimeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-        {
-          timeout = 600;
-          onTimeout = suspendScript.outPath;
-        }
-        {
-          timeout = 15;
-          onTimeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-      ];
+      settings = {
+        lock_cmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+        unlock_cmd = "killall -q -s SIGUSR1 hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        ignore_dbus_inhibit = false;
+
+        listeners = [
+          # turn off screen after 5 minutes
+          {
+            timeout = 300;
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+          {
+            timeout = 360;
+            on-timeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+          {
+            timeout = 600;
+            on-timeout = suspendScript.outPath;
+          }
+          {
+            timeout = 15;
+            on-timeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+        ];
+      };
     };
   };
 }
