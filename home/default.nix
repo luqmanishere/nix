@@ -52,6 +52,7 @@
           self.homeModules.misc-gui
 
           ./editors/emacs
+          ./editors/vscode.nix
         ];
       };
 

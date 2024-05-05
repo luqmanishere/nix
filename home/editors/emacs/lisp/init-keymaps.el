@@ -1,5 +1,6 @@
+;;; lexical-binding: t
 (defun meow-setup ()
-  "Setup meow binds"
+  "Setup meow binds."
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
@@ -83,7 +84,7 @@
    '("Y" . meow-sync-grab)
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("<escape>" . ignore)))  
+   '("<escape>" . ignore)))
 
 (use-package meow
   :config
@@ -100,3 +101,4 @@
   (key-chord-define meow-insert-state-keymap "kj" 'meow-insert-exit))
 
 (provide 'init-keymaps)
+;;; init-keymaps.el ends here

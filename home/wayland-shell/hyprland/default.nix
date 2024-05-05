@@ -148,6 +148,8 @@ in {
           "opaque, title:(muzik)"
           "float, class:(ayaya-project-manager)"
           "opaque, class:(ayaya-project-manager)"
+          "float, class:(Ayaya-project-manager)"
+          "opaque, class:(Ayaya-project-manager)"
           "float, title:(Extension: (Raindrop.io) - Bookmark saved — Mozilla Firefox)"
 
           "animation slide, class:(pavucontrol)"
@@ -216,7 +218,7 @@ in {
           "SUPERSHIFT, N, exec, killall -SIGUSR1 waybar" # waybar hide
 
           "SUPERSHIFT, L, exec, loginctl lock-session && sleep 5 && hyprctl dispatch dpms off"
-          "SUPERSHIFT, S, exec, ${lib.getExe pkgs.grim} -g ${lib.getExe pkgs.slurp} "
+          "SUPERSHIFT, S, exec, grim -g \"\$(${lib.getExe pkgs.slurp})\" "
 
           # FIXME: WTH IS THIS?
           "SUPER, T, exec, /home/luqman/scripts/autoclicktrigger.sh"
