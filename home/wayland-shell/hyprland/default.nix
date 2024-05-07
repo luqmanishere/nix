@@ -168,6 +168,7 @@ in {
           "SUPERSHIFT, O, toggleopaque"
           "SUPERSHIFT, J, workspaceopt, allfloat"
           "SUPER, G, togglegroup"
+          "SUPERSHIFT, G, moveintogroup"
           "SUPER, grave, changegroupactive, f"
 
           "SUPER, left, movefocus, l"
@@ -239,6 +240,7 @@ in {
           "border, 1, 10, default"
           "fade, 1, 10, default"
           "workspaces, 1, 6, default"
+          "specialWorkspace, 1, 10, default, slidefadevert"
         ];
       };
       extraConfig = builtins.readFile ./hyprland.conf;
@@ -262,6 +264,7 @@ in {
         ${pkgs.pipewire}/bin/pw-cli i all 2>&1 | ${pkgs.ripgrep}/bin/rg running -q
         # only suspend if audio isn't running
         if [ $? == 1 ]; then
+          exit
           ${pkgs.systemd}/bin/systemctl suspend
         fi
       '';
