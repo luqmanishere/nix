@@ -12,6 +12,9 @@ jobs:
     if: contains( github.event.pull_request.labels.*.name, 'automated') || contains( github.event.pull_request.labels.*.name, 'dependencies')
     steps:
       - name: Enable automerge on flake update PRs
-        run: gh pr merge --merge --auto ${{ github.event.pull_request.number }} --repo ${{ github.event.repository.name }}
+        run: gh pr merge --merge --auto "$PR_NUMBER" --repo "$OWNER/$REPO"
         env:
           GH_TOKEN: ${{ secrets.PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
