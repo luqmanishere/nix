@@ -1,0 +1,7 @@
+builds:
+  exclude:
+    - nixosConfigurations.fenrys-cross
+    - nixosConfigurations.fenrys
+  include:
+    # - homeConfigurations.*
+    - nixosConfigurations.*
