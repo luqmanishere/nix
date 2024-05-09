@@ -83,10 +83,12 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://nix-conf.cachix.org"
+      "https://ezkea.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-conf.cachix.org-1:ckJrXG+dLoz1zMLNce35EDFGlWcigKdrDlqdmv9kPbE="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
 
@@ -147,6 +149,10 @@
     agenix.url = "github:ryantm/agenix";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay/403633f6af2703c057707b31b1ca6bec00bdaaca";
     nixvim = {
@@ -162,5 +168,10 @@
     nix2container.url = "github:nlewo/nix2container";
     nix2container.inputs = {nixpkgs.follows = "nixpkgs";};
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
+
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

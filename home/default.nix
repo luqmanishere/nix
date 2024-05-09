@@ -33,6 +33,7 @@
         ./wayland-shell/rofi.nix
         ./wayland-shell/anyrun
         ./wayland-shell/waybar
+        ./wayland-shell/ags
       ];
 
       misc-gui.imports = [
@@ -51,8 +52,10 @@
           self.homeModules.wayland
           self.homeModules.misc-gui
 
-          ./editors/emacs
+          ./editors/doom-emacs
           ./editors/vscode.nix
+
+          ./games/lutris.nix
         ];
       };
 

@@ -93,6 +93,12 @@
       fsType = "btrfs";
       options = ["subvol=rustic-repo" "compress=zstd" "rw" "user" "exec" "nofail"];
     };
+
+    "/mnt/storage2/games" = {
+      device = "/dev/disk/by-uuid/39ea80c4-e748-47eb-835c-64025de53e26";
+      fsType = "btrfs";
+      options = ["subvol=games" "compress=zstd" "rw" "user" "exec" "nofail"];
+    };
   };
   swapDevices = [];
 

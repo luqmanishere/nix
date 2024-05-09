@@ -116,7 +116,7 @@ in {
           "eDP-1, preferred, auto, 1"
           "HDMI-A-1, 1920x1080, auto, 1"
           "DP-1, preferred, auto, 1"
-          "DP-1, transform, 1"
+          # "DP-1, transform, 1"
           "eDP-1, addreserved, 0, 0, 0, 50"
         ];
 
