@@ -1,4 +1,3 @@
-# change this to the event type you want to get the data for
 on:
   check_suite:
     types: ['completed']
