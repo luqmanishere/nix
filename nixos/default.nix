@@ -31,6 +31,7 @@ in {
           ./dev.nix
           ./shells.nix
           ./nh.nix
+          ./power.nix
         ];
 
         home-manager.useGlobalPkgs = true;

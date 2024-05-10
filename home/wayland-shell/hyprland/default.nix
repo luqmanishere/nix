@@ -151,6 +151,9 @@ in {
           "float, class:(Ayaya-project-manager)"
           "opaque, class:(Ayaya-project-manager)"
           "float, title:(Extension: (Raindrop.io) - Bookmark saved — Mozilla Firefox)"
+          "float, title:(com.github.Aylur.ags)"
+          "move 25% 85%, title:(com.github.Aylur.ags)"
+          "noinitialfocus, title:(com.github.Aylur.ags)"
 
           "animation slide, class:(pavucontrol)"
         ];
