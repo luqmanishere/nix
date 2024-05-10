@@ -21,7 +21,7 @@ jobs:
           remove-large-packages: 'true'
       - uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
+        uses: DeterminateSystems/nix-installer-action@v11
       - name: Use Cachix
         uses: cachix/cachix-action@v14
         with:
