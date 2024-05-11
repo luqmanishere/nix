@@ -43,7 +43,7 @@ in {
       # main laptop configuration
       asuna = mkSystem {
         hostname = "asuna";
-        nixosModules = [./games/steam.nix ./initrd.nix ./plymouth.nix ./games/aagl.nix];
+        nixosModules = [./games/steam.nix ./initrd.nix ./plymouth.nix ./games/aagl.nix ./experimental/protonvpn.nix];
       };
 
       # wsl2 config

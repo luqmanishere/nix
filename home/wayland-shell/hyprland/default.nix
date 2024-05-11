@@ -11,8 +11,7 @@ with lib; let
 in {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    inputs.hypridle.homeManagerModules.default
-    inputs.hyprlock.homeManagerModules.default
+    ./kanshi.nix
   ];
 
   options.hyprland = {
@@ -113,10 +112,6 @@ in {
         };
 
         monitor = [
-          "eDP-1, preferred, auto, 1"
-          "HDMI-A-1, 1920x1080, auto, 1"
-          "DP-1, preferred, auto, 1"
-          # "DP-1, transform, 1"
           "eDP-1, addreserved, 0, 0, 0, 50"
         ];
 
@@ -253,14 +248,16 @@ in {
 
     programs.hyprlock = {
       enable = true;
-      general = {
-        disable_loading_bar = false;
+      settings = {
+        general = {
+          disable_loading_bar = false;
+        };
+        backgrounds = [
+          {
+            path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
+          }
+        ];
       };
-      backgrounds = [
-        {
-          path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
-        }
-      ];
     };
 
     services.hypridle = let
@@ -274,30 +271,32 @@ in {
       '';
     in {
       enable = true;
-      lockCmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
-      unlockCmd = "killall -q -s SIGUSR1 hyprlock";
-      beforeSleepCmd = "loginctl lock-session";
-      afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-      ignoreDbusInhibit = false;
-      listeners = [
-        # turn off screen after 5 minutes
-        {
-          timeout = 300;
-          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-        {
-          timeout = 360;
-          onTimeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-        {
-          timeout = 600;
-          onTimeout = suspendScript.outPath;
-        }
-        {
-          timeout = 15;
-          onTimeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-        }
-      ];
+      settings = {
+        lock_cmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+        unlockcmd = "killall -q -s SIGUSR1 hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        ignore_dbus_inhibit = false;
+        listener = [
+          # turn off screen after 5 minutes
+          {
+            timeout = 300;
+            on_timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+          {
+            timeout = 360;
+            on_timeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+          {
+            timeout = 600;
+            on_timeout = suspendScript.outPath;
+          }
+          {
+            timeout = 15;
+            on_timeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          }
+        ];
+      };
     };
   };
 }
