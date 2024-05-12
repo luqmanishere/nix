@@ -149,6 +149,7 @@ in {
           "float, title:(com.github.Aylur.ags)"
           "move 25% 85%, title:(com.github.Aylur.ags)"
           "noinitialfocus, title:(com.github.Aylur.ags)"
+          "float, class:(waydroid.*)"
 
           "animation slide, class:(pavucontrol)"
         ];
@@ -252,9 +253,30 @@ in {
         general = {
           disable_loading_bar = false;
         };
-        backgrounds = [
+        background = [
           {
+            monitor = "eDP-1";
             path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
+            color = "color = rgba(25, 20, 20, 1.0)";
+          }
+          {
+            monitor = "DP-1";
+            color = "color = rgba(25, 20, 20, 1.0)";
+          }
+        ];
+        input-field = [
+          {
+            size = "200, 50";
+            position = "0, -80";
+            monitor = "";
+            dots_center = true;
+            fade_on_empty = false;
+            font_color = "rgb(202, 211, 245)";
+            inner_color = "rgb(91, 96, 120)";
+            outer_color = "rgb(24, 25, 38)";
+            outline_thickness = 5;
+            placeholder_text = "'Password...'";
+            shadow_passes = 2;
           }
         ];
       };
@@ -272,28 +294,30 @@ in {
     in {
       enable = true;
       settings = {
-        lock_cmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
-        unlockcmd = "killall -q -s SIGUSR1 hyprlock";
-        before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-        ignore_dbus_inhibit = false;
+        general = {
+          lock_cmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+          unlockcmd = "killall -q -s SIGUSR1 hyprlock";
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+          ignore_dbus_inhibit = false;
+        };
         listener = [
           # turn off screen after 5 minutes
           {
             timeout = 300;
-            on_timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
           }
           {
             timeout = 360;
-            on_timeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-timeout = "pidof hyprlock || loginctl lock-session && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
           }
           {
             timeout = 600;
-            on_timeout = suspendScript.outPath;
+            on-timeout = suspendScript.outPath;
           }
           {
             timeout = 15;
-            on_timeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-timeout = "pidof hyprlock && ${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
           }
         ];
       };

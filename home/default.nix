@@ -52,7 +52,7 @@
           self.homeModules.wayland
           self.homeModules.misc-gui
 
-          ./editors/doom-emacs
+          ./editors/emacs
           ./editors/vscode.nix
 
           ./games/lutris.nix

@@ -18,7 +18,7 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = {
     services.wayper = {
       enable = true;
       monitorConfigs = [

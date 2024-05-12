@@ -1,24 +1,28 @@
-{pkgs, ...}: {
-  config = let
-    emacs-pkg = pkgs.emacsWithPackagesFromUsePackage {
-      config = ./init.el;
-      package = pkgs.emacs-pgtk;
-      alwaysEnsure = true;
-    };
-  in {
-    home.packages = with pkgs; [rust-analyzer fd ripgrep silver-searcher];
+{pkgs, ...}: let
+  emacs-treesitter = (pkgs.emacsPackagesFor pkgs.emacs29).emacsWithPackages (epkgs:
+    with epkgs; [
+      astro-ts-mode
+      treesit-grammars.with-all-grammars
+    ]);
+in {
+  config = {
+    home.packages = with pkgs; [
+      rust-analyzer
+      fd
+      ripgrep
+      silver-searcher
+      coreutils
+      clang
+      git
+    ];
     programs.emacs = {
       enable = true;
-      package = emacs-pkg;
+      package = emacs-treesitter;
     };
 
-    services.emacs.enable = true;
-    services.emacs.package = emacs-pkg;
+    # services.emacs.enable = true;
+    # services.emacs.package = pkgs.emacs29;
 
-    home.file = {
-      ".emacs.d/init.el".source = ./init.el;
-      ".emacs.d/early-init.el".source = ./early-init.el;
-      ".emacs.d/lisp".source = ./lisp;
-    };
+    # TODO: manage doom emacs files here once stable
   };
 }
