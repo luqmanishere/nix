@@ -34,6 +34,7 @@
         ./wayland-shell/anyrun
         ./wayland-shell/waybar
         ./wayland-shell/ags
+        ./wayland-shell/easyeffects.nix
       ];
 
       misc-gui.imports = [

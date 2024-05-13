@@ -30,8 +30,13 @@
 
       luks.devices."enc".device = "/dev/disk/by-uuid/2f22d311-7714-4816-a444-39c1b87fbe20";
     };
+
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
+
+    extraModprobeConfig = ''
+      options snd-hda-intel model=auto,dell-headset-multi
+    '';
   };
 
   fileSystems = {

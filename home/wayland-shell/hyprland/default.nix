@@ -64,7 +64,7 @@ in {
         general = {
           gaps_in = 5;
           gaps_out = 25;
-          border_size = 2;
+          border_size = 6;
 
           "col.active_border" = "rgb(f5bde6)";
           "col.inactive_border" = "rgb(7dc4e4)";
@@ -152,6 +152,8 @@ in {
           "float, class:(waydroid.*)"
 
           "animation slide, class:(pavucontrol)"
+          "float, class:(pavucontrol)"
+          "size 80% 50%, class:(pavucontrol)"
         ];
 
         # TODO: segregate these into logical sections
@@ -232,7 +234,7 @@ in {
           ", XF86MonBrightnessUp, exec, light -A 5"
           ", XF86MonBrightnessDown, exec, light -U 5"
 
-          # TODO: submaps
+          # submaps can't really be defined here due to requiring multiple submap calls and consolidated bind calls
         ];
 
         animation = [
