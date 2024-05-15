@@ -240,7 +240,6 @@ in {
     gcc
     clang
     python3
-    python310Packages.pip
     polkit-kde-agent
     cloudflare-warp
     aria2

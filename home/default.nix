@@ -13,6 +13,7 @@
           ./tools/mpd.nix
           ./tools/task.nix
           ./secrets
+          ./tools/python.nix
         ];
         home.stateVersion = "22.11";
       };

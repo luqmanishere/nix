@@ -35,7 +35,6 @@ in {
 
       ripgrep
       nodejs
-      python3
       cargo
       unzip
       lazygit

@@ -233,6 +233,10 @@
         enable = true;
         defaultEditor = true;
       };
+
+      bottom.enable = true;
+
+      htop.enable = true;
     };
   };
 }
