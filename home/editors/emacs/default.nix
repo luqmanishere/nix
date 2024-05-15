@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  emacs-treesitter = (pkgs.emacsPackagesFor pkgs.emacs29).emacsWithPackages (epkgs:
+  emacs-treesitter = pkgs.emacs29.pkgs.withPackages (epkgs:
     with epkgs; [
       astro-ts-mode
       treesit-grammars.with-all-grammars
@@ -17,7 +17,8 @@ in {
     ];
     programs.emacs = {
       enable = true;
-      package = emacs-treesitter;
+      package = pkgs.emacs29;
+      extraPackages = epkgs: [epkgs.treesit-grammars.with-all-grammars];
     };
 
     # services.emacs.enable = true;
