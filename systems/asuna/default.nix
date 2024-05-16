@@ -137,11 +137,6 @@ in {
       watch = true;
     };
 
-    tlp = {
-      enable = true;
-      settings = {};
-    };
-
     # Enable the OpenSSH daemon.
     openssh.enable = true;
     resolved = {
