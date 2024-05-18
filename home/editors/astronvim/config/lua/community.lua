@@ -27,12 +27,14 @@ return {
       },
     },
   },
+  { import = "astrocommunity.colorscheme.cyberdream-nvim" },
 
   -- language packs
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.svelte" },
   { import = "astrocommunity.pack.sql" },
   { import = "astrocommunity.pack.tailwindcss" },
@@ -48,9 +50,11 @@ return {
   -- disabled because not working
   -- { import = "astrocommunity.editing-support.ultimate-autopair-nvim" },
   { import = "astrocommunity.editing-support.nvim-devdocs" },
+  { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.editing-support.suda-vim" },
 
-  { import = "astrocommunity.lsp.garbage-day-nvim" },
+  -- { import = "astrocommunity.lsp.garbage-day-nvim" },
+  { import = "astrocommunity.lsp.lsp-signature-nvim" },
 
   { import = "astrocommunity.motion.leap-nvim" },
 

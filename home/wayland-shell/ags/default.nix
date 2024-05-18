@@ -14,8 +14,6 @@ with lib; let
       PID=0
       echo "ags config dir is $WORKDIR"
 
-      # kill any runaway process
-
       function _ags() {
         if [[ $PID -ne 0 ]]
           then

@@ -63,7 +63,7 @@ in {
 
         general = {
           gaps_in = 5;
-          gaps_out = 25;
+          gaps_out = 15;
           border_size = 6;
 
           "col.active_border" = "rgb(f5bde6)";
@@ -258,7 +258,7 @@ in {
         background = [
           {
             monitor = "eDP-1";
-            path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
+            # path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
             color = "color = rgba(25, 20, 20, 1.0)";
           }
           {
