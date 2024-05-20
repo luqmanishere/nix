@@ -30,6 +30,7 @@ return {
   { import = "astrocommunity.colorscheme.cyberdream-nvim" },
 
   -- language packs
+  { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.toml" },
