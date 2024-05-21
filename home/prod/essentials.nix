@@ -3,5 +3,6 @@
     tdesktop
     obsidian
     zathura
+    whatsapp-for-linux
   ];
 }
