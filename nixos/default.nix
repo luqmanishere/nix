@@ -32,6 +32,7 @@ in {
           ./shells.nix
           ./nh.nix
           ./power.nix
+          ./polkit.nix
         ];
 
         home-manager.useGlobalPkgs = true;
@@ -62,6 +63,12 @@ in {
       # rpi4 config
       fenrys = mkSystem {
         hostname = "fenrys";
+        nixosModules = [];
+      };
+
+      # desktop config
+      kurumi = mkSystem {
+        hostname = "kurumi";
         nixosModules = [];
       };
     };

@@ -58,6 +58,7 @@
         nil
         alejandra
         nh
+        ripgrep
       ];
       scripts = {
         menu = {
@@ -65,9 +66,15 @@
           exec = help-menu;
         };
 
+        # build systems
         nix-build-asuna = {
           description = "Builds toplevel NixOS image for host asuna";
           exec = nix-build "asuna";
+        };
+
+        nix-build-kurumi = {
+          description = "Builds toplevel NixOS image for host kurumi";
+          exec = nix-build "kurumi";
         };
 
         rebuild-switch-asuna = {

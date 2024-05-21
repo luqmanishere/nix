@@ -11,7 +11,7 @@ in {
     };
 
     # put nixos overlays here
-    overlays = [inputs.neovim-nightly-overlay.overlays.default inputs.emacs-overlay.overlays.package];
+    overlays = [inputs.emacs-overlay.overlays.package];
   };
 
   nix = {
@@ -43,4 +43,14 @@ in {
       # trusted-substituters = ["https://hyprland.cachix.org"];
     };
   };
+
+  # increase open file settings for nix
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "8192";
+    }
+  ];
 }

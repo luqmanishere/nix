@@ -13,7 +13,7 @@
       telescope.enable = true;
       nvim-autopairs.enable = true;
     };
-    extraPlugins = with pkgs.vimPlugins; [suda-vim];
+    extraPlugins = with pkgs.vimPlugins; [vim-suda];
     options = {
       number = true;
       relativenumber = true;

@@ -33,6 +33,8 @@
           ip = "ip --color=auto";
 
           tm = "tmux attach -t main || tmux new -s main";
+
+          nvimdev = "NVIM_APPNAME=\"nvimdev\" nvim";
         };
         shellAbbrs = {
           psg = "ps ax | grep -i";

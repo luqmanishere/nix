@@ -57,7 +57,7 @@ in {
 
     programs.neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
+      # package = pkgs.neovim-nightly;
       # package = inputs.neovim-flake.packages.${pkgs.system}.neovim;
       # we avoid using the wrapped neovim thing
     };

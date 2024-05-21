@@ -51,6 +51,8 @@
 
           fenrys-cross =
             nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform.nixos ./systems/fenrys.nix;
+
+          kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
         };
       };
 

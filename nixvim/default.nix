@@ -13,7 +13,8 @@
 
       # TODO: use nightly for now
       extraSpecialArgs = {
-        nvim-package = inputs'.neovim-nightly-overlay.packages.neovim;
+        # nvim-package = inputs'.neovim-nightly-overlay.packages.neovim;
+        nvim-package = pkgs.neovim;
         flake-inputs = inputs';
       };
     };

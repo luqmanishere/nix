@@ -195,7 +195,6 @@ in {
         Defaults lecture = never
       '';
     };
-    polkit.enable = true;
   };
 
   # TODO: refactor into own module
@@ -235,7 +234,6 @@ in {
     gcc
     clang
     python3
-    polkit-kde-agent
     cloudflare-warp
     aria2
     helvum
@@ -256,19 +254,6 @@ in {
   ];
 
   systemd = {
-    user.services.polkit-kde-authentication-agent-1 = {
-      description = "polkit-kde-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
   };
 
   virtualisation = {
