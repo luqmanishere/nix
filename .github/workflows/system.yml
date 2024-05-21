@@ -11,7 +11,7 @@ jobs:
     environment: systemconfig
     strategy:
       matrix:
-        system: [asuna, sinon]
+        system: [asuna, sinon, kurumi]
     steps:
       - name: Maximize build space
         uses: AdityaGarg8/remove-unwanted-software@v3
