@@ -71,17 +71,6 @@ in {
   services = {
     blueman.enable = true;
 
-    # TODO: maybe find a better alternative?
-    greetd = {
-      enable = true;
-      settings = {
-        vt = 2;
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-          user = "greeter";
-        };
-      };
-    };
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -156,10 +145,6 @@ in {
     dconf.enable = true;
     light.enable = true;
     git.enable = true;
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    };
     adb.enable = true;
     command-not-found.enable = false;
   };

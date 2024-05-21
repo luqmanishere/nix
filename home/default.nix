@@ -74,6 +74,17 @@
       luqman-fenrys = {
         imports = [self.homeModules.common ./luqman-home.nix];
       };
+
+      luqman-kurumi = {
+        imports = [self.homeModules.common ./luqman-home.nix
+
+          self.homeModules.gui
+          self.homeModules.wayland
+          self.homeModules.misc-gui
+
+          ./editors/vscode.nix
+        ];
+      };
     };
   };
 }

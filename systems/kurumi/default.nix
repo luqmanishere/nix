@@ -2,14 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+flake,
   lib,
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (flake) inputs;
+  inherit (inputs) self;
+in {
   imports = [
+    self.nixosModules.kurumi
+
     # Include the results of the hardware scan.
-    ./hw-conf/kurumi-hc.nix
+    ./hardware.nix
   ];
   boot = {
     loader = {
@@ -21,7 +27,7 @@
     # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_2;
 
     # use the latest xanmod kerner
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
   };
   networking = {
     hostName = "kurumi"; # Define your hostname.

@@ -39,12 +39,18 @@ in {
         home-manager.useUserPackages = true;
       };
 
+      gui-hyprland.imports = [
+        ./login/tuigreet.nix
+        ./login/hyprland.nix
+      ];
+
       ###### system specific configurations
 
       # main laptop configuration
       asuna = mkSystem {
         hostname = "asuna";
         nixosModules = [
+          self.nixosModules.gui-hyprland
           ./games/steam.nix
           ./initrd.nix
           ./plymouth.nix
@@ -69,7 +75,10 @@ in {
       # desktop config
       kurumi = mkSystem {
         hostname = "kurumi";
-        nixosModules = [];
+        nixosModules = [
+          ./initrd.nix
+          self.nixosModules.gui-hyprland
+        ];
       };
     };
   };
