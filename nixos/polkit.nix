@@ -4,7 +4,7 @@
 
     environment.systemPackages = with pkgs; [polkit-kde-agent];
 
-    user.services.polkit-kde-authentication-agent-1 = {
+    systemd.user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";
       wantedBy = ["graphical-session.target"];
       wants = ["graphical-session.target"];
