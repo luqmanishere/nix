@@ -76,16 +76,10 @@
     };
 
     "/mnt/windowsc" = {
-      device = "/dev/disk/by-uuid/ACFA1C91FA1C59C2";
+      device = "/dev/disk/by-uuid/E48C23D68C23A1D2";
       fsType = "ntfs3";
-      options = ["user" "exec" "rw" "uid=1000" "gid=1000"];
+      options = ["nofail" "user" "exec" "rw" "uid=1000" "gid=1000"];
     };
-
-    # "/mnt/windowsd" = {
-    #   device = "/dev/disk/by-uuid/DA1AAC921AAC6CE7";
-    #   fsType = "ntfs3";
-    #   options = ["user" "exec" "rw" "uid=1000" "gid=1000"];
-    # };
 
     "/mnt/storage2/jellyfin" = {
       device = "/dev/disk/by-uuid/39ea80c4-e748-47eb-835c-64025de53e26";
