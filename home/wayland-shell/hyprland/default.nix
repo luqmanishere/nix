@@ -11,6 +11,7 @@ with lib; let
 in {
   imports = [
     inputs.hyprland.homeManagerModules.default
+    inputs.hyprrdrop.homeManagerModules.default
     ./kanshi.nix
   ];
 
@@ -42,6 +43,7 @@ in {
         size = 22;
       };
     };
+    programs.hyprrdrop.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -235,6 +237,9 @@ in {
           ", XF86MonBrightnessDown, exec, light -U 5"
 
           # submaps can't really be defined here due to requiring multiple submap calls and consolidated bind calls
+
+          # SUPERSHIFT, 1
+          "SUPERSHIFT, 1, exec, hyprrdrop toggle quick-1 || hyprrdrop register active quick-1"
         ];
 
         animation = [

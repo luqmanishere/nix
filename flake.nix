@@ -149,6 +149,7 @@
       url = "github:hyprwm/hyprlock/2ae79757d5e5c48de2f4284992a6bfa265853a2d";
     };
     wayper.url = "github:luqmanishere/wayper";
+    hyprrdrop.url = "github:luqmanishere/hyprrdrop";
     agenix.url = "github:ryantm/agenix";
     anyrun.url = "github:Kirottu/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
