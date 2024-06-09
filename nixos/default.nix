@@ -42,6 +42,7 @@ in {
       gui-hyprland.imports = [
         ./login/tuigreet.nix
         ./login/hyprland.nix
+        ./xdg.nix
       ];
 
       ###### system specific configurations
