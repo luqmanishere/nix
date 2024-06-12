@@ -23,7 +23,10 @@ in {
         {
           profile.name = "docked_home";
           profile.outputs = [
-            {criteria = "eDP-1";}
+            {
+              criteria = "eDP-1";
+              position = "0,0";
+            }
             {
               # this monitor sits on top
               criteria = "Dell Inc. DELL U2713HM 7JNY5496050S";
@@ -35,7 +38,10 @@ in {
         {
           profile.name = "undocked";
           profile.outputs = [
-            {criteria = "eDP-1";}
+            {
+              criteria = "eDP-1";
+              position = "0,0";
+            }
           ];
         }
       ];
