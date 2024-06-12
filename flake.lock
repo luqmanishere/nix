@@ -2088,22 +2088,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstabler": {
-      "locked": {
-        "lastModified": 1717774105,
-        "narHash": "sha256-HV97wqUQv9wvptiHCb3Y0/YH0lJ60uZ8FYfEOIzYEqI=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "d226935fd75012939397c83f6c385e4d6d832288",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_10": {
       "locked": {
         "lastModified": 1706487304,
@@ -2717,7 +2701,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_13",
-        "nixpkgs-unstabler": "nixpkgs-unstabler",
         "nixvim": "nixvim",
         "treefmt-nix": "treefmt-nix_2",
         "wayper": "wayper",

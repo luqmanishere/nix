@@ -8,8 +8,6 @@ in {
   config = {
     services.kanshi = {
       enable = true;
-      # FIXME: remove after new nixpkgs is used
-      package = inputs.nixpkgs-unstabler.legacyPackages.${pkgs.system}.kanshi;
       systemdTarget = "hyprland-session.target";
       settings = [
         # FIXME: why is this even broken
