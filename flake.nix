@@ -138,8 +138,12 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland/v0.41.0";
+    #   inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
+    # };
     hyprland = {
-      url = "github:hyprwm/Hyprland/v0.39.1";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&tag=v0.41.0";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
