@@ -33,6 +33,7 @@ in {
           ./nh.nix
           ./power.nix
           ./polkit.nix
+          ./services/avahi.nix
         ];
 
         home-manager.useGlobalPkgs = true;
@@ -58,6 +59,7 @@ in {
           ./games/aagl.nix
           ./experimental/protonvpn.nix
           ./acpufreq.nix
+          ./services/kea.nix
         ];
       };
 

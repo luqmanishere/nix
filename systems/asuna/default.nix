@@ -20,9 +20,13 @@ in {
   ];
 
   networking = {
-    hostName = "asuna"; # Define your hostname.
-    networkmanager.enable = true;
-    networkmanager.wifi.powersave = false;
+    hostName = "asuna";
+    networkmanager = {
+      # Define your hostname.
+      enable = true;
+      wifi.powersave = false;
+      connectionConfig = {"connection.mdns" = 2;};
+    };
 
     firewall = {
       # Open ports in the firewall.
@@ -45,7 +49,6 @@ in {
   hardware = {
     opengl = {
       enable = true;
-      driSupport = true;
       extraPackages = with pkgs; [
         # Vulkan
         #amdvlk # Outdated
@@ -70,7 +73,6 @@ in {
 
   services = {
     blueman.enable = true;
-
 
     # Enable CUPS to print documents.
     printing.enable = true;
@@ -139,7 +141,6 @@ in {
       lidSwitchExternalPower = "ignore";
     };
   };
-  networking.networkmanager.connectionConfig = {"connection.mdns" = 2;};
 
   programs = {
     dconf.enable = true;
