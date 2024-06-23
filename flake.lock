@@ -1302,19 +1302,35 @@
         "xdph": "xdph"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1719093162,
         "narHash": "sha256-gPUIGmUvWKNxFjCxH/EZL9idVEgaEiPFmXCwW5+TwTE=",
+||||||| parent of df97e53 (update)
+        "lastModified": 1718978185,
+        "narHash": "sha256-J5DjUiFsl+3Yb3xKUZLx2uORMpYlcy87SElModRrz40=",
+=======
+        "lastModified": 1719009683,
+        "narHash": "sha256-kvGqeJdHpqmDu5qJYCbylipbcPaSr1pFlO1m1xPtPeQ=",
+>>>>>>> df97e53 (update)
         "ref": "refs/heads/main",
+<<<<<<< HEAD
         "rev": "7f09646ab8b5b6d9f835681d0af5d7a0dc29d8f1",
         "revCount": 4876,
+||||||| parent of df97e53 (update)
+        "rev": "19081bb66637f3a6302a25a6a10cb86cc9bbb505",
+        "revCount": 4871,
+=======
+        "rev": "4778afe2e6b4a6f8c7d218ccd8fe7e0bd4d2ee9c",
+        "revCount": 4874,
+>>>>>>> df97e53 (update)
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland?tag=v0.41.0"
+        "url": "https://github.com/hyprwm/Hyprland?tag=v0.41.1"
       },
       "original": {
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland?tag=v0.41.0"
+        "url": "https://github.com/hyprwm/Hyprland?tag=v0.41.1"
       }
     },
     "hyprland-protocols": {

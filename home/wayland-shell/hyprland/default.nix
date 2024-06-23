@@ -102,10 +102,11 @@ in {
         };
 
         master = {
-          new_is_master = true;
+          new_status = "master";
           mfact = 0.7;
           no_gaps_when_only = false;
           always_center_master = true;
+          special_scale_factor = 0.7;
         };
 
         gestures = {

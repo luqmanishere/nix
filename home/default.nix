@@ -18,6 +18,8 @@
         home.stateVersion = "22.11";
       };
 
+      sync-services.imports = [./tools/syncthing.nix];
+
       gui.imports = [
         ./tools/fonts.nix
         ./terminals/kitty.nix
@@ -58,6 +60,7 @@
           ./editors/vscode.nix
 
           ./games/lutris.nix
+          self.homeModules.sync-services
         ];
       };
 
@@ -76,7 +79,9 @@
       };
 
       luqman-kurumi = {
-        imports = [self.homeModules.common ./luqman-home.nix
+        imports = [
+          self.homeModules.common
+          ./luqman-home.nix
 
           self.homeModules.gui
           self.homeModules.wayland

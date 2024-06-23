@@ -78,7 +78,7 @@
 
       git = {
         enable = true;
-        userName = "luqmanishere";
+        userName = "Luqmanul Hakim";
         userEmail = "luqmanulhakim1720@gmail.com";
         extraConfig = let
           deltaCommand = "${pkgs.delta}/bin/delta";

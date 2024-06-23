@@ -59,7 +59,6 @@ in {
           ./games/aagl.nix
           ./experimental/protonvpn.nix
           ./acpufreq.nix
-          ./services/kea.nix
         ];
       };
 
