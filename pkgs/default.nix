@@ -14,4 +14,5 @@
     '';
     set = "SolemnAttic";
   };
+  maple-mono-NF-beta = (pkgs.callPackage ./maple-mono.nix {}).NF;
 }

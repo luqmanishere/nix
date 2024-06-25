@@ -17,7 +17,7 @@ in {
     type = types.bool;
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # fonts
       noto-fonts
@@ -29,6 +29,7 @@ in {
       jetbrains-mono
       (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
       self.packages.${pkgs.system}.iosevka-solemnattic
+      self.packages.${pkgs.system}.maple-mono-NF-beta
 
       fontconfig
     ];
