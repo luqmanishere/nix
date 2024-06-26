@@ -59,6 +59,7 @@ in {
           ./games/aagl.nix
           ./experimental/protonvpn.nix
           ./acpufreq.nix
+          ./networking/networkd-iwd.nix
         ];
       };
 

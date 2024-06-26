@@ -21,12 +21,6 @@ in {
 
   networking = {
     hostName = "asuna";
-    networkmanager = {
-      # Define your hostname.
-      enable = true;
-      wifi.powersave = false;
-      connectionConfig = {"connection.mdns" = 2;};
-    };
 
     firewall = {
       # Open ports in the firewall.
