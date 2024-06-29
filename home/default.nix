@@ -6,7 +6,7 @@
       common = {
         imports = [
           ./configopts.nix
-          ./editors/astronvim
+          ./editors/lazyvim
           ./tools/shell.nix
           ./tools/starship.nix
           ./terminals/zellij.nix
