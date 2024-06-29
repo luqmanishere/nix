@@ -4,6 +4,7 @@ _: {
     # TODO: modularize this
     systemd.network = {
       enable = true;
+      wait-online.anyInterface = true;
 
       networks."10-wireless" = {
         matchConfig.Name = "wl*";
