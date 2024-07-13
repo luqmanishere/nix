@@ -90,6 +90,23 @@
           ./editors/vscode.nix
         ];
       };
+
+      luqman-alya = {
+          imports = [
+            ./luqman-home-alya.nix
+          ./configopts.nix
+          ./editors/lazyvim
+          ./tools/shell.nix
+          ./tools/starship.nix
+          ./terminals/zellij.nix
+          ./tools/task.nix
+          ./secrets
+          ./tools/python.nix
+          ];
+
+programs.home-manager.enable = true;
+        home.stateVersion = "22.11";
+        };
     };
   };
 }

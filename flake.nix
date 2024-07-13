@@ -64,6 +64,11 @@
         ...
       }: {
         # make pkgs available to all `perSystem` functions
+        legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
+            imports = [
+            self.homeModules.luqman-alya
+            ];
+          };
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [
