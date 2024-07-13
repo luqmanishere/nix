@@ -77,7 +77,7 @@
 
     "/mnt/windowsc" = {
       device = "/dev/disk/by-uuid/E48C23D68C23A1D2";
-      fsType = "ntfs3";
+      fsType = "ntfs";
       options = ["nofail" "user" "exec" "rw" "uid=1000" "gid=1000"];
     };
 
