@@ -43,6 +43,7 @@
       misc-gui.imports = [
         ./prod/school.nix
         ./games/general.nix
+        ./tools/ticktick.nix
       ];
 
       # for specific systems
