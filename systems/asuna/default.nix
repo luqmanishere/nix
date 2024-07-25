@@ -144,9 +144,6 @@ in {
     command-not-found.enable = false;
   };
 
-  # Enable sound.
-  sound.enable = false;
-
   security = {
     rtkit.enable = true;
 
