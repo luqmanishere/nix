@@ -170,7 +170,7 @@ in {
           "SUPERSHIFT, F, fakefullscreen"
           "SUPERSHIFT, Q, exit"
           "SUPER, J, togglefloating"
-          "SUPERSHIFT, O, toggleopaque"
+          "SUPERSHIFT, O, exec, hyprctl setprop active opaque toggle"
           "SUPERSHIFT, J, workspaceopt, allfloat"
           "SUPER, G, togglegroup"
           "SUPERSHIFT, G, moveintogroup"
