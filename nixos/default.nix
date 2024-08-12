@@ -34,10 +34,13 @@ in {
           ./power.nix
           ./polkit.nix
           ./services/avahi.nix
+          ./editors/nvim-nixcats.nix
         ];
 
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+
+        modules.editors.nixCats.setDefault = true;
       };
 
       gui-hyprland.imports = [

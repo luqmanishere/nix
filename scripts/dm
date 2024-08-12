@@ -27,7 +27,7 @@
 #  HISTORY
 #     2022/02/15 : solemnattic : Script creation
 #     2023/04/09 : solemnattic : do not use home-manager when rebuilding in nix
-# 
+#
 #================================================================
 #  DEBUG OPTION
 #    set -n  # Uncomment to check your syntax, without execution.
@@ -55,7 +55,7 @@ then
     usage
 fi
 
-if [ "$OPTS1" = "nix-switch" ] 
+if [ "$OPTS1" = "nix-switch" ]
 then
     if [ -z "$2" ]
     then
@@ -105,7 +105,7 @@ then
       echo "rebuilding nixos profile for $NIX_ARG"
       echo "running command $NIX_COMM"
       $NIX_COMM
-    else 
+    else
       echo "not running under NixOS"
       echo "rebuilding home-manager profile for $HOME_ARG"
       echo "running command $HOME_COMM"

@@ -109,6 +109,7 @@
     };
     # nix darwin when we need it only
 
+    nvim-nixcats.url = "github:luqmanishere/nvim-nixcats";
     nil.url = "github:oxalica/nil";
     alejandra = {
       url = "github:kamadorueda/alejandra/3.0.0";

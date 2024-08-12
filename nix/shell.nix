@@ -54,6 +54,7 @@
     # };
     devenv.shells.default = {
       packages = with pkgs; [
+      inputs'.nvim-nixcats.packages.nixCats
         neovim
         nil
         alejandra

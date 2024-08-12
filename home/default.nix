@@ -1,4 +1,8 @@
-{self, ...}: {
+{
+  self,
+  lib,
+  ...
+}: {
   flake = {
     homeModules = {
       # common modules that should be imported by everyone.
@@ -6,7 +10,8 @@
       common = {
         imports = [
           ./configopts.nix
-          ./editors/lazyvim
+          # ./editors/lazyvim # deprecated
+          ./editors/nvim-nixcats.nix
           ./tools/shell.nix
           ./tools/starship.nix
           ./terminals/zellij.nix
@@ -16,6 +21,9 @@
           ./tools/python.nix
         ];
         home.stateVersion = "22.11";
+
+        # set configuratble module options here
+        modules.editors.nixCats.setDefault = lib.mkDefault true;
       };
 
       sync-services.imports = [./tools/syncthing.nix];
@@ -93,8 +101,8 @@
       };
 
       luqman-alya = {
-          imports = [
-            ./luqman-home-alya.nix
+        imports = [
+          ./luqman-home-alya.nix
           ./configopts.nix
           ./editors/lazyvim
           ./tools/shell.nix
@@ -103,11 +111,11 @@
           ./tools/task.nix
           ./secrets
           ./tools/python.nix
-          ];
+        ];
 
-programs.home-manager.enable = true;
+        programs.home-manager.enable = true;
         home.stateVersion = "22.11";
-        };
+      };
     };
   };
 }

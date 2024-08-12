@@ -13,6 +13,10 @@ in {
       description = "Enable LazyVim";
       type = types.bool;
     };
+    setDefault = mkOption {
+      default = false;
+      description = "Make this your default EDITOR";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -57,6 +61,7 @@ in {
 
     programs.neovim = {
       enable = true;
+      defaultEditor = cfg.setDefault;
     };
   };
 }
