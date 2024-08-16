@@ -235,6 +235,8 @@
       bottom.enable = true;
 
       htop.enable = true;
+
+      lazygit.enable = true;
     };
   };
 }
