@@ -167,7 +167,7 @@ in {
           "SUPER, P, pseudo"
           "SUPERSHIFT, P, pin"
           "SUPER, F, fullscreen"
-          "SUPERSHIFT, F, fakefullscreen"
+          "SUPERSHIFT, F, fullscreen, 1"
           "SUPERSHIFT, Q, exit"
           "SUPER, J, togglefloating"
           "SUPERSHIFT, O, exec, hyprctl setprop active opaque toggle"
@@ -257,6 +257,7 @@ in {
 
     programs.hyprlock = {
       enable = true;
+      package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
       settings = {
         general = {
           disable_loading_bar = false;
@@ -265,11 +266,11 @@ in {
           {
             monitor = "eDP-1";
             # path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
-            color = "color = rgba(25, 20, 20, 1.0)";
+            color = "rgba(25, 20, 20, 1.0)";
           }
           {
             monitor = "DP-1";
-            color = "color = rgba(25, 20, 20, 1.0)";
+            color = "rgba(25, 20, 20, 1.0)";
           }
         ];
         input-field = [
@@ -301,6 +302,7 @@ in {
       '';
     in {
       enable = true;
+      package = inputs.hypridle.packages.${pkgs.system}.hypridle;
       settings = {
         general = {
           lock_cmd = "pidof hyprlock || ${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";

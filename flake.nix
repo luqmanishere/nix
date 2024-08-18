@@ -65,10 +65,10 @@
       }: {
         # make pkgs available to all `perSystem` functions
         legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
-            imports = [
+          imports = [
             self.homeModules.luqman-alya
-            ];
-          };
+          ];
+        };
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [
@@ -152,10 +152,10 @@
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
-      url = "github:hyprwm/hypridle/4395339a2dc410bcf49f3e24f9ed3024fdb25b0a";
+      url = "github:hyprwm/hypridle/96d51ec2a749a928cb9d48b1fc0ea4898e73a335";
     };
     hyprlock = {
-      url = "github:hyprwm/hyprlock/2ae79757d5e5c48de2f4284992a6bfa265853a2d";
+      url = "github:hyprwm/hyprlock/9393a3e94d837229714e28041427709756033f5a";
     };
     wayper.url = "github:luqmanishere/wayper";
     hyprrdrop.url = "github:luqmanishere/hyprrdrop";
