@@ -59,5 +59,5 @@ jobs:
           name: nix-conf
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build system ${{ matrix.system }}
-        run: nix build .#nixosConfigurations.${{ matrix.system }}.config.system.build.toplevel --accept-flake-config
+        run: nix build .#darwinConfigurations.${{ matrix.system }}.config.system.build.toplevel --accept-flake-config
       - run: echo "Build for host ${{ matrix.system }} OK"
