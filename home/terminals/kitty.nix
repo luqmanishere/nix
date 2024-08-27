@@ -15,6 +15,11 @@ in {
       description = "Enable the great kitty terminal config";
       type = types.bool;
     };
+    fontSize = mkOption {
+      default = 16.0;
+      description = "Customize font size";
+      type = types.float;
+    };
   };
 
   config = mkIf (cfg.enable) {
@@ -27,8 +32,8 @@ in {
     programs.kitty = {
       enable = true;
       font = {
-        name = "Iosevka SolemnAttic";
-        size = 16.0;
+        name = "Maple Mono NF";
+        size = cfg.fontSize;
       };
       theme = "Catppuccin-Mocha";
     };

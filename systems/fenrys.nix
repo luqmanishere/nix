@@ -19,7 +19,8 @@ in {
   #   "Sapi" = {pskRaw = "261aa691d2135810dcff3b7b8248f63727c8088b4d9f7618f3685a61ce03b341";};
   # };
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.enableSudoTouchIdAuth = false;
+  security.pam.enableSudoTouchId = true;
 
   # services.openssh.enable = true;
   services.nix-daemon.enable = true;

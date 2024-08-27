@@ -11,6 +11,7 @@
         self.nixosModules.common
         ./environment.nix
         ./users.nix
+        ./touch-id.nix
       ];
     };
   };

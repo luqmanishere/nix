@@ -54,6 +54,8 @@
         ./tools/ticktick.nix
       ];
 
+      gui-darwin.imports = [./terminals/kitty.nix ./tools/fonts.nix];
+
       # for specific systems
 
       luqman-asuna = {
@@ -84,7 +86,8 @@
       };
 
       luqman-fenrys = {
-        imports = [self.homeModules.common ./luqman-home-fenrys.nix];
+        imports = [self.homeModules.common ./luqman-home-fenrys.nix self.homeModules.gui-darwin];
+        modules.terminals.kitty.fontSize = 12.0;
       };
 
       luqman-kurumi = {

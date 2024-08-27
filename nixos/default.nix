@@ -22,8 +22,14 @@
       ++ nixosModules
       ++ [extraConfig];
 
-    home-manager.users.luqman = {
-      imports = [self.homeModules."luqman-${hostname}"] ++ homeManagerModules;
+    home-manager = {
+      extraSpecialArgs = {
+        # special args provided to modules
+        hostname = hostname;
+      };
+      users.luqman = {
+        imports = [self.homeModules."luqman-${hostname}"] ++ homeManagerModules;
+      };
     };
   };
 in {
