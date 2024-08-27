@@ -1941,6 +1941,26 @@
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724561770,
+        "narHash": "sha256-zv8C9RNa86CIpyHwPIVO/k+5TfM8ZbjGwOOpTe1grls=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "ac5694a0b855a981e81b4d9f14052e3ff46ca39e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "nix-darwin_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixvim",
           "nixpkgs"
         ]
@@ -2591,7 +2611,7 @@
         "flake-parts": "flake-parts_5",
         "git-hooks": "git-hooks_2",
         "home-manager": "home-manager_3",
-        "nix-darwin": "nix-darwin",
+        "nix-darwin": "nix-darwin_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -2897,6 +2917,7 @@
         "mk-shell-bin": "mk-shell-bin",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nil": "nil",
+        "nix-darwin": "nix-darwin",
         "nix2container": "nix2container",
         "nixos-flake": "nixos-flake",
         "nixos-generators": "nixos-generators",

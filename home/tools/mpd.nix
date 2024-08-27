@@ -12,14 +12,15 @@ in {
   options = {
     modules.tools.mpd = {
       enable = mkOption {
-        description = "Enable mpd music daemon service";
+        description = "Enable mpd music daemon service, enabling does nothing on MacOS";
         default = true;
         type = types.bool;
       };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable
+    && pkgs.stdenv.isLinux) {
     home.packages = with pkgs; [
       mpc-cli
       playerctl

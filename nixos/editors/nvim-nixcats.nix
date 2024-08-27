@@ -1,6 +1,7 @@
 {
   flake,
   config,
+  pkgs,
   lib,
   ...
 }: let
@@ -18,8 +19,15 @@ in {
     };
   };
 
-  config = {
-    nixCats.enable = true;
-    environment.sessionVariables = lib.mkIf cfg.setDefault {EDITOR = "cats";};
-  };
+  # config = {
+  #   nixCats.enable = true;
+  #   environment.sessionVariables = lib.mkIf cfg.setDefault {EDITOR = "cats";};
+  # };
+  config = with lib;
+    mkMerge [
+      {
+        nixCats.enable = true;
+        environment.variables = mkIf cfg.setDefault {EDITOR = "cats";};
+      }
+    ];
 }

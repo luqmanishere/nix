@@ -44,14 +44,4 @@ in {
       # trusted-substituters = ["https://hyprland.cachix.org"];
     };
   };
-
-  # increase open file settings for nix
-  security.pam.loginLimits = [
-    {
-      domain = "*";
-      type = "soft";
-      item = "nofile";
-      value = "8192";
-    }
-  ];
 }

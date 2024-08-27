@@ -7,40 +7,41 @@
   inherit (inputs) nixpkgs self;
 in {
   imports = [
+    self.darwinModules.default
+    # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
     self.nixosModules.fenrys
-    "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
   ];
 
-  time.timeZone = "Asia/Kuala_Lumpur";
-  i18n.defaultLocale = "en_US.UTF8";
-  sdImage.compressImage = false;
-
-  networking.wireless.networks = {
-    "Sapi" = {pskRaw = "261aa691d2135810dcff3b7b8248f63727c8088b4d9f7618f3685a61ce03b341";};
-  };
-
+  nixpkgs.hostPlatform = lib.mkForce "aarch64-darwin";
   networking.hostName = "fenrys";
 
-  users.users.luqman.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW+oXpKYSILzxc4O5Nrlf1oObQQc4XrawHWQmd5yvspQI6G5138KhX4woq65P1dGRguLvj3wWwJt5zKf533995radcusma9G1YDMWgkq+bKz+eNvY4n3zkA3EeKAlLsdwf/bA1ydLqK/LOTmBjTQqoxJsiQ7sqWCQFKZxRPlaRKsEnL8PmhkQNll8sJJ0GY559kODKArAjqYxNVPnOjijfl80WjIplrxKOdlaK79zJxv955lQTRNotI/wITnbOSpi2IMrbhCXQ5IViVj1fr5CwxPO1hrz5wRaycUhErtxzQS+Cvfkp5ooaOJSNRtmxoGC0hPxO8Vi+SrL28mH8ziPn"
-  ];
+  # networking.wireless.networks = {
+  #   "Sapi" = {pskRaw = "261aa691d2135810dcff3b7b8248f63727c8088b4d9f7618f3685a61ce03b341";};
+  # };
 
-  services.openssh.enable = true;
+  security.pam.enableSudoTouchIdAuth = true;
 
-  nixpkgs.hostPlatform = lib.mkForce "aarch64-linux";
+  # services.openssh.enable = true;
+  services.nix-daemon.enable = true;
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-      workstation = true;
-    };
+  # For home-manager to work
+  users.users.luqman = {
+    name = "luqman";
+    home = "/Users/luqman";
   };
 
-  system.stateVersion = "22.11"; # Did you read the comment?
+  # services.avahi = {
+  #   enable = true;
+  #   nssmdns4 = true;
+  #   publish = {
+  #     enable = true;
+  #     addresses = true;
+  #     domain = true;
+  #     hinfo = true;
+  #     userServices = true;
+  #     workstation = true;
+  #   };
+  # };
+
+  system.stateVersion = 4; # Did you read the comment?
 }

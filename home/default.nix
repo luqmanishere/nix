@@ -84,7 +84,7 @@
       };
 
       luqman-fenrys = {
-        imports = [self.homeModules.common ./luqman-home.nix];
+        imports = [self.homeModules.common ./luqman-home-fenrys.nix];
       };
 
       luqman-kurumi = {

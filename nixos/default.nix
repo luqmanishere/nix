@@ -9,8 +9,18 @@
     homeManagerModules ? [],
     # extra config applied after all modules
     extraConfig ? {},
+    default ? true,
   }: {
-    imports = [self.nixosModules.common] ++ nixosModules ++ [extraConfig];
+    imports =
+      [
+        (
+          if default
+          then self.nixosModules.default
+          else self.nixosModules.common
+        )
+      ]
+      ++ nixosModules
+      ++ [extraConfig];
 
     home-manager.users.luqman = {
       imports = [self.homeModules."luqman-${hostname}"] ++ homeManagerModules;
@@ -20,12 +30,25 @@ in {
   flake = {
     # declare our modules here
     nixosModules = {
-      # common modules that should be present on all systems
+      # common modules that should be present on all systems types - ie linux & darwin
       common = {
         imports = [
           ./nix.nix
-          self.nixosModules.home-manager
+          ./editors/nvim-nixcats.nix
+        ];
 
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+
+        modules.editors.nixCats.setDefault = true;
+      };
+
+      default = {
+        imports = [
+          self.nixosModules.home-manager
+          self.nixosModules.common
+
+          ./nix-limits.nix
           ./users.nix
           ./groups.nix
           ./dev.nix
@@ -34,12 +57,7 @@ in {
           ./power.nix
           ./polkit.nix
           ./services/avahi.nix
-          ./editors/nvim-nixcats.nix
         ];
-
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-
         modules.editors.nixCats.setDefault = true;
       };
 
@@ -76,6 +94,7 @@ in {
       fenrys = mkSystem {
         hostname = "fenrys";
         nixosModules = [];
+        default = false;
       };
 
       # desktop config

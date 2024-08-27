@@ -25,10 +25,12 @@
         nixos-flake.flakeModule
         treefmt-nix.flakeModule
         devenv.flakeModule
+        ./users
         ./nixvim
         ./nix
         ./nixos
         ./home
+        ./nix-darwin
       ];
 
       systems = [
@@ -46,13 +48,12 @@
           # configuration for WSL
           sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
 
-          # configuration for rpi4 (for building on aarch64 systems);
-          fenrys = self.nixos-flake.lib.mkLinuxSystem ./systems/fenrys.nix;
-
-          fenrys-cross =
-            nixpkgs.legacyPackages.x86_64-linux.pkgsCross.aarch64-multiplatform.nixos ./systems/fenrys.nix;
-
           kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
+        };
+
+        darwinConfigurations = {
+          # M1 Macbook
+          fenrys = self.nixos-flake.lib.mkMacosSystem ./systems/fenrys.nix;
         };
       };
 
@@ -107,7 +108,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # nix darwin when we need it only
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     nvim-nixcats.url = "github:luqmanishere/nvim-nixcats";
     nil.url = "github:oxalica/nil";

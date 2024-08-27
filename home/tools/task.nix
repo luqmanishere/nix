@@ -63,6 +63,6 @@ in {
       '';
     };
 
-    services.taskwarrior-sync.enable = true;
+    services.taskwarrior-sync.enable = mkIf pkgs.stdenv.isLinux true;
   };
 }
