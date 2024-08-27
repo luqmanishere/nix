@@ -41,15 +41,15 @@ jobs:
       matrix:
         system: [fenrys]
     steps:
-      - name: Maximize build space
-        uses: AdityaGarg8/remove-unwanted-software@v3
-        with:
-          remove-android: 'true'
-          remove-dotnet: 'true'
-          remove-haskell: 'true'
-          remove-codeql: 'true'
-          remove-docker-images: 'true'
-          remove-large-packages: 'true'
+      # - name: Maximize build space
+      #   uses: AdityaGarg8/remove-unwanted-software@v3
+      #   with:
+      #     remove-android: 'true'
+      #     remove-dotnet: 'true'
+      #     remove-haskell: 'true'
+      #     remove-codeql: 'true'
+      #     remove-docker-images: 'true'
+      #     remove-large-packages: 'true'
       - uses: actions/checkout@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v11
