@@ -54,12 +54,13 @@
     # };
     devenv.shells.default = {
       packages = with pkgs; [
-      inputs'.nvim-nixcats.packages.nixCats
+        inputs'.nvim-nixcats.packages.nixCats
         neovim
         nil
         alejandra
         nh
         ripgrep
+        inputs'.nh-darwin.packages.default
       ];
       scripts = {
         menu = {

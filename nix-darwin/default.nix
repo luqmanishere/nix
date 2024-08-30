@@ -12,6 +12,7 @@
         ./environment.nix
         ./users.nix
         ./touch-id.nix
+        ./nh-darwin.nix
       ];
     };
   };
