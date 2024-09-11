@@ -113,6 +113,7 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nh-darwin.url = "github:ToyVo/nh_darwin";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
     nvim-nixcats.url = "github:luqmanishere/nvim-nixcats";
     nil.url = "github:oxalica/nil";

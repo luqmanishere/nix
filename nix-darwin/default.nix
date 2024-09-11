@@ -13,6 +13,8 @@
         ./users.nix
         ./touch-id.nix
         ./nh-darwin.nix
+        ./homebrew.nix
+        ./desktop/yabai
       ];
     };
   };

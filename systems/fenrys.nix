@@ -1,6 +1,7 @@
 {
   flake,
   lib,
+  pkgs,
   ...
 }: let
   inherit (flake) inputs;
@@ -30,6 +31,8 @@ in {
     name = "luqman";
     home = "/Users/luqman";
   };
+
+  environment.systemPackages = with pkgs; [pandoc];
 
   # services.avahi = {
   #   enable = true;
