@@ -14,7 +14,8 @@
         ./touch-id.nix
         ./nh-darwin.nix
         ./homebrew.nix
-        ./desktop/yabai
+        # ./desktop/yabai
+        # ./desktop/sketchybar
       ];
     };
   };

@@ -5,6 +5,7 @@
   config = {
     home.packages = with pkgs; [
       age
+      coreutils
     ];
     programs = {
       starship = {
@@ -237,6 +238,8 @@
       htop.enable = true;
 
       lazygit.enable = true;
+
+      ripgrep.enable = true;
     };
   };
 }

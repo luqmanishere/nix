@@ -15,8 +15,10 @@ in {
       # User owning the Homebrew prefix
       user = "luqman";
 
+      mutableTaps = true;
+
       # Automatically migrate existing Homebrew installations
-      autoMigrate = true;
+      # autoMigrate = true;
     };
   };
 }
