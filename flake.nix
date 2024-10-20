@@ -9,7 +9,7 @@
     nixpkgs,
     treefmt-nix,
     devenv,
-    nixos-flake,
+    nixos-unified,
     ...
   }: let
     # Use our custom lib enhanced with nixpkgs and home-manager
@@ -22,7 +22,7 @@
       debug = true;
       imports = [
         flake-root.flakeModule
-        nixos-flake.flakeModule
+        nixos-unified.flakeModule
         treefmt-nix.flakeModule
         devenv.flakeModule
         ./users
@@ -43,17 +43,17 @@
       flake = {
         nixosConfigurations = {
           #main laptop
-          asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
+          asuna = self.nixos-unified.lib.mkLinuxSystem ./systems/asuna;
 
           # configuration for WSL
-          sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
+          sinon = self.nixos-unified.lib.mkLinuxSystem ./systems/sinon.nix;
 
-          kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
+          kurumi = self.nixos-unified.lib.mkLinuxSystem ./systems/kurumi;
         };
 
         darwinConfigurations = {
           # M1 Macbook
-          fenrys = self.nixos-flake.lib.mkMacosSystem ./systems/fenrys.nix;
+          fenrys = self.nixos-unified.lib.mkMacosSystem ./systems/fenrys.nix;
         };
       };
 
@@ -65,7 +65,7 @@
         ...
       }: {
         # make pkgs available to all `perSystem` functions
-        legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
+        legacyPackages.homeConfigurations."luqman@alya" = self.nixos-unified.lib.mkHomeConfiguration pkgs {
           imports = [
             self.homeModules.luqman-alya
           ];
@@ -130,7 +130,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     flake-root.url = "github:srid/flake-root";
-    nixos-flake.url = "github:srid/nixos-flake";
+    nixos-unified.url = "github:srid/nixos-unified";
 
     # utilities
     nixos-generators = {
