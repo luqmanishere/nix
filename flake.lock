@@ -3521,11 +3521,11 @@
         "nixpkgs": "nixpkgs_23"
       },
       "locked": {
-        "lastModified": 1729229459,
-        "narHash": "sha256-B+zHWCtBbFP8xinAq+4fAPnWQmhQ+FhEf9z7VLV7kX4=",
+        "lastModified": 1730687816,
+        "narHash": "sha256-IqJLKYC+eskURBfFCKKMbJC+rS/nj2RP5yH6w3Do1x4=",
         "owner": "luqmanishere",
         "repo": "nvim-nixcats",
-        "rev": "f3f4812ce8f60e1217cc89ea1ee6fa28d10b175a",
+        "rev": "81ba66fc1a4af2d51326c6fca0315d1fb4cfb158",
         "type": "github"
       },
       "original": {
