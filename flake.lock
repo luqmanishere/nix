@@ -3518,14 +3518,15 @@
     "nvim-nixcats": {
       "inputs": {
         "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs_23"
+        "nixpkgs": "nixpkgs_23",
+        "plugins-eagle-nvim": "plugins-eagle-nvim"
       },
       "locked": {
-        "lastModified": 1730687816,
-        "narHash": "sha256-IqJLKYC+eskURBfFCKKMbJC+rS/nj2RP5yH6w3Do1x4=",
+        "lastModified": 1730990258,
+        "narHash": "sha256-ZFHLJj9Mi4tl56xpnfYIEOSBQuPjzHofDhH7XN/Qcs0=",
         "owner": "luqmanishere",
         "repo": "nvim-nixcats",
-        "rev": "81ba66fc1a4af2d51326c6fca0315d1fb4cfb158",
+        "rev": "0b549e97d3ec21286f5cf20b77400c6e45128567",
         "type": "github"
       },
       "original": {
@@ -3617,6 +3618,22 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "plugins-eagle-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730074768,
+        "narHash": "sha256-MkNmphWhLVIw/EHh1GrGjVqrVJsKpE0R0VtHHiwhG1o=",
+        "owner": "soulis-1256",
+        "repo": "eagle.nvim",
+        "rev": "e42dbd42b73b10fdf12fd06172e116cdb6637537",
+        "type": "github"
+      },
+      "original": {
+        "owner": "soulis-1256",
+        "repo": "eagle.nvim",
         "type": "github"
       }
     },
