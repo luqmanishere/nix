@@ -11,7 +11,7 @@ in {
         enable = true;
         extraArgs = "--keep-since 1d --keep 3 --nogcroots";
       };
-      flake = "/Users/luqman/nix";
+      # flake = "/Users/luqman/nix";
     };
   };
 }

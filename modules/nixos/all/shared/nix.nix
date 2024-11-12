@@ -31,17 +31,16 @@ in {
         "root"
         (
           if pkgs.stdenv.isDarwin
-          then flake.config.people.myself
+          then flake.config.me.username
           else "@wheel"
         )
         "luqman"
       ];
 
-      auto-optimise-store = true;
-
       # substituters = ["https://hyprland.cachix.org"];
       # trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
       # trusted-substituters = ["https://hyprland.cachix.org"];
     };
+    optimise.automatic = true;
   };
 }

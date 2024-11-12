@@ -21,15 +21,17 @@ in {
     home.packages = with pkgs; [
       # fonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
       fira-code
       fira-code-symbols
       jetbrains-mono
       (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
-      self.packages.${pkgs.system}.iosevka-solemnattic
-      self.packages.${pkgs.system}.maple-mono-NF-beta
+      # TODO: fix packages
+      # self.packages.${pkgs.system}.iosevka-solemnattic
+      # TODO: fix packages
+      # self.packages.${pkgs.system}.maple-mono-NF-beta
 
       fontconfig
     ];
