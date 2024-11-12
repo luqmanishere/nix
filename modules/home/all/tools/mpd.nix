@@ -27,7 +27,7 @@ in {
     ];
     services.mpd = {
       enable = true;
-      #musicDirectory = home.homeDirectory/Music;
+      musicDirectory = "${home.homeDirectory}/music";
 
       # allow remote control of mpd
       network = {
