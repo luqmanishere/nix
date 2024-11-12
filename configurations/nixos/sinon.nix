@@ -11,6 +11,7 @@ in {
   imports = [
     self.nixosModules.common
     self.nixosModules.default-linux
+    self.nixosModules.linux-wsl
   ];
 
   networking.hostName = "sinon";
