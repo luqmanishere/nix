@@ -3,7 +3,7 @@
   inherit (inputs) self;
 in {
   # Enable home-manager for "runner" user
-  home-manager.users."runner" = {
-    imports = [(self + /configurations/home/runner.nix)];
+  home-manager.users."luqman" = {
+    imports = [(self + /configurations/home/luqman.nix)];
   };
 }
