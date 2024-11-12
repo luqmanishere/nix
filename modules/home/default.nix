@@ -1,4 +1,9 @@
-{lib, ...}: {
+# shared by MacOS & Linux
+{
+  lib,
+  config,
+  ...
+}: {
   home.stateVersion = "22.11";
   imports = [
     # editor
@@ -12,4 +17,13 @@
     # ./all/tools/python.nix
   ];
   modules.editors.nixCats.setDefault = lib.mkDefault true;
+
+  # from luqman-home.nix
+  home = {
+    sessionVariables = {
+      COLORTERM = "truecolor";
+      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      MEOW = "cat";
+    };
+  };
 }
