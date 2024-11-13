@@ -3,36 +3,21 @@
 
   outputs = inputs @ {
     self,
-    flake-parts,
-    flake-root,
-    home-manager,
-    nixpkgs,
-    treefmt-nix,
-    devenv,
-    nixos-flake,
+    # flake-parts,
+    # flake-root,
+    # home-manager,
+    # nixpkgs,
+    # treefmt-nix,
+    # devenv,
+    # nixos-unified,
     ...
   }: let
     # Use our custom lib enhanced with nixpkgs and home-manager
-    lib = import ./nix/lib {inherit (nixpkgs) lib;} // nixpkgs.lib // home-manager.lib;
   in
-    flake-parts.lib.mkFlake {
+    inputs.flake-parts.lib.mkFlake {
       inherit inputs;
-      specialArgs = {inherit lib;};
+      # specialArgs = {inherit lib;};
     } {
-      debug = true;
-      imports = [
-        flake-root.flakeModule
-        nixos-flake.flakeModule
-        treefmt-nix.flakeModule
-        devenv.flakeModule
-        ./users
-        ./nixvim
-        ./nix
-        ./nixos
-        ./home
-        ./nix-darwin
-      ];
-
       systems = [
         "aarch64-linux"
         "aarch64-darwin"
@@ -40,50 +25,63 @@
         "x86_64-linux"
       ];
 
-      flake = {
-        nixosConfigurations = {
-          #main laptop
-          asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
+      # debug = true;
+      imports = with builtins;
+        map (fn: ./modules/flake-parts/${fn})
+        (attrNames (readDir ./modules/flake-parts));
+      # imports = [
+      #   flake-root.flakeModule
+      #   nixos-unified.flakeModule
+      #   treefmt-nix.flakeModule
+      #   devenv.flakeModule
+      #   ./users
+      #   ./nixvim
+      #   ./nix
+      #   ./nixos
+      #   ./home
+      #   ./nix-darwin
+      # ];
 
-          # configuration for WSL
-          sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
+      # flake = {
+      #   nixosConfigurations = {
+      #     #main laptop
+      #     asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
+      #
+      #     # configuration for WSL
+      #     sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
+      #
+      #     kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
+      #   };
+      #
+      #   darwinConfigurations = {
+      #     # M1 Macbook
+      #     fenrys = self.nixos-flake.lib.mkMacosSystem ./systems/fenrys.nix;
+      #   };
+      # };
 
-          kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
-        };
-
-        darwinConfigurations = {
-          # M1 Macbook
-          fenrys = self.nixos-flake.lib.mkMacosSystem ./systems/fenrys.nix;
-        };
-      };
-
-      _module.args._inputs = inputs // {inherit self;};
+      # _module.args._inputs = inputs // {inherit self;};
 
       perSystem = {
-        pkgs,
+        lib,
         system,
         ...
       }: {
-        # make pkgs available to all `perSystem` functions
-        legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
-          imports = [
-            self.homeModules.luqman-alya
-          ];
-        };
+        # # make pkgs available to all `perSystem` functions
+        # legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
+        #   imports = [
+        #     self.homeModules.luqman-alya
+        #   ];
+        # };
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [
-            # do not set overlays for the flake here unless absolutely necessary.
-            # set them in nixos modules whenever possible
-            # inputs.neovim-nightly-overlay.overlay
-            inputs.emacs-overlay.overlays.default
-          ];
+          overlays = lib.attrValues self.overlays;
+          config.allowUnfree = true;
         };
 
         # make custom lib available to all `perSystem` functions
-        _module.args.lib = lib;
-
-        packages = import ./pkgs {inherit pkgs;};
+        # _module.args.lib = lib;
+        #
+        # packages = import ./pkgs {inherit pkgs;};
       };
     };
 
@@ -130,7 +128,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     flake-root.url = "github:srid/flake-root";
-    nixos-flake.url = "github:srid/nixos-flake";
+    nixos-unified.url = "github:srid/nixos-unified";
 
     # utilities
     nixos-generators = {
@@ -155,7 +153,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     # };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&tag=v0.42.0&rev=9a09eac79b85c846e3a865a9078a3f8ff65a9259";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&tag=v0.45.0&rev=a425fbebe4cf4238e48a42f724ef2208959d66cf";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
