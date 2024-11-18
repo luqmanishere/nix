@@ -3519,11 +3519,11 @@
         "plugins-eagle-nvim": "plugins-eagle-nvim"
       },
       "locked": {
-        "lastModified": 1731471754,
-        "narHash": "sha256-NnhqZXS7baFqt7sU0JvxTkGrNMOYSfrStR8Xsexac1E=",
+        "lastModified": 1731927074,
+        "narHash": "sha256-11LcOQqp73Jd3a7FqMb/7gnQXbfW+APGbhphOGRyrtA=",
         "owner": "luqmanishere",
         "repo": "nvim-nixcats",
-        "rev": "8f6e3e897d17eede70636ba6e9dae11abf7b6fea",
+        "rev": "7a40a1593e077ab7f26e15d4ad3102ac4ee374ea",
         "type": "github"
       },
       "original": {
