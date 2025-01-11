@@ -29,10 +29,10 @@ in {
       jetbrains-mono
       # before they split nerdfonts
       # (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
-      nerdfonts.JetBrainsMono
-      nerdfonts.FiraCode
-      nerdfonts.Noto
-      nerdfonts.NerdFontsSymbolsOnly
+      nerd-fonts.JetBrainsMono
+      nerd-fonts.FiraCode
+      nerd-fonts.Noto
+      nerd-fonts.NerdFontsSymbolsOnly
       # TODO: fix packages
       # self.packages.${pkgs.system}.iosevka-solemnattic
       # TODO: fix packages
