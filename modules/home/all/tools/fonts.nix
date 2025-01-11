@@ -27,7 +27,12 @@ in {
       fira-code
       fira-code-symbols
       jetbrains-mono
-      (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
+      # before they split nerdfonts
+      # (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "Noto" "NerdFontsSymbolsOnly"];})
+      nerdfonts.JetBrainsMono
+      nerdfonts.FiraCode
+      nerdfonts.Noto
+      nerdfonts.NerdFontsSymbolsOnly
       # TODO: fix packages
       # self.packages.${pkgs.system}.iosevka-solemnattic
       # TODO: fix packages
