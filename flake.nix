@@ -153,7 +153,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     # };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&tag=v0.46.2&rev=0bd541f2fd902dbfa04c3ea2ccf679395e316887";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=0bd541f2fd902dbfa04c3ea2ccf679395e316887";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
