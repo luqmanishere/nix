@@ -168,7 +168,7 @@
             '';
           }
           sensible
-          resurrect
+          # resurrect
           continuum
           fzf-tmux-url
           extrakto
