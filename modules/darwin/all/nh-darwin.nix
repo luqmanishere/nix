@@ -2,7 +2,8 @@
   inherit (flake) inputs;
   inherit (inputs) nh-darwin;
 in {
-  imports = [nh-darwin.nixDarwinModules.prebuiltin];
+  # temporary disable
+  # imports = [nh-darwin.nixDarwinModules.prebuiltin];
 
   config = {
     programs.nh = {

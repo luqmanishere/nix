@@ -110,7 +110,7 @@
     # nix darwin when we need it only
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nh-darwin.url = "github:ToyVo/nh_darwin";
+    nh-darwin.url = "github:ToyVo/nh_plus";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
