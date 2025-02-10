@@ -1,5 +1,6 @@
 {
   imports = [
+    ./all/services/avahi.nix
     ./all/login/tuigreet.nix
     ./all/login/hyprland.nix
     ./all/xdg.nix

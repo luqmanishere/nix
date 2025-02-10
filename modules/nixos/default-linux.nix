@@ -8,7 +8,6 @@
     ./all/nh.nix
     ./all/power.nix
     ./all/polkit.nix
-    ./all/services/avahi.nix
   ];
 
   modules.editors.nixCats.setDefault = true;
