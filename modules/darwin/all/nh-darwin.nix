@@ -1,4 +1,8 @@
-{flake, ...}: let
+{
+  flake,
+  pkgs,
+  ...
+}: let
   inherit (flake) inputs;
   inherit (inputs) nh-darwin;
 in {
@@ -6,13 +10,14 @@ in {
   # imports = [nh-darwin.nixDarwinModules.prebuiltin];
 
   config = {
-    programs.nh = {
-      enable = true;
-      clean = {
-        enable = true;
-        extraArgs = "--keep-since 1d --keep 3 --nogcroots";
-      };
-      # flake = "/Users/luqman/nix";
-    };
+    environment.systemPackages = [nh-darwin.packages.${pkgs.system}.nh];
+    # programs.nh = {
+    #   enable = true;
+    #   clean = {
+    #     enable = true;
+    #     extraArgs = "--keep-since 1d --keep 3 --nogcroots";
+    #   };
+    #   # flake = "/Users/luqman/nix";
+    # };
   };
 }
