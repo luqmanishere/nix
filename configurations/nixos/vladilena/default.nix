@@ -12,13 +12,16 @@ in {
     ./hm.nix
     self.nixosModules.common
     self.nixosModules.default-linux
+    self.nixosModules.linux-server
     ./hardware.nix
   ];
 
   networking.hostName = "vladilena";
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [22];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # firewall is handled by the cloud platform
+  networking.firewall.enable = false;
+
+  users.users."luqman".linger = true;
 
   nixpkgs.hostPlatform = "aarch64-linux";
 
