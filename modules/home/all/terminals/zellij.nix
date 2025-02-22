@@ -16,6 +16,7 @@ in {
     (mkIf (cfg.enable) {
       programs.zellij = {
         enable = true;
+        enableFishIntegration = lib.mkForce false;
       };
       xdg.configFile."zellij/config.kdl".source = ./config.kdl;
     })
