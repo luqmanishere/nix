@@ -12,6 +12,7 @@ in {
     self.nixosModules.common
     self.nixosModules.default-linux
     self.nixosModules.linux-wsl
+    ./hm.nix
   ];
 
   networking.hostName = "sinon";
@@ -27,11 +28,6 @@ in {
     gcc
     clang
   ];
-
-  # Enable home-manager for "luqman" user
-  home-manager.users."luqman" = {
-    imports = [(self + /configurations/home/luqman.nix)];
-  };
 
   programs.command-not-found.enable = true;
   services.logrotate.enable = false;

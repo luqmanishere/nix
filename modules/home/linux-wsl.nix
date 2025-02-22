@@ -1,6 +1,7 @@
 {
   imports = [
-    ./all/tools/fonts.nix
-    ./all/terminals/kitty.nix
+    ./all/tools/syncthing.nix
   ];
+
+  modules.solemnattic.tools.syncthing.guiPort = 8300;
 }
