@@ -12,7 +12,6 @@ in {
     defaultUser = "luqman";
 
     startMenuLaunchers = true;
-    nativeSystemd = true;
 
     interop = {
       register = false;
