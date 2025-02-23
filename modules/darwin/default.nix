@@ -23,6 +23,7 @@ in {
     ./all/nh-darwin.nix
   ];
 
-  services.nix-daemon.enable = true;
+  # removed: nix-darwin manages nix-daemon now
+  # services.nix-daemon.enable = true;
   security.pam.enableSudoTouchId = true;
 }

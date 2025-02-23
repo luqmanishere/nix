@@ -23,7 +23,6 @@ in {
   security.pam.enableSudoTouchId = true;
 
   # services.openssh.enable = true;
-  services.nix-daemon.enable = true;
 
   # For home-manager to work
   users.users.luqman = {
