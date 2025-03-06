@@ -17,7 +17,6 @@ in {
     self.nixosModules.common
     # TODO: ragenix
     ./all/users.nix
-    ./all/touch-id.nix
     ./all/environment.nix
     ./all/homebrew.nix
     ./all/nh-darwin.nix
@@ -25,5 +24,12 @@ in {
 
   # removed: nix-darwin manages nix-daemon now
   # services.nix-daemon.enable = true;
-  security.pam.enableSudoTouchId = true;
+
+  # changed: security.pam.enableSudoTouchId = true;
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+    watchIdAuth = true;
+    reattach = true;
+  };
 }
