@@ -61,7 +61,6 @@ in {
     clang
     python3
     python310Packages.pip
-    polkit-kde-agent
     aria2
   ];
 
