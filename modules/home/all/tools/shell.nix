@@ -221,6 +221,7 @@
           bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded"
 
           set -g allow-passthrough on
+          set -g default-shell ${pkgs.fish}/bin/fish
         '';
       };
 
@@ -230,7 +231,7 @@
         enableFishIntegration = true;
         inheritType = "any";
         agents = ["gpg" "ssh"];
-        keys = ["gitmain" "general"];
+        keys = ["gitmain" "general" "oci_key"];
       };
 
       bottom.enable = true;

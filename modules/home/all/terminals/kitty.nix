@@ -36,6 +36,9 @@ in {
         size = cfg.fontSize;
       };
       theme = "Catppuccin-Mocha";
+      extraConfig = ''
+        macos_option_as_alt yes
+      '';
     };
   };
 }

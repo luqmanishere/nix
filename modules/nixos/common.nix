@@ -3,6 +3,7 @@
   imports = [
     ./all/shared/nix.nix
     ./all/shared/editors/nvim-nixcats.nix
+    ./all/shells.nix
   ];
 
   home-manager.useGlobalPkgs = true;
