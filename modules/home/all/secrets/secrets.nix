@@ -1,8 +1,0 @@
-let
-  general_pub = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW+oXpKYSILzxc4O5Nrlf1oObQQc4XrawHWQmd5yvspQI6G5138KhX4woq65P1dGRguLvj3wWwJt5zKf533995radcusma9G1YDMWgkq+bKz+eNvY4n3zkA3EeKAlLsdwf/bA1ydLqK/LOTmBjTQqoxJsiQ7sqWCQFKZxRPlaRKsEnL8PmhkQNll8sJJ0GY559kODKArAjqYxNVPnOjijfl80WjIplrxKOdlaK79zJxv955lQTRNotI/wITnbOSpi2IMrbhCXQ5IViVj1fr5CwxPO1hrz5wRaycUhErtxzQS+Cvfkp5ooaOJSNRtmxoGC0hPxO8Vi+SrL28mH8ziPn";
-  agenix_pub = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPS7So2hAtYNZQNkqTzq0+b2wDgsx++VpKLMttkA4F00 luqman@asuna";
-in {
-  "taskd_credentials.age".publicKeys = [general_pub agenix_pub];
-  "taskd_ca.age".publicKeys = [general_pub agenix_pub];
-  "taskd_key.age".publicKeys = [general_pub agenix_pub];
-}

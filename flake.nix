@@ -172,6 +172,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TODO: revisit this fork as needed - ensure its updated
+    nixos-apple-silicon = {
+      url = "github:oliverbestmann/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Niri window manager
+    niri-flake.url = "github:sodiboo/niri-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixvim = {
       url = "github:nix-community/nixvim";
