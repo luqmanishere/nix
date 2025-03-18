@@ -13,6 +13,16 @@ in {
       description = "Enable waybar, a wayland bar";
       type = types.bool;
     };
+    width = mkOption {
+      default = 1800;
+      description = "Width of the bar";
+      type = types.int;
+    };
+    height = mkOption {
+      default = 30;
+      description = "Height of the bar";
+      type = types.int;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -24,10 +34,15 @@ in {
       enable = true;
       systemd = {
         enable = true;
-        target = "hyprland-session.target";
+        # no longer needed
+        # target = "hyprland-session.target";
       };
       style = ./style.css;
-      settings = builtins.fromJSON (builtins.readFile ./config.json);
+      # settings = builtins.fromJSON (builtins.readFile ./config.json);
+      settings = import ./config.nix {
+        width = cfg.width;
+        height = cfg.height;
+      };
       package = pkgs.waybar;
     };
     assertions = [

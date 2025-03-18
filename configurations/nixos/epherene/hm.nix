@@ -42,6 +42,10 @@ in {
 
       anyrun.enable = true;
       dunst.enable = true;
+      waybar = {
+        enable = true;
+        width = 1400;
+      };
       wayper.enable = true;
     };
   };
