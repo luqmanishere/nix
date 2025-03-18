@@ -11,7 +11,7 @@ in {
 
   options.modules.terminals.kitty = {
     enable = mkOption {
-      default = true;
+      default = false;
       description = "Enable the great kitty terminal config";
       type = types.bool;
     };
@@ -20,6 +20,7 @@ in {
       description = "Customize font size";
       type = types.float;
     };
+    mapleFont = mkEnableOption "Use MapleMonoNF font";
   };
 
   config = mkIf (cfg.enable) {
@@ -31,14 +32,24 @@ in {
 
     programs.kitty = {
       enable = true;
-      font = {
+      font = mkIf cfg.mapleFont {
         name = "Maple Mono NF";
         size = cfg.fontSize;
       };
       themeFile = "Catppuccin-Mocha";
-      extraConfig = ''
-        macos_option_as_alt yes
-      '';
+      extraConfig = mkMerge [
+        ''
+          macos_option_as_alt yes
+        ''
+        (mkIf cfg.mapleFont ''
+          font_features MapleMonoNF-Regular +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+          font_features MapleMonoNF-LightItalic +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+          font_features MapleMonoNF-Italic +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+          font_features MapleMonoNF-BoldItalic +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+          font_features MapleMonoNF-Light +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+          font_features MapleMonoNF-Bold +calt -zero -cv01 -cv02 -cv03 -cv04 ss01 -ss02 ss03
+        '')
+      ];
     };
 
     assertions = [

@@ -11,7 +11,7 @@
   }:
     stdenv.mkDerivation rec {
       inherit pname;
-      version = "7.0-beta24";
+      version = "7.0";
       src = fetchurl {
         url = "https://github.com/subframe7536/Maple-font/releases/download/v${version}/${pname}.zip";
         inherit sha256;

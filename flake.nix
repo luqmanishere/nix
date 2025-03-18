@@ -29,49 +29,14 @@
       imports = with builtins;
         map (fn: ./modules/flake-parts/${fn})
         (attrNames (readDir ./modules/flake-parts));
-      # imports = [
-      #   flake-root.flakeModule
-      #   nixos-unified.flakeModule
-      #   treefmt-nix.flakeModule
-      #   devenv.flakeModule
-      #   ./users
-      #   ./nixvim
-      #   ./nix
-      #   ./nixos
-      #   ./home
-      #   ./nix-darwin
-      # ];
-
-      # flake = {
-      #   nixosConfigurations = {
-      #     #main laptop
-      #     asuna = self.nixos-flake.lib.mkLinuxSystem ./systems/asuna;
-      #
-      #     # configuration for WSL
-      #     sinon = self.nixos-flake.lib.mkLinuxSystem ./systems/sinon.nix;
-      #
-      #     kurumi = self.nixos-flake.lib.mkLinuxSystem ./systems/kurumi;
-      #   };
-      #
-      #   darwinConfigurations = {
-      #     # M1 Macbook
-      #     fenrys = self.nixos-flake.lib.mkMacosSystem ./systems/fenrys.nix;
-      #   };
-      # };
-
-      # _module.args._inputs = inputs // {inherit self;};
 
       perSystem = {
         lib,
         system,
+        pkgs,
         ...
       }: {
-        # # make pkgs available to all `perSystem` functions
-        # legacyPackages.homeConfigurations."luqman@alya" = self.nixos-flake.lib.mkHomeConfiguration pkgs {
-        #   imports = [
-        #     self.homeModules.luqman-alya
-        #   ];
-        # };
+        # make pkgs available to all `perSystem` functions
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = lib.attrValues self.overlays;
@@ -81,7 +46,7 @@
         # make custom lib available to all `perSystem` functions
         # _module.args.lib = lib;
         #
-        # packages = import ./pkgs {inherit pkgs;};
+        packages = import ./pkgs {inherit pkgs;};
       };
     };
 

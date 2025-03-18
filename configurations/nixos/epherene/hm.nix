@@ -22,7 +22,11 @@ in {
 
     modules.terminals = {
       zellij.enable = true;
-      kitty.fontSize = 12.0;
+      kitty = {
+        enable = true;
+        fontSize = 12.0;
+        mapleFont = true;
+      };
     };
 
     modules.tools = {
