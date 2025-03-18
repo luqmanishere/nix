@@ -45,6 +45,7 @@ in {
       waybar = {
         enable = true;
         width = 1400;
+        wm = "niri";
       };
       wayper.enable = true;
     };

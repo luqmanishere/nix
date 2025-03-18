@@ -13,6 +13,11 @@ in {
       description = "Enable waybar, a wayland bar";
       type = types.bool;
     };
+    wm = mkOption {
+      type = types.enum ["hyprland" "niri"];
+      default = "hyprland";
+      description = "The wm waybar is configured for";
+    };
     width = mkOption {
       default = 1800;
       description = "Width of the bar";
@@ -40,8 +45,10 @@ in {
       style = ./style.css;
       # settings = builtins.fromJSON (builtins.readFile ./config.json);
       settings = import ./config.nix {
+        inherit lib;
         width = cfg.width;
         height = cfg.height;
+        wm = cfg.wm;
       };
       package = pkgs.waybar;
     };

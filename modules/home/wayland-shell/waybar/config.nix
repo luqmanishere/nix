@@ -1,9 +1,46 @@
 {
+  lib,
   width,
   height,
-}: let
+  wm,
+}:
+with lib; let
   inherit width;
   inherit height;
+
+  hyprland_workspaces_module = "hyprland/workspaces";
+  hyprland_workspaces_set = {
+    "disable-scroll" = true;
+    "all-outputs" = false;
+    "format" = "{id}";
+    "format-icons" = {
+      "1" = "";
+      "2" = "";
+      "3" = "";
+      "4" = "";
+      "5" = "";
+      "urgent" = "";
+      "focused" = "";
+      "default" = "";
+    };
+    "on-click" = "activate";
+  };
+  hyprland_window_module = "hyprland/window";
+  hyprland_window_set = {
+    "format" = "{}";
+    "max-length" = 30;
+  };
+
+  niri_workspaces_module = "niri/workspaces";
+  niri_workspace_set = {
+    "disable-scroll" = true;
+    "all-outputs" = false;
+  };
+  niri_window_module = "niri/window";
+  niri_window_set = {
+    "format" = "{title}";
+    "max-length" = 30;
+  };
 in [
   {
     "layer" = "top";
@@ -15,7 +52,8 @@ in [
     "margin-top" = 0;
     "name" = "ayaya";
     "modules-left" = [
-      "hyprland/workspaces"
+      (mkIf (wm == "hyprland") hyprland_workspaces_module)
+      (mkIf (wm == "niri") niri_workspaces_module)
     ];
     "modules-center" = [];
     "modules-right" = [
@@ -28,22 +66,8 @@ in [
       "backlight"
       "clock"
     ];
-    "hyprland/workspaces" = {
-      "disable-scroll" = true;
-      "all-outputs" = false;
-      "format" = "{id}";
-      "format-icons" = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        "urgent" = "";
-        "focused" = "";
-        "default" = "";
-      };
-      "on-click" = "activate";
-    };
+    "${hyprland_workspaces_module}" = hyprland_workspaces_set;
+    "${niri_workspaces_module}" = niri_workspace_set;
     "idle_inhibitor" = {
       "format" = "{icon}";
       "format-icons" = {
@@ -170,15 +194,14 @@ in [
       "tray"
     ];
     "modules-center" = [
-      "hyprland/window"
+      (mkIf (wm == "hyprland") hyprland_window_module)
+      (mkIf (wm == "niri") niri_window_module)
     ];
     "modules-right" = [
       "mpd"
     ];
-    "hyprland/window" = {
-      "format" = "{}";
-      "max-length" = 30;
-    };
+    "${hyprland_window_module}" = hyprland_window_set;
+    "${niri_window_module}" = niri_window_set;
     "mpd" = {
       "format" = "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ⸨{songPosition}|{queueLength}⸩ {volume}% ";
       "format-disconnected" = "Disconnected ";
