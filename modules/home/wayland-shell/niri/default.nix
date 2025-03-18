@@ -17,7 +17,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    modules.core.gui.enable = mkForce true;
+    modules.core.gui = {
+      enable = mkForce true;
+      wmType = "wayland";
+      wmName = "niri";
+    };
+
     modules.wayland-shell.utils.enable = mkForce true;
 
     programs.niri = {

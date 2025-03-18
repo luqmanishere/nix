@@ -4,6 +4,8 @@
     ./anyrun
     ./dunst.nix
     ./hyprland
+    ./hyprlock.nix
+    ./hypridle.nix
     ./niri
     ./rofi.nix
     ./utils.nix

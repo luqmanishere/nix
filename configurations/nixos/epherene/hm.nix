@@ -41,11 +41,12 @@ in {
       niri.enable = true;
 
       anyrun.enable = true;
+      hypridle.enable = true;
+      hyprlock.enable = true;
       dunst.enable = true;
       waybar = {
         enable = true;
         width = 1400;
-        wm = "niri";
       };
       wayper.enable = true;
     };

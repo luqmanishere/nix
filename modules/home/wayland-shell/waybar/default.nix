@@ -15,7 +15,7 @@ in {
     };
     wm = mkOption {
       type = types.enum ["hyprland" "niri"];
-      default = "hyprland";
+      default = config.modules.core.gui.wmName;
       description = "The wm waybar is configured for";
     };
     width = mkOption {
