@@ -14,6 +14,11 @@ in {
     home.packages = with pkgs; [
       tdesktop
       whatsapp-for-linux
+      (
+        if system == "aarch64-linux"
+        then legcord # there is no aarch64_linux discord
+        else discord
+      )
     ];
 
     assertions = [
