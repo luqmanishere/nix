@@ -35,7 +35,7 @@ in {
         name = "Maple Mono NF";
         size = cfg.fontSize;
       };
-      theme = "Catppuccin-Mocha";
+      themeFile = "Catppuccin-Mocha";
       extraConfig = ''
         macos_option_as_alt yes
       '';
