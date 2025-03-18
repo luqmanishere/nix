@@ -16,7 +16,7 @@ in {
       whatsapp-for-linux
       (
         if system == "aarch64-linux"
-        then legcord # there is no aarch64_linux discord
+        then vesktop # there is no aarch64_linux discord
         else discord
       )
     ];
