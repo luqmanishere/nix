@@ -1,9 +1,11 @@
 {
+  flake,
   pkgs,
   config,
   lib,
   ...
 }: let
+  inherit (flake) self;
   cfg = config.modules.productivity.essentials;
 in {
   options.modules.productivity.essentials = {
@@ -14,6 +16,7 @@ in {
     home.packages = with pkgs; [
       obsidian
       zathura
+      self.packages.${pkgs.system}.siyuan-unlock
     ];
 
     assertions = [
