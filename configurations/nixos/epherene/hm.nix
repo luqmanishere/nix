@@ -6,7 +6,8 @@ in {
   home-manager.users."luqman" = {
     imports = [
       (self + /configurations/home/luqman.nix)
-      self.homeModules.default
+      self.homeModules.common
+      self.homeModules.linux-only
     ];
 
     modules.core.gui.enable = true;

@@ -32,6 +32,11 @@ in {
       (self + /configurations/home/luqman.nix)
       {imports = [self.homeModules.darwin-only];}
     ];
+
+    modules.core.gui.enable = true;
+
+    modules.terminals.zellij.enable = true;
+    modules.terminals.kitty.enable = true;
   };
 
   environment.systemPackages = with pkgs; [pandoc];

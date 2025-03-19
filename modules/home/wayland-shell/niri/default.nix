@@ -2,6 +2,7 @@
   flake,
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -14,6 +15,12 @@ in {
 
   options.modules.wayland-shell.niri = {
     enable = mkEnableOption "Enable niri, the scrolling wayland window manager";
+  };
+  options.programs.niri = mkIf pkgs.stdenv.hostPlatform.isDarwin {
+    config = mkOption {
+      type = types.str;
+      default = null;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -29,5 +36,11 @@ in {
       # enable = true;
       config = readFile ./config.kdl;
     };
+    assertions = [
+      {
+        assertion = pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux";
+        message = "Only supported in linux systems";
+      }
+    ];
   };
 }

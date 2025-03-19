@@ -8,9 +8,10 @@
   inherit (inputs) self;
 in {
   imports = [
-    self.homeModules.default
+    self.homeModules.common
   ];
   home.username = "luqman";
+  home.packages = [];
   home.homeDirectory = lib.mkDefault "/${
     if pkgs.stdenv.isDarwin
     then "Users"

@@ -86,23 +86,23 @@ in {
     udisks2.enable = true;
     tailscale.enable = true;
 
-    protonvpn = {
-      enable = true;
-      autostart = false;
-      interface = {
-        ip = "10.2.0.2/32";
-        privateKeyFile = "/etc/protonkey";
-        dns = {
-          enable = true;
-          ip = "10.2.0.1";
-        };
-      };
-      endpoint = {
-        publicKey = "6vLkUgiS/K8p5dTMwUQo6tiyJ65DrM8E2mwO+QFz/zs=";
-        ip = "138.199.21.206";
-        port = 51820;
-      };
-    };
+    # protonvpn = {
+    #   enable = true;
+    #   autostart = false;
+    #   interface = {
+    #     ip = "10.2.0.2/32";
+    #     privateKeyFile = "/etc/protonkey";
+    #     dns = {
+    #       enable = true;
+    #       ip = "10.2.0.1";
+    #     };
+    #   };
+    #   endpoint = {
+    #     publicKey = "6vLkUgiS/K8p5dTMwUQo6tiyJ65DrM8E2mwO+QFz/zs=";
+    #     ip = "138.199.21.206";
+    #     port = 51820;
+    #   };
+    # };
 
     # TODO: move xremap to dedicated module
     xremap = {

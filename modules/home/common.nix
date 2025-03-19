@@ -1,4 +1,9 @@
 {
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
   imports = [
     ./configopts.nix
 
@@ -9,7 +14,7 @@
     ./sound
     ./terminals
     ./tools
-    ./wayland-shell
   ];
+
   home.stateVersion = "22.11";
 }

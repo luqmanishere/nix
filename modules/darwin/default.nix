@@ -10,7 +10,7 @@ in {
       };
       home-manager.users.${config.me.username} = {};
       home-manager .sharedModules = [
-        self.homeModules.default
+        self.homeModules.common
         self.homeModules.darwin-only
       ];
     }

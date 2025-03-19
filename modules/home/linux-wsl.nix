@@ -8,7 +8,7 @@
   warnings = [
     ''
       The module `linux-wsl` is deprecated.
-      Please use the `homeModules.default` module and enable the desired options.
+      Please use the `homeModules.common` module and enable the desired options.
     ''
   ];
 }
