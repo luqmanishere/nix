@@ -1,7 +1,7 @@
 {
   imports = [
     # ./tools/syncthing.nix
-    ./default.nix
+    ./common.nix
   ];
 
   modules.solemnattic.tools.syncthing.guiPort = 8300;
