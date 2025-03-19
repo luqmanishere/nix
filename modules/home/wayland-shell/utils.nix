@@ -17,6 +17,7 @@ in {
       wl-clipboard
       wlr-randr
       pavucontrol
+      brightnessctl
     ];
     home.pointerCursor = {
       gtk.enable = true;
