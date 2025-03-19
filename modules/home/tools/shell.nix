@@ -1,8 +1,10 @@
 {
   pkgs,
   config,
+  lib,
   ...
-}: {
+}:
+with lib; {
   # TODO: split up into smaller files
   imports = [];
 
@@ -47,9 +49,20 @@
 
           nvimdev = "NVIM_APPNAME=\"nvimdev\" nvim";
         };
-        shellAbbrs = {
-          psg = "ps ax | grep -i";
-        };
+        shellAbbrs = mkMerge [
+          {
+            psg = "ps ax | grep -i";
+          }
+          (mkIf pkgs.stdenv.isLinux {
+            # Systemd --user commands
+            usstart = "systemctl --user start";
+            usstop = "systemctl --user stop";
+            usrestart = "systemctl --user restart";
+            usdr = "systemctl --user daemon-reload";
+            ujxeu = "journalctl --user -xeu";
+            ujafu = "journalctl --user -afu";
+          })
+        ];
         shellInit = ''
           set -U fish_greeting "Welcome SolemnAttic. System initialized."
         '';

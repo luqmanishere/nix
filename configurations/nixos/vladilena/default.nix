@@ -81,6 +81,8 @@ in {
   # Disable autologin.
   services.getty.autologinUser = null;
 
+  boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 80;};
+
   # Open ports in the firewall.
 
   # Disable documentation for minimal install.
