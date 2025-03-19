@@ -16,12 +16,6 @@ in {
   options.modules.wayland-shell.niri = {
     enable = mkEnableOption "Enable niri, the scrolling wayland window manager";
   };
-  options.programs.niri = mkIf pkgs.stdenv.hostPlatform.isDarwin {
-    config = mkOption {
-      type = types.str;
-      default = null;
-    };
-  };
 
   config = mkIf cfg.enable {
     modules.core.gui = {
