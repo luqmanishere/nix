@@ -28,6 +28,10 @@ with lib; let
     [{wmName = "niri";} "${pkgs.niri-stable}/bin/niri msg action power-off-monitors"]
     [{wmName = "hyprland";} "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"]
   ];
+  screen_on_cmd = match {wmName = gui_config.wmName;} [
+    [{wmName = "niri";} "${pkgs.niri-stable}/bin/niri msg action power-on-monitors"]
+    [{wmName = "hyprland";} "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"]
+  ];
 
   cfg = config.modules.wayland-shell.hypridle;
 in {
@@ -44,7 +48,7 @@ in {
           lock_cmd = "pidof hyprlock || ${hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
           unlockcmd = "killall -q -s SIGUSR1 hyprlock";
           before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "${screen_off_cmd}";
+          after_sleep_cmd = "${screen_on_cmd}";
           ignore_dbus_inhibit = false;
         };
         listener = [
