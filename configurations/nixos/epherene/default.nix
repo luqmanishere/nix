@@ -22,6 +22,7 @@ in {
     nixos-apple-silicon.nixosModules.default
     inputs.niri-flake.nixosModules.niri
     ./hm.nix
+    inputs.titdb.nixosModules.default
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -53,6 +54,13 @@ in {
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.logind.powerKey = "suspend";
+
+  # reject some areas of the trackpad smartly
+  services.titdb = {
+    enable = true;
+    device = "/dev/input/event1";
+    topPercentage = 10;
+  };
 
   # Enable sound.
   # services.pulseaudio.enable = true;

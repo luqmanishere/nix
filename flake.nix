@@ -171,5 +171,6 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    titdb.url = "github:luqmanishere/trackpad-is-too-damn-big-flake";
   };
 }
