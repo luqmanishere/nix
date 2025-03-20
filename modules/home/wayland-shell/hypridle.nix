@@ -37,6 +37,14 @@ with lib; let
 in {
   options.modules.wayland-shell.hypridle = {
     enable = mkEnableOption "Enable the hypridle daemon";
+    keyboardLed = {
+      enable = mkEnableOption "Let hypridle manage the keyboard leds";
+      device = mkOption {
+        description = "the device name of the keyboard led. get it using `brightnessctl -l`";
+        type = types.str;
+        default = "kbd_backlight";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -69,6 +77,15 @@ in {
             timeout = 15;
             on-timeout = "pidof hyprlock && ${screen_off_cmd}";
           }
+          (
+            if cfg.keyboardLed.enable
+            then {
+              timeout = 60;
+              on-timeout = "brightnessctl -sd '${cfg.keyboardLed.device}' set 0";
+              on-resume = "brightnessctl -rd '${cfg.keyboardLed.device}'";
+            }
+            else null
+          )
         ];
       };
     };

@@ -42,7 +42,10 @@ in {
       niri.enable = true;
 
       anyrun.enable = true;
-      hypridle.enable = true;
+      hypridle = {
+        enable = true;
+        keyboardLed = {enable = true;};
+      };
       hyprlock.enable = true;
       dunst.enable = true;
       waybar = {
