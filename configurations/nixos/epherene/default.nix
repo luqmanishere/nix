@@ -52,6 +52,8 @@ in {
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  services.logind.powerKey = "suspend";
+
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
