@@ -118,14 +118,14 @@
     #   inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     # };
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=0bd541f2fd902dbfa04c3ea2ccf679395e316887";
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=155eba57d81fa2553f1eda8788bd9d1a16947a43";
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
-      url = "github:hyprwm/hypridle/413564cb986cfc67aeb7c4e750b42dc93ff9810f";
+      url = "github:hyprwm/hypridle/71e875e49e583c7b8b1364b55dfe494375c4e3ea";
     };
     hyprlock = {
-      url = "github:hyprwm/hyprlock/3d63d9b129d5def270bc8a2471347e6f97274e2b";
+      url = "github:hyprwm/hyprlock/ee8ee1f9f7cfd2c45de321ce6315c9cccb12c054";
     };
     wayper.url = "github:luqmanishere/wayper";
     hyprrdrop.url = "github:luqmanishere/hyprrdrop";
