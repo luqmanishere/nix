@@ -138,13 +138,19 @@
     };
 
     # TODO: revisit this fork as needed - ensure its updated
+    # nixos-apple-silicon = {
+    #   url = "github:oliverbestmann/nixos-apple-silicon";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # FIXME: wait for this pr #284 to merge
     nixos-apple-silicon = {
-      url = "github:oliverbestmann/nixos-apple-silicon";
+      url = "github:marcin-serwin/nixos-apple-silicon?rev=f51de44b1d720ac23e838db8e0cf13fadb7942b8";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Niri window manager
     niri-flake.url = "github:sodiboo/niri-flake";
+    niri-flake.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
