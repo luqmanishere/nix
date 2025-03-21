@@ -27,7 +27,9 @@ in {
             monitor = "eDP-1";
             # path = "/home/luqman/wallpapers/notseiso/horizontal/suisei-member-july.png";
             path = "/home/luqman/wallpapers/seiso/horizontal/ocean-lock.jpg";
-            # color = "rgba(25, 20, 20, 1.0)";
+            # path = "screenshot";
+            blur_passes = 2;
+            color = "rgba(25, 20, 20, 1.0)";
           }
           {
             monitor = "DP-1";
@@ -36,17 +38,38 @@ in {
         ];
         input-field = [
           {
-            size = "200, 50";
-            position = "0, -80";
-            monitor = "";
+            size = "300, 50";
+            position = "0, -30%";
             dots_center = true;
             fade_on_empty = false;
             font_color = "rgb(202, 211, 245)";
             inner_color = "rgb(91, 96, 120)";
             outer_color = "rgb(24, 25, 38)";
             outline_thickness = 5;
-            placeholder_text = "'Password...'";
+            font_family = "Maple Mono NF";
+            placeholder_text = "'enter your secrets...'";
             shadow_passes = 2;
+            halign = "center";
+          }
+        ];
+        label = [
+          {
+            position = "0, 330";
+            color = "rgba(242, 243, 244, 0.75)";
+            font_size = 93;
+            font_family = "Maple Mono NF";
+            text = "cmd[update:1000] echo \"$(date +\"%k:%M\")\"";
+            halign = "center";
+            valign = "center";
+          }
+          {
+            position = "0, 405";
+            text = "cmd[update:1000] echo \"$(date +\"%A, %B %d\")\"";
+            color = "rgba(242, 243, 244, 0.75)";
+            font_size = 25;
+            font_family = "Maple Mono NF";
+            halign = "center";
+            valign = "center";
           }
         ];
       };
