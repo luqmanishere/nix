@@ -24,6 +24,10 @@ keybinds clear-defaults=true {
             SwitchToMode "Session";
         }
 
+        bind "[" {
+            SwitchToMode "Scroll";
+        }
+
         // Splitting panes
         bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
@@ -409,7 +413,7 @@ plugins {
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
     filepicker location="zellij:strider" {
-        cwd "/"
+        cwd "/home/luqman"
     }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
@@ -456,7 +460,7 @@ default_mode "normal"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "compact"
+default_layout "default"
 
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -572,13 +576,13 @@ session_serialization true
 //   - true
 //   - false (default)
 //
-// serialize_pane_viewport false
+serialize_pane_viewport true
 
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 //
-// scrollback_lines_to_serialize 10000
+scrollback_lines_to_serialize 1000
 
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
