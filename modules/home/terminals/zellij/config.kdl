@@ -15,8 +15,9 @@ keybinds clear-defaults=true {
 
         // Session manager
         bind "s" "$" ":" {
-            LaunchOrFocusPlugin "session-manager" {
+            LaunchPlugin "session-manager" {
                 floating true
+                close_on_exit true
             };
             SwitchToMode "Normal";
         }
