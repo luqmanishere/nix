@@ -305,11 +305,19 @@ window-rule {
     // block-out-from "screencast"
 }
 
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
+// General window rules
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+
+    draw-border-with-background false
+    opacity 0.5
+}
+
+window-rule {
+    match is-active=true
+
+    opacity 0.9
 }
 
 binds {

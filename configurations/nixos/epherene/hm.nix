@@ -21,6 +21,8 @@ in {
       essentials.enable = true;
     };
 
+    modules.secrets.enable = true;
+
     modules.terminals = {
       zellij.enable = true;
       kitty = {
@@ -36,6 +38,7 @@ in {
         enable = true;
         mpdris2.enable = true;
       };
+      taskwarrior.enable = true;
     };
 
     modules.wayland-shell = {

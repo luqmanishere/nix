@@ -15,6 +15,7 @@ in {
       default = false;
       type = types.bool;
     };
+    sync.enable = mkEnableOption "Enable sync";
   };
 
   config = mkIf (cfg.enable) {
@@ -63,6 +64,7 @@ in {
       '';
     };
 
+    modules.secrets.taskd.enable = true;
     services.taskwarrior-sync.enable = mkIf pkgs.stdenv.isLinux true;
   };
 }

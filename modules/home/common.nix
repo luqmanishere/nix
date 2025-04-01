@@ -11,6 +11,7 @@ with lib; {
     ./editors
     ./games
     ./prod
+    ./secrets
     ./sound
     ./terminals
     ./tools
