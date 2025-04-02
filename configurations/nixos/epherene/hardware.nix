@@ -13,6 +13,19 @@
   ];
 
   boot.initrd.availableKernelModules = ["usb_storage"];
+  boot.kernelParams = lib.mkForce [
+    "quiet"
+    "earlycon"
+    # "console=ttySAC0,115200n8"
+    "console=tty0"
+    "boot.shell_on_fail"
+    "nvme_apple.flush_interval=0"
+    "root=fstab"
+    "splash"
+    "loglevel=4"
+    "rd.systemd.show_status=false"
+    "rd.udev.log_level=3"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
