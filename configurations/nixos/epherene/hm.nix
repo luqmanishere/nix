@@ -14,7 +14,10 @@ in {
 
     modules.browsers.zen.enable = true;
 
-    modules.editors.neovide.enable = true;
+    modules.editors = {
+      neovide.enable = true;
+      zed.enable = true;
+    };
 
     modules.productivity = {
       comms.enable = true;
