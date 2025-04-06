@@ -25,6 +25,11 @@
     "loglevel=4"
     "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
+    # zswap config
+    "zswap.enabled=1"
+    "zswap.compressor=zstd"
+    "zswap.zpool=zsmalloc"
+    "zswap.max_pool_percent=50"
   ];
 
   fileSystems."/" = {
@@ -45,13 +50,24 @@
     options = ["subvol=nix" "compress=zstd" "noatime"];
   };
 
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
+    fsType = "btrfs";
+    options = ["subvol=swap" "noatime"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/9693-1719";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 12 * 1024;
+    }
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -58,8 +58,8 @@ in {
   # reject some areas of the trackpad smartly
   services.titdb = {
     enable = true;
-    device = "/dev/input/event1";
-    topPercentage = 10;
+    device = "/dev/input/by-path/platform-23510c000.spi-cs-0-event-mouse";
+    topPercentage = 15;
   };
 
   # Enable sound.
