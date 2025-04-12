@@ -16,6 +16,7 @@ in {
 
     modules.editors = {
       neovide.enable = true;
+      vscode.enable = true;
       zed.enable = true;
     };
 
@@ -43,6 +44,7 @@ in {
       };
       taskwarrior.enable = true;
     };
+    modules.solemnattic.tools.syncthing.enable = true;
 
     modules.wayland-shell = {
       niri.enable = true;
