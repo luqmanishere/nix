@@ -8,7 +8,8 @@
   inherit (flake) inputs;
   cfg = config.modules.wayland-shell.anyrun;
 in {
-  imports = [inputs.anyrun.homeManagerModules.default];
+  # the module is now upstreamed
+  # imports = [inputs.anyrun.homeManagerModules.default];
 
   options.modules.wayland-shell.anyrun = {
     enable = lib.mkEnableOption "Enable the anyrun runner";
