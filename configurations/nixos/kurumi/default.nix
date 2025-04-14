@@ -59,8 +59,6 @@ in {
     fish
     gcc
     clang
-    python3
-    python310Packages.pip
     aria2
   ];
 
