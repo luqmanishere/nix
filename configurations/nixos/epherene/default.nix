@@ -26,7 +26,10 @@ in {
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 5;
+  };
   boot.loader.efi.canTouchEfiVariables = false;
 
   hardware.asahi = {
@@ -69,9 +72,7 @@ in {
   #   enable = true;
   #   pulse.enable = true;
   # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.printing.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.luqman = {
