@@ -56,9 +56,10 @@ in {
       };
       hyprlock.enable = true;
       dunst.enable = true;
+
       waybar = {
         enable = true;
-        width = 1400;
+        width = 1700;
       };
       wayper.enable = true;
     };

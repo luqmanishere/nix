@@ -43,19 +43,19 @@ with lib; let
   };
 in [
   {
-    "layer" = "top";
+    layer = "top";
     "position" = "top";
     "height" = height;
     "output" = "eDP-1";
     "width" = width;
     "spacing" = 4;
-    "margin-top" = 0;
+    "margin-top" = 10;
     "name" = "ayaya";
     "modules-left" = [
       (mkIf (wm == "hyprland") hyprland_workspaces_module)
       (mkIf (wm == "niri") niri_workspaces_module)
     ];
-    "modules-center" = [];
+    modules-center = ["clock"];
     "modules-right" = [
       "wireplumber"
       "network"
@@ -64,7 +64,6 @@ in [
       "battery"
       "temperature"
       "backlight"
-      "clock"
     ];
     "${hyprland_workspaces_module}" = hyprland_workspaces_set;
     "${niri_workspaces_module}" = niri_workspace_set;
@@ -80,8 +79,27 @@ in [
       "spacing" = 10;
     };
     "clock" = {
-      "tooltip-format" = "<big>{=%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-      "format-alt" = "{=%Y-%m-%d}";
+      format = "{:%H:%M} ";
+      format-alt = "{:%A, %B %d, %Y (%R)}  ";
+      tooltip-format = "<tt><small>{calendar}</small></tt>";
+      calendar = {
+        mode = "year";
+        mode-mon-col = 3;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          months = "<span color='#ffead3'><b>{}</b></span>";
+          days = "<span color='#ecc6d9'><b>{}</b></span>";
+          weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+          weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+          today = "<span color='#ff6699'><b><u>{}</u></b></span>";
+        };
+      };
+      actions = {
+        on-click-right = "mode";
+        on-scroll-up = "shift_up";
+        on-scroll-down = "shift_down";
+      };
     };
     "cpu" = {
       "format" = "{usage}% ";
@@ -123,7 +141,7 @@ in [
         "warning" = 30;
         "critical" = 15;
       };
-      "format" = "{capacity}% {icon}";
+      "format" = "{capacity}% {icon} ";
       "format-charging" = "{capacity}% 󰂄";
       "format-plugged" = "{capacity}% ";
       "format-alt" = "{time} {icon}";
@@ -137,14 +155,14 @@ in [
         ""
       ];
     };
-    "network" = {
-      "format-wifi" = "{essid} ({signalStrength}%) ";
-      "format-ethernet" = "{ipaddr}/{cidr} 󰈀";
-      "tooltip-format" = "{ifname} via {gwaddr} 󰈀";
-      "format-linked" = "{ifname} (No IP) 󰈀";
-      "format-disconnected" = "Disconnected ⚠";
-      "format-alt" = "{ifname}= {ipaddr}/{cidr}";
-      "interface" = "wlan0";
+    network = {
+      format-wifi = "{essid} ({signalStrength}%)  ";
+      format-ethernet = "{ipaddr}/{cidr} 󰈀";
+      tooltip-format = "{ifname} via {gwaddr} 󰈀";
+      format-linked = "{ifname} (No IP) 󰈀";
+      format-disconnected = "Disconnected ⚠";
+      format-alt = "{ifname}= {ipaddr}/{cidr}";
+      interface = "wlan0";
     };
     "pulseaudio" = {
       "scroll-step" = 1;
@@ -170,7 +188,7 @@ in [
       "on-click" = "pavucontrol";
     };
     "wireplumber" = {
-      "format" = "{volume}% {icon}";
+      "format" = "{volume}% {icon} ";
       "format-muted" = "󰝟 muted";
       "on-click" = "helvum";
       "format-icons" = [
@@ -187,7 +205,7 @@ in [
     "height" = height;
     "width" = width;
     "spacing" = 4;
-    "margin-bottom" = 0;
+    "margin-bottom" = 10;
     "name" = "bot";
     "modules-left" = [
       "hyprland/submap"
@@ -342,7 +360,7 @@ in [
         "warning" = 30;
         "critical" = 15;
       };
-      "format" = "{capacity}% {icon}";
+      "format" = "{capacity}% {icon} ";
       "format-charging" = "{capacity}% 󰂄";
       "format-plugged" = "{capacity}% ";
       "format-alt" = "{time} {icon}";
@@ -357,7 +375,7 @@ in [
       ];
     };
     "network" = {
-      "format-wifi" = "{essid} ({signalStrength}%) ";
+      "format-wifi" = "{essid} ({signalStrength}%)  ";
       "format-ethernet" = "{ipaddr}/{cidr} 󰈀";
       "tooltip-format" = "{ifname} via {gwaddr} 󰈀";
       "format-linked" = "{ifname} (No IP) 󰈀";
@@ -389,7 +407,7 @@ in [
       "on-click" = "pavucontrol";
     };
     "wireplumber" = {
-      "format" = "{volume}% {icon}";
+      "format" = "{volume}% {icon} ";
       "format-muted" = "󰝟 muted";
       "on-click" = "helvum";
       "format-icons" = [
@@ -505,7 +523,7 @@ in [
       ];
     };
     "network" = {
-      "format-wifi" = "{essid} ({signalStrength}%) ";
+      "format-wifi" = "{essid} ({signalStrength}%)  ";
       "format-ethernet" = "{ipaddr}/{cidr} 󰈀";
       "tooltip-format" = "{ifname} via {gwaddr} 󰈀";
       "format-linked" = "{ifname} (No IP) 󰈀";
@@ -641,7 +659,7 @@ in [
       ];
     };
     "network" = {
-      "format-wifi" = "{essid} ({signalStrength}%) ";
+      "format-wifi" = "{essid} ({signalStrength}%)  ";
       "format-ethernet" = "{ipaddr}/{cidr} 󰈀";
       "tooltip-format" = "{ifname} via {gwaddr} 󰈀";
       "format-linked" = "{ifname} (No IP) 󰈀";

@@ -1,6 +1,8 @@
+* {all:unset;}
+
 * {
   /* `otf-font-awesome` is required to be installed for icons */
-  font-family: 'JetBrainsMono Nerd Font', monospace;
+  font-family: 'Symbols Nerd Font', 'Maple Mono NF', monospace;
   font-size: 20px;
   min-height: 0;
 }
@@ -17,7 +19,8 @@
 }
 
 window#waybar.ayaya {
-  background-color: #1e2030;
+  /* background-color: #1e2030; */
+  background-color: transparent;
   /* border: 3px solid rgba(100, 114, 125, 0.5); */
   color: #ffffff;
   transition-property: background-color;
@@ -25,11 +28,12 @@ window#waybar.ayaya {
   border: none;
   border-style: solid;
   border-color: #c6a0f6;
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px;
 }
 
 window#waybar.bot {
-  background-color: #1e2030;
+  /* background-color: #1e2030; */
+  background-color: transparent;
   /* border: 3px solid rgba(100, 114, 125, 0.5); */
   color: #ffffff;
   transition-property: background-color;
@@ -63,7 +67,7 @@ window#waybar.chromium {
 }
 
 #workspaces button {
-  background: transparent;
+  background-color: #1a1111;
   padding: 0 5px;
   margin: 0px;
   color: #f5bde6;
@@ -117,8 +121,13 @@ button.focused {
 #mode,
 #idle_inhibitor,
 #mpd {
+  background-color: #1a1111;
+  border-color: #1a1111;
   padding: 0 10px;
   color: #ffffff;
+  border: 1px;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #window {
@@ -133,7 +142,6 @@ button.focused {
 #workspaces {
   margin: 0 4px;
 }
-
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
   margin-left: 0;
@@ -145,21 +153,26 @@ button.focused {
 }
 
 #clock {
-  background-color: transparent;
-  color: #f5bde6;
-  box-shadow: inset 0 -3px #f5bde6;
+  /* background-color: #f5bde6; */
+  /* color: #f5bde6; */
+  /* box-shadow: inset 0 -3px #f5bde6; */
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #battery {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #a6da95;
-  box-shadow: inset 0 -3px #a6da95;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #battery.charging,
 #battery.plugged {
   color: #a6da95;
-  background-color: transparent;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
+  /* background-color: transparent; */
 }
 
 @keyframes blink {
@@ -170,13 +183,15 @@ button.focused {
 }
 
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
+  /* background-color: #f53c3c; */
   color: #ffffff;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 label:focus {
@@ -184,60 +199,71 @@ label:focus {
 }
 
 #cpu {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #c6a0f6;
-  box-shadow: inset 0 -3px #c6a0f6;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #memory {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #8aadf4;
-  box-shadow: inset 0 -3px #8aadf4;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #disk {
-  background-color: #964b00;
+  /* background-color: #964b00; */
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #backlight {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #f4dbd6;
-  box-shadow: inset 0 -3px #f4dbd6;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #network {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #7dc4e4;
-  box-shadow: inset 0 -3px #7dc4e4;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #network.disconnected {
-  background-color: #f53c3c;
+  /* background-color: #f53c3c; */
 }
 
 #pulseaudio,
 #wireplumber {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #8bd5ca;
-  box-shadow: inset 0 -3px #8bd5ca;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #pulseaudio.muted,
 #wireplumber.muted {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #8bd5ca;
-  box-shadow: inset 0 -3px #8bd5ca;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #temperature {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #f5a97f;
-  box-shadow: inset 0 -3px #f5a97f;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #temperature.critical {
   background-color: #eb4d4b;
   color: #ffffff;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #tray {
@@ -254,9 +280,10 @@ label:focus {
 }
 
 #mpd {
-  background-color: transparent;
+  /* background-color: transparent; */
   color: #ee99a0;
-  box-shadow: inset 0 -3px #ee99a0;
+  border-style: solid;
+  border-radius: 5px 5px 5px 5px;
 }
 
 #taskbar {
