@@ -8,7 +8,6 @@
     ./hypridle.nix
     ./niri
     ./rofi.nix
-    ./sherlock
     ./utils.nix
     ./waybar
     ./wayper.nix
