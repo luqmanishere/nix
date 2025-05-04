@@ -1,12 +1,20 @@
 {
   flake,
   pkgs,
+  config,
+  lib,
   ...
-}: let
+}:
+with lib; let
   inherit (flake) inputs;
+  cfg = config.modules.wm.hyprland;
 in {
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+  options.modules.wm.hyprland.enable = mkEnableOption "Enable Hyprland";
+
+  config = (mkIf cfg.enable) {
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    };
   };
 }
