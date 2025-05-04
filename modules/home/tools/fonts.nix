@@ -35,8 +35,8 @@ in {
       nerd-fonts.symbols-only
       # TODO: fix packages
       # self.packages.${pkgs.system}.iosevka-solemnattic
-      # TODO: Monitor official 7.0 package on nixpkgs
-      self.packages.${pkgs.system}.maple-mono-NF-beta
+
+      maple-mono.NF
 
       fontconfig
     ];
