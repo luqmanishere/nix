@@ -1,3 +1,4 @@
 {
-  xdg.portal.enable = true;
+  # TODO: is this needed?
+  # xdg.portal.enable = true;
 }
