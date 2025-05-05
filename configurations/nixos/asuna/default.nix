@@ -81,7 +81,9 @@ in {
       alsa.enable = true;
       jack.enable = true;
     };
-    flatpak.enable = true;
+    # TODO: reenable
+    # flatpak.enable = true;
+
     # to ease mount of usbs
     udisks2.enable = true;
     tailscale.enable = true;
