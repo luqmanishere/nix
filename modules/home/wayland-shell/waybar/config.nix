@@ -190,7 +190,7 @@ in [
     "wireplumber" = {
       "format" = "{volume}% {icon} ";
       "format-muted" = "󰝟 muted";
-      "on-click" = "helvum";
+      "on-click" = "pwvucontrol";
       "format-icons" = [
         ""
         ""
@@ -409,7 +409,7 @@ in [
     "wireplumber" = {
       "format" = "{volume}% {icon} ";
       "format-muted" = "󰝟 muted";
-      "on-click" = "helvum";
+      "on-click" = "pwvucontrol";
       "format-icons" = [
         ""
         ""

@@ -33,7 +33,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       font-awesome_5
-      helvum
+      pwvucontrol
     ];
     programs.waybar = {
       enable = true;
