@@ -147,6 +147,10 @@
       url = "github:marcin-serwin/nixos-apple-silicon?rev=f51de44b1d720ac23e838db8e0cf13fadb7942b8";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sherlock = {
+      url = "github:Skxxtz/sherlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Niri window manager
     niri-flake.url = "github:sodiboo/niri-flake";
