@@ -4,6 +4,7 @@
     ./all/services/avahi.nix
     ./all/login/tuigreet.nix
     ./all/login/hyprland.nix
+    ./all/login/niri.nix
     ./all/xdg.nix
 
     # ./all/games/steam.nix

@@ -3,6 +3,7 @@
   pkgs,
   config,
   lib,
+  ...
 }:
 with lib; let
   inherit (flake) inputs;
@@ -12,8 +13,6 @@ in {
   options.modules.wm.niri = {enable = mkEnableOption "Enable the niri wm";};
 
   config = mkIf cfg.enable {
-    nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
-
     environment.systemPackages = with pkgs; [
       nautilus # required for file picking with gnome portal
     ];

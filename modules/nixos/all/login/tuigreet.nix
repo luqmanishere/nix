@@ -5,7 +5,7 @@
       settings = {
         vt = 2;
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember-user-session --user-menu";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time -r --user-menu";
           user = "greeter";
         };
       };
