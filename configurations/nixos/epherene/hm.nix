@@ -42,6 +42,7 @@ in {
         enable = true;
         mpdris2.enable = true;
       };
+      obsidian.enable = true;
       taskwarrior.enable = true;
     };
     modules.solemnattic.tools.syncthing.enable = true;
