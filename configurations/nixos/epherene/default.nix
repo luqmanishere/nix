@@ -20,7 +20,6 @@ in {
     self.nixosModules.linux-laptop
 
     nixos-apple-silicon.nixosModules.default
-    inputs.niri-flake.nixosModules.niri
     ./hm.nix
     inputs.titdb.nixosModules.default
   ];
@@ -40,6 +39,7 @@ in {
     experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
   };
+  # TODO: centralize overlays
   nixpkgs.overlays = [nixos-apple-silicon.overlays.apple-silicon-overlay inputs.niri-flake.overlays.niri];
 
   networking.hostName = "epherene"; # Define your hostname.
@@ -84,7 +84,6 @@ in {
   };
 
   # programs.firefox.enable = true;
-  programs.niri.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -117,6 +116,8 @@ in {
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  modules.wm.niri.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
