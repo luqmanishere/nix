@@ -128,18 +128,6 @@ with lib; {
         };
       };
 
-      helix = {
-        enable = true;
-        settings = {
-          theme = "catppuccin_mocha";
-          editor = {
-            cursorline = true;
-            lsp.display-messages = true;
-            indent-guides.render = true;
-          };
-        };
-      };
-
       eza = {
         enable = true;
       };
