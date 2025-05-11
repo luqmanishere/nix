@@ -15,6 +15,7 @@ in {
     modules.browsers.zen.enable = true;
 
     modules.editors = {
+      helix.enable = true;
       neovide.enable = true;
       vscode.enable = true;
       zed.enable = true;
