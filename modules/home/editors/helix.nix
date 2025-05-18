@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -20,6 +21,12 @@ in {
           color-modes = true;
           popup-border = "all";
           end-of-line-diagnostics = "hint";
+
+          cursor-shape = {
+            normal = "block";
+            insert = "bar";
+            select = "underline";
+          };
 
           lsp = {
             enable = true;
@@ -49,6 +56,30 @@ in {
         keys = {
           insert = {
             k.j = "normal_mode";
+          };
+        };
+      };
+
+      # refer https://github.com/helix-editor/helix/blob/master/languages.toml
+      languages = {
+        # this is for language server configuration
+        language-server = with pkgs; {
+          # rust
+          rust-analyzer = {
+            command = "${getExe rust-analyzer}";
+            config.cargo = {
+              targetDir = true;
+            };
+          };
+
+          # nix
+          nixd = {
+            command = "${getExe nixd}";
+          };
+
+          # markdown
+          marksman = {
+            command = "${getExe marksman}";
           };
         };
       };

@@ -6,5 +6,6 @@
     ./nvim-nixcats.nix
     ./vscode.nix
     ./zed.nix
+    ./helix.nix
   ];
 }
