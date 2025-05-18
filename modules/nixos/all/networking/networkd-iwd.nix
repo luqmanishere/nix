@@ -26,7 +26,7 @@ _: {
       enable = true;
       settings = {
         Settings = {AutoConnect = true;};
-        General = {UseDefaultInterface = true;};
+        DriverQuirks = {UseDefaultInterface = true;};
       };
     };
   };
