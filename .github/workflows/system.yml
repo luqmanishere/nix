@@ -24,7 +24,11 @@ jobs:
           remove-large-packages: 'true'
       - uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v11
+        uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf:
+            lazy-trees = true
+        # uses: DeterminateSystems/nix-installer-action@v11
       - name: Use Cachix
         uses: cachix/cachix-action@v14
         with:
@@ -52,7 +56,11 @@ jobs:
           remove-large-packages: 'false'
       - uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v11
+        uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf:
+            lazy-trees = true
+        # uses: DeterminateSystems/nix-installer-action@v11
       - name: Use Cachix
         uses: cachix/cachix-action@v14
         with:
@@ -80,7 +88,11 @@ jobs:
       #     remove-large-packages: 'true'
       - uses: actions/checkout@v4
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v11
+        uses: DeterminateSystems/determinate-nix-action@v3
+        with:
+          extra-conf:
+            lazy-trees = true
+        # uses: DeterminateSystems/nix-installer-action@v11
       - name: Use Cachix
         uses: cachix/cachix-action@v14
         with:

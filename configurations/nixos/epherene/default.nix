@@ -9,7 +9,7 @@
   ...
 }: let
   inherit (flake) inputs;
-  inherit (inputs) nixos-apple-silicon self;
+  inherit (inputs) nixos-apple-silicon determinate self;
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -19,10 +19,13 @@ in {
     self.nixosModules.default-linux
     self.nixosModules.linux-laptop
 
+  determinate.nixosModules.default
     nixos-apple-silicon.nixosModules.default
     ./hm.nix
     inputs.titdb.nixosModules.default
   ];
+
+  modules.nix.latest = false;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot = {
