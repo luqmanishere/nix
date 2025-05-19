@@ -62,6 +62,18 @@ in {
 
       # refer https://github.com/helix-editor/helix/blob/master/languages.toml
       languages = {
+        # for individual language conf
+        language = [
+          {
+            name = "nix";
+            auto-format = true;
+            formatter = {
+              command = "${getExe pkgs.alejandra}";
+              args = ["-"];
+            };
+          }
+        ];
+
         # this is for language server configuration
         language-server = with pkgs; {
           # rust
