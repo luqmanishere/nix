@@ -15,9 +15,11 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       nautilus # required for file picking with gnome portal
+      adwaita-icon-theme
     ];
 
     programs.niri.enable = true;
+    programs.dconf.enable = true;
   };
 
   imports = [

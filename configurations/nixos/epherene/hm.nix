@@ -62,6 +62,7 @@ in {
       hyprlock.enable = true;
       dunst.enable = true;
 
+      sherlock.enable = true;
       waybar = {
         enable = true;
         width = 1700;
