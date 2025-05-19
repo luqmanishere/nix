@@ -25,10 +25,7 @@ in {
 
       secrets = mkMerge [
         (mkIf cfg.taskd.enable {
-          taskd_credentials.file = ./taskd_credentials.age;
-          taskd_ca.file = ./taskd_ca.age;
-          taskd_key.file = ./taskd_key.age;
-          taskd_cert.file = ./taskd_cert.age;
+          taskv3_sync.file = ./taskv3_sync.age;
         })
       ];
     };

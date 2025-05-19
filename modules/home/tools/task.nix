@@ -24,6 +24,7 @@ in {
     ];
     programs.taskwarrior = {
       enable = true;
+      package = pkgs.taskwarrior3;
       colorTheme = "dark-256";
       config = {
         news.version = "2.6.0";
@@ -51,20 +52,16 @@ in {
           labels = "ID,Proj,Desc,Tags";
           filter = "+today status:pending -WAITING -BLOCKED -notify_only";
         };
-
-        taskd.trust = "strict";
-        taskd.server = "app.wingtask.com:53589";
-        taskd.key = config.age.secrets.taskd_key.path;
-        taskd.ca = config.age.secrets.taskd_ca.path;
-        taskd.certificate = config.age.secrets.taskd_cert.path;
-        # taskd.credentials = config.age.secrets.taskd_credentials.path;
       };
       extraConfig = ''
-        include ${config.age.secrets.taskd_credentials.path}
+        include ${config.age.secrets.taskv3_sync.path}
       '';
     };
 
-    modules.secrets.taskd.enable = true;
-    services.taskwarrior-sync.enable = mkIf pkgs.stdenv.isLinux true;
+    # modules.secrets.taskd.enable = true;
+    services.taskwarrior-sync = {
+      enable = mkIf pkgs.stdenv.isLinux true;
+      package = pkgs.taskwarrior3;
+    };
   };
 }

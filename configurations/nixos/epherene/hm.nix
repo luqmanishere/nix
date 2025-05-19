@@ -26,7 +26,10 @@ in {
       essentials.enable = true;
     };
 
-    modules.secrets.enable = true;
+    modules.secrets = {
+      enable = true;
+      taskd.enable = true;
+    };
 
     modules.terminals = {
       zellij.enable = true;
