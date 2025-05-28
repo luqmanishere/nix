@@ -19,7 +19,7 @@ in {
     self.nixosModules.default-linux
     self.nixosModules.linux-laptop
 
-  determinate.nixosModules.default
+    determinate.nixosModules.default
     nixos-apple-silicon.nixosModules.default
     ./hm.nix
     inputs.titdb.nixosModules.default
@@ -121,6 +121,8 @@ in {
   networking.firewall.enable = false;
 
   modules.wm.niri.enable = true;
+
+  hardware.graphics.package = lib.mkForce pkgs.mesa;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
