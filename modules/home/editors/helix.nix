@@ -54,6 +54,10 @@ in {
         };
 
         keys = {
+          normal = {
+            H = ":bp";
+            L = ":bn";
+          };
           insert = {
             k.j = "normal_mode";
           };
