@@ -31,12 +31,16 @@ in {
     imports = [
       (self + /configurations/home/luqman.nix)
       {imports = [self.homeModules.darwin-only];}
+      self.homeModules.common
     ];
 
     modules.core.gui.enable = true;
 
+    modules.editors.helix.enable = true;
+
     modules.terminals.zellij.enable = true;
     modules.terminals.kitty.enable = true;
+    modules.tools.fonts.enable = true;
   };
 
   environment.systemPackages = with pkgs; [pandoc];
