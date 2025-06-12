@@ -8,6 +8,7 @@
     ./all/nh.nix
     ./all/power.nix
     ./all/polkit.nix
+    ./all/containers/podman.nix
   ];
 
   modules.editors.nixCats.setDefault = true;
