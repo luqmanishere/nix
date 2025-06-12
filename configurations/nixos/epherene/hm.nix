@@ -1,4 +1,8 @@
-{flake, ...}: let
+{
+  flake,
+  pkgs,
+  ...
+}: let
   inherit (flake) inputs;
   inherit (inputs) self;
 in {
@@ -9,6 +13,9 @@ in {
       self.homeModules.common
       self.homeModules.linux-only
     ];
+
+    # TODO: put in module
+    home.packages = with pkgs; [moonlight-qt];
 
     modules.core.gui.enable = true;
 
