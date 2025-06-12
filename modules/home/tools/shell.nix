@@ -52,6 +52,10 @@ with lib; {
         shellAbbrs = mkMerge [
           {
             psg = "ps ax | grep -i";
+
+            # zellij abbrs
+            za = "zellij attach";
+            zac = "zellij attach -c";
           }
           (mkIf pkgs.stdenv.isLinux {
             # Systemd --user commands
@@ -240,8 +244,6 @@ with lib; {
         enable = true;
         enableZshIntegration = true;
         enableFishIntegration = true;
-        inheritType = "any";
-        agents = ["gpg" "ssh"];
         keys = ["gitmain" "general" "oci_key"];
       };
 
