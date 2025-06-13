@@ -13,6 +13,7 @@ with lib; {
       COLORTERM = "truecolor";
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
       MEOW = "cat";
+      NH_NO_CHECKS = "";
     };
 
     home.packages = with pkgs; [
