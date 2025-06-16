@@ -22,7 +22,7 @@ in {
     services.wayper = {
       enable = true;
       config = {
-        default-config = "default";
+        default-profile = "default";
         monitorConfigs = [
           {
             name = "eDP-1";
