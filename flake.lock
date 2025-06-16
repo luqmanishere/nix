@@ -3898,11 +3898,11 @@
         "parts": "parts_3"
       },
       "locked": {
-        "lastModified": 1750028534,
-        "narHash": "sha256-3jArqQNKHjRY3gG4rGpz7LMJQ0XURdnk4jPRE3/29t4=",
+        "lastModified": 1750037761,
+        "narHash": "sha256-QmB0piaIXImbuPtEuDv70bxBYI6kR1RrxEACs5S9OiY=",
         "owner": "luqmanishere",
         "repo": "wayper",
-        "rev": "740f848a1ddcf24522d6279b8ec229dcbb45e131",
+        "rev": "a27021af0acd04e2256d8aca0969901fdc2c858e",
         "type": "github"
       },
       "original": {
