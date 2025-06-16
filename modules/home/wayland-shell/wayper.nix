@@ -21,23 +21,26 @@ in {
   config = {
     services.wayper = {
       enable = true;
-      monitorConfigs = [
-        {
-          name = "eDP-1";
-          duration = 60;
-          path = "/home/luqman/wallpapers/notseiso/horizontal";
-        }
-        {
-          name = "HDMI-A-1";
-          duration = 60;
-          path = "/home/luqman/wallpapers/seiso/horizontal";
-        }
-        {
-          name = "DP-1";
-          duration = 60;
-          path = "/home/luqman/wallpapers/seiso/horizontal";
-        }
-      ];
+      config = {
+        default-profile = "default";
+        monitorConfigs = [
+          {
+            name = "eDP-1";
+            duration = 60;
+            path = "/home/luqman/wallpapers/notseiso/horizontal";
+          }
+          {
+            name = "HDMI-A-1";
+            duration = 60;
+            path = "/home/luqman/wallpapers/seiso/horizontal";
+          }
+          {
+            name = "DP-1";
+            duration = 60;
+            path = "/home/luqman/wallpapers/seiso/horizontal";
+          }
+        ];
+      };
     };
   };
 }
