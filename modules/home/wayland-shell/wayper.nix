@@ -21,6 +21,7 @@ in {
   config = mkIf cfg.enable {
     services.wayper = {
       enable = true;
+      enableFuzzelIntegration = true;
       config = {
         default-profile = "default";
         monitorConfigs = [
