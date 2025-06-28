@@ -10,12 +10,14 @@ with lib; let
   inherit (inputs) sherlock;
   cfg = config.modules.wayland-shell.sherlock;
 in {
-  options.modules.wayland-shell.sherlock.enable = mkEnableOption "Enable sherlock";
-  config = mkIf cfg.enable {
-    # TODO: configuration
+  imports = [sherlock.homeManagerModules.default];
 
-    home.packages = with pkgs; [
-      sherlock-launcher
-    ];
+  options.modules.wayland-shell.sherlock.enable = mkEnableOption "Enable sherlock";
+
+  config = mkIf cfg.enable {
+    programs.sherlock = {
+      enable = true;
+      settings = null;
+    };
   };
 }

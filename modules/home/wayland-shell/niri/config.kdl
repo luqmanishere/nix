@@ -578,6 +578,7 @@ binds {
     Mod+Shift+P { power-off-monitors; }
     Alt+Space { spawn "anyrun"; }
     Mod+Space { spawn "sherlock"; }
+    Mod+Ctrl+W { spawn "wayperctl" "change-profile" "safe"; }
 }
 
 environment {

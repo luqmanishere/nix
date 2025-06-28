@@ -18,7 +18,7 @@ in {
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     services.wayper = {
       enable = true;
       config = {
@@ -36,6 +36,14 @@ in {
           }
           {
             name = "DP-1";
+            duration = 60;
+            path = "/home/luqman/wallpapers/seiso/horizontal";
+          }
+
+          # safe
+          {
+            name = "eDP-1";
+            profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
           }
