@@ -3447,6 +3447,26 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752219538,
+        "narHash": "sha256-uckx6ukCJtuAdyGtyqS1OrwAPoxl/LNRyznNO51e8HE=",
+        "ref": "refs/heads/master",
+        "rev": "49a3752b9d79bf9f56d8372de594d54312315470",
+        "revCount": 618,
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      }
+    },
     "root": {
       "inputs": {
         "aagl": "aagl",
@@ -3484,6 +3504,7 @@
         "nixpkgs": "nixpkgs_16",
         "nixvim": "nixvim",
         "nvim-nixcats": "nvim-nixcats",
+        "quickshell": "quickshell",
         "sherlock": "sherlock",
         "titdb": "titdb",
         "treefmt-nix": "treefmt-nix_2",

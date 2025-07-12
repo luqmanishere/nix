@@ -7,6 +7,7 @@
     ./hyprlock.nix
     ./hypridle.nix
     ./niri
+    ./quickshell.nix
     ./rofi.nix
     ./sherlock
     ./utils.nix
