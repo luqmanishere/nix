@@ -16,7 +16,8 @@ in {
     home.packages = with pkgs; [
       obsidian
       zathura
-      self.packages.${pkgs.system}.siyuan-unlock
+      # disabled due to pnpm deps thing
+      # self.packages.${pkgs.system}.siyuan-unlock
     ];
 
     assertions = [
