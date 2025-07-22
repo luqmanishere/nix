@@ -12,6 +12,7 @@ in {
   config = mkIf cfg.enable {
     programs.helix = {
       enable = true;
+      extraPackages = with pkgs; [kdePackages.qtdeclarative];
       settings = {
         theme = "catppuccin_mocha";
         editor = {
@@ -76,6 +77,15 @@ in {
               args = ["-"];
             };
           }
+          {
+            name = "qml";
+            auto-format = true;
+          }
+          {
+            name = "toml";
+            language-servers = ["tombi" "taplo"];
+            auto-format = true;
+          }
         ];
 
         # this is for language server configuration
@@ -96,6 +106,17 @@ in {
           # markdown
           marksman = {
             command = "${getExe marksman}";
+          };
+
+          # qml
+          qmlls = {
+            args = ["-E"];
+            command = "qmlls";
+          };
+
+          tombi = {
+            command = "${getExe tombi}";
+            args = ["lsp"];
           };
         };
       };

@@ -42,6 +42,14 @@ in {
     experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
   };
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
   # TODO: centralize overlays
   nixpkgs.overlays = [nixos-apple-silicon.overlays.apple-silicon-overlay inputs.niri-flake.overlays.niri];
 
@@ -87,6 +95,7 @@ in {
   };
 
   # programs.firefox.enable = true;
+  # programs.steam.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -99,6 +108,9 @@ in {
     curl
     alacritty
     xwayland-satellite
+    muvm
+    fex
+    bash
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

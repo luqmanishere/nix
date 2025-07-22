@@ -100,7 +100,7 @@ output "eDP-1" {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
-    gaps 16
+    gaps 5
 
     center-focused-column "on-overflow"
 
@@ -231,7 +231,7 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
+        left 32
         // right 64
         // top 64
         // bottom 64
