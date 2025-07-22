@@ -2,6 +2,7 @@
   flake,
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -19,6 +20,7 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [matugen];
     services.wayper = {
       enable = true;
       enableFuzzelIntegration = true;
@@ -29,16 +31,19 @@ in {
             name = "eDP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/notseiso/horizontal";
+            run_command = "matugen image {image}";
           }
           {
             name = "HDMI-A-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
+            run_command = "matugen image {image}";
           }
           {
             name = "DP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
+            run_command = "matugen image {image}";
           }
 
           # safe
@@ -47,6 +52,7 @@ in {
             profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
+            run_command = "matugen image {image}";
           }
         ];
       };

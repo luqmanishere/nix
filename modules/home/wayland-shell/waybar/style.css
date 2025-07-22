@@ -1,5 +1,7 @@
 * {all:unset;}
 
+@import 'colors.css';
+
 * {
   /* `otf-font-awesome` is required to be installed for icons */
   font-family: 'Symbols Nerd Font', 'Maple Mono NF', monospace;
@@ -67,10 +69,10 @@ window#waybar.chromium {
 }
 
 #workspaces button {
-  background-color: #1a1111;
+  background-color: @primary;
   padding: 0 5px;
   margin: 0px;
-  color: #f5bde6;
+  color: @on_primary;
   /* Use box-shadow instead of border so the text isn't offset */
   box-shadow: inset 0 -3px transparent;
   /* Avoid rounded borders under each workspace name */
@@ -80,7 +82,8 @@ window#waybar.chromium {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-  background: rgba(0, 0, 0, 0.2);
+  /* background: rgba(0, 0, 0, 0.2); */
+  background-color: @tertiary;
   box-shadow: inset 0 -3px #8aadf4;
 }
 
@@ -92,7 +95,7 @@ window#waybar.chromium {
 
 #workspaces button.active,
 button.focused {
-  background-color: #6e738d;
+  background-color: @secondary;
   /* background-color: #2d3436; */
   box-shadow: inset 0 -3px #ed8796;
 }
@@ -121,19 +124,20 @@ button.focused {
 #mode,
 #idle_inhibitor,
 #mpd {
-  background-color: #1a1111;
+  /* background-color: @primary_container; */
+  background-color: @secondary;
   border-color: #1a1111;
   padding: 0 10px;
-  color: #ffffff;
+  color: @on_secondary;
   border: 1px;
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #window {
-  padding-left: 10px;
-  padding-right: 10px;
-  background: transparent;
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+  /* background: transparent; */
   color: #ffffff;
   box-shadow: inset 0 -3px #ffffff;
 }
@@ -153,8 +157,8 @@ button.focused {
 }
 
 #clock {
-  /* background-color: #f5bde6; */
-  /* color: #f5bde6; */
+  background-color: @primary;
+  color: @on_primary;
   /* box-shadow: inset 0 -3px #f5bde6; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
@@ -162,14 +166,14 @@ button.focused {
 
 #battery {
   /* background-color: transparent; */
-  color: #a6da95;
+  /* color: #a6da95; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #a6da95;
+  /* color: #a6da95; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
   /* background-color: transparent; */
@@ -177,13 +181,13 @@ button.focused {
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: @error;
+    color: @on_error;
   }
 }
 
 #battery.critical:not(.charging) {
-  /* background-color: #f53c3c; */
+  background-color: #ffffff;
   color: #ffffff;
   animation-name: blink;
   animation-duration: 0.5s;
@@ -200,14 +204,14 @@ label:focus {
 
 #cpu {
   /* background-color: transparent; */
-  color: #c6a0f6;
+  /* color: #c6a0f6; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #memory {
   /* background-color: transparent; */
-  color: #8aadf4;
+  /* color: #8aadf4; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
@@ -220,14 +224,15 @@ label:focus {
 
 #backlight {
   /* background-color: transparent; */
-  color: #f4dbd6;
+  /* color: #f4dbd6; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #network {
   /* background-color: transparent; */
-  color: #7dc4e4;
+  /* background-color: @tertiary_container; */
+  /* color: @on_tertiary_container; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
@@ -239,7 +244,8 @@ label:focus {
 #pulseaudio,
 #wireplumber {
   /* background-color: transparent; */
-  color: #8bd5ca;
+  /* background-color: @secondary; */
+  /* color: @on_secondary; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
@@ -247,27 +253,27 @@ label:focus {
 #pulseaudio.muted,
 #wireplumber.muted {
   /* background-color: transparent; */
-  color: #8bd5ca;
+  /* color: #8bd5ca; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #temperature {
   /* background-color: transparent; */
-  color: #f5a97f;
+  /* color: #f5a97f; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
-  color: #ffffff;
+  /* background-color: #eb4d4b; */
+  /* color: #ffffff; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #tray {
-  background-color: transparent;
+  /* background-color: @primary; */
 }
 
 #tray > .passive {
@@ -276,16 +282,16 @@ label:focus {
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: #eb4d4b;
+  background-color: @error;
 }
 
 #mpd {
   /* background-color: transparent; */
-  color: #ee99a0;
+  /* color: #ee99a0; */
   border-style: solid;
   border-radius: 5px 5px 5px 5px;
 }
 
 #taskbar {
-  color: #000000;
+  /* color: #000000; */
 }
