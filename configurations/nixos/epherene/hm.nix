@@ -15,7 +15,7 @@ in {
     ];
 
     # TODO: put in module
-    home.packages = with pkgs; [moonlight-qt];
+    home.packages = with pkgs; [moonlight-qt prismlauncher];
 
     modules.core.gui.enable = true;
 
