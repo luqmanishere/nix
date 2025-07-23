@@ -13,7 +13,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       tdesktop
-      whatsapp-for-linux
+      zapzap
       (
         if system == "aarch64-linux"
         then vesktop # there is no aarch64_linux discord
