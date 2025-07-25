@@ -68,6 +68,7 @@ in {
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.logind.powerKey = "suspend";
+  services.tailscale.enable = true;
 
   # reject some areas of the trackpad smartly
   services.titdb = {
@@ -111,6 +112,7 @@ in {
     muvm
     fex
     bash
+    config.boot.kernelPackages.perf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
