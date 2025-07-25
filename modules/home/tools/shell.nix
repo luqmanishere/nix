@@ -133,6 +133,16 @@ with lib; {
         };
       };
 
+      jujutsu = {
+        enable = true;
+        settings = {
+          user = {
+            name = "Luqmanul Hakim";
+            email = "luqmanulhakim1720@gmail.com";
+          };
+        };
+      };
+
       eza = {
         enable = true;
       };
