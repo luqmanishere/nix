@@ -36,7 +36,6 @@ in {
 
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
-    withRust = true;
     # enable gpu support
     useExperimentalGPUDriver = true;
     experimentalGPUInstallMode = "replace";
