@@ -15,10 +15,15 @@ in {
     ];
 
     # TODO: put in module
-    home.packages = with pkgs; [moonlight-qt prismlauncher];
+    home.packages = with pkgs; [
+      moonlight-qt
+      prismlauncher
+      chromium
+    ];
 
     modules.core.gui.enable = true;
 
+    modules.browsers.firefox.enable = true;
     modules.browsers.zen.enable = true;
 
     modules.editors = {

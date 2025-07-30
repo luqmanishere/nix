@@ -69,6 +69,19 @@ in {
   services.logind.powerKey = "suspend";
   services.tailscale.enable = true;
 
+  # virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+    daemon.settings = {
+      # dns = ["1.1.1.1"];
+    };
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   # reject some areas of the trackpad smartly
   services.titdb = {
     enable = true;
