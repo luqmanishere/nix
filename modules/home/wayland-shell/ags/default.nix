@@ -47,10 +47,16 @@ with lib; let
 in {
   imports = [inputs.ags.homeManagerModules.default];
 
-  options.modules.wayland-shell.ags = {enable = lib.mkEnableOption "Enable AGS based shell";};
+  options.modules.wayland-shell.ags = {
+    enable = lib.mkOption {
+      description = "Enable AGS based shell";
+      type = types.bool;
+      default = false;
+    };
+  };
 
-  config = {
-    programs.ags = mkIf cfg.enable {
+  config = mkIf (cfg.enable) {
+    programs.ags = {
       enable = true;
       # TODO: integrate ags-config
       # configDir = ./ags-config;
