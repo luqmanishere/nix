@@ -231,7 +231,7 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        left 32
+        left 36
         // right 64
         // top 64
         // bottom 64
@@ -339,6 +339,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T { spawn "kitty"; }
+    Mod+Shift+t { spawn "kitten" "quick-access-terminal" "--detach"; }
     Mod+D { spawn "fuzzel"; }
     Super+Alt+L { spawn "hyprlock"; }
 

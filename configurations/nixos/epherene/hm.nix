@@ -47,7 +47,7 @@ in {
       zellij.enable = true;
       kitty = {
         enable = true;
-        fontSize = 12.0;
+        fontSize = 11.0;
         mapleFont = true;
       };
     };
@@ -79,6 +79,7 @@ in {
         enable = true;
         width = 1700;
       };
+      quickshell.enable = true;
       wayper.enable = true;
     };
   };

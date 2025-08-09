@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   width,
   height,
@@ -56,7 +57,7 @@ in [
 
     "modules-left" = [
       (mkIf (wm == "hyprland") hyprland_workspaces_module)
-      (mkIf (wm == "niri") niri_workspaces_module)
+      (mkIf (wm == "niri" && config.modules.wayland-shell.quickshell.enable == false) niri_workspaces_module)
     ];
     modules-center = ["clock"];
     modules-right = [

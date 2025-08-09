@@ -45,7 +45,7 @@ in {
       style = ./style.css;
       # settings = builtins.fromJSON (builtins.readFile ./config.json);
       settings = import ./config.nix {
-        inherit lib;
+        inherit lib config;
         width = cfg.width;
         height = cfg.height;
         wm = cfg.wm;
