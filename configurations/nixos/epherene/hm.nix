@@ -72,7 +72,8 @@ in {
         keyboardLed = {enable = true;};
       };
       hyprlock.enable = true;
-      dunst.enable = true;
+      # use quickshell's notification
+      dunst.enable = false;
 
       sherlock.enable = true;
       waybar = {

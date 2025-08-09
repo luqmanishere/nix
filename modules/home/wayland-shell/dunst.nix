@@ -72,6 +72,10 @@ in {
         assertion = config.modules.core.gui.enable;
         message = "a graphical environment is required.";
       }
+      {
+        assertion = !config.modules.wayland-shell.quickshell.enable;
+        message = "quickshell contains a notification daemon, which conflicts with dunst. enable either one only.";
+      }
     ];
   };
 }
