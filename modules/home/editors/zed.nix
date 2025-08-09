@@ -11,7 +11,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.zed-editor.enable = false;
+    programs.zed-editor.enable = true;
 
     assertions = [
       {
