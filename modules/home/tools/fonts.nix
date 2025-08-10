@@ -33,6 +33,7 @@ in {
       nerd-fonts.fira-code
       nerd-fonts.noto
       nerd-fonts.symbols-only
+      material-symbols
       # TODO: fix packages
       # self.packages.${pkgs.system}.iosevka-solemnattic
 
