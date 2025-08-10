@@ -17,7 +17,7 @@ in {
   config = mkIf cfg.enable {
     programs.sherlock = {
       enable = true;
-      settings = null;
+      # settings = null;
     };
   };
 }
