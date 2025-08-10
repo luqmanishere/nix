@@ -10,7 +10,7 @@ with lib; let
   inherit (inputs) sherlock;
   cfg = config.modules.wayland-shell.sherlock;
 in {
-  imports = [sherlock.homeManagerModules.default];
+  # imports = [sherlock.homeManagerModules.default];
 
   options.modules.wayland-shell.sherlock.enable = mkEnableOption "Enable sherlock";
 
