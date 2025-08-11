@@ -27,9 +27,11 @@ in {
 
   # config = mkIf cfg.enable {
   config = mkIf cfg.enable {
-    home.packages = [
+    home.packages = with pkgs; [
       cfg.package
       pkgs.kdePackages.qtdeclarative
+
+      material-symbols
     ];
     qt.enable = true;
 
