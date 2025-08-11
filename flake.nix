@@ -122,10 +122,11 @@
       inputs.nixpkgs.follows = "nixpkgs"; # MESA/OpenGL HW workaround
     };
     hypridle = {
-      url = "github:hyprwm/hypridle/71e875e49e583c7b8b1364b55dfe494375c4e3ea";
+      url = "github:hyprwm/hypridle";
     };
     hyprlock = {
-      url = "github:hyprwm/hyprlock/ee8ee1f9f7cfd2c45de321ce6315c9cccb12c054";
+      url = "github:hyprwm/hyprlock";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     wayper.url = "github:luqmanishere/wayper";
     hyprrdrop.url = "github:luqmanishere/hyprrdrop";
