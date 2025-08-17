@@ -30,6 +30,8 @@
     "zswap.compressor=zstd"
     "zswap.zpool=zsmalloc"
     "zswap.max_pool_percent=50"
+    # disable ipv6
+    "ipv6.disable=1"
   ];
 
   fileSystems."/" = {

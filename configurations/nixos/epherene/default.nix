@@ -60,6 +60,7 @@ in {
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
   };
+  networking.enableIPv6 = false;
 
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
