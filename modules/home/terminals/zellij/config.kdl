@@ -32,6 +32,7 @@ keybinds clear-defaults=true {
         // Splitting panes
         bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "\\" { NewPane "stacked"; SwitchToMode "Normal"; }
 
         // moving between tabs
         bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
