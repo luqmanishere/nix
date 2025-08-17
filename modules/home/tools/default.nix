@@ -2,6 +2,7 @@
   imports = [
     ./a2ln.nix
     ./fonts.nix
+    ./misc.nix
     ./mpd.nix
     ./obsidian.nix
     ./oci.nix
