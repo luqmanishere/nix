@@ -36,9 +36,9 @@ in {
 
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
-    # enable gpu support
-    useExperimentalGPUDriver = true;
-    experimentalGPUInstallMode = "replace";
+    # TODO: remove once considered working enable gpu support
+    # useExperimentalGPUDriver = true;
+    # experimentalGPUInstallMode = "replace";
     setupAsahiSound = true;
   };
   hardware.bluetooth = {
