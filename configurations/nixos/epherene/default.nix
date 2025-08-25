@@ -53,13 +53,7 @@ in {
   nixpkgs.overlays = [nixos-apple-silicon.overlays.apple-silicon-overlay inputs.niri-flake.overlays.niri];
 
   networking.hostName = "epherene"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.wireless.iwd = {
-    enable = true;
-    settings.General.EnableNetworkConfiguration = true;
-  };
+  # disable ipv6 because its annoying
   networking.enableIPv6 = false;
 
   # Set your time zone.
