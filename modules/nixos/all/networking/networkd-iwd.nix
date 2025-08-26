@@ -18,6 +18,7 @@ _: {
           RequiredForOnline = "no";
           Multicast = "yes";
         };
+        dhcpV4Config = {UseDNS = false;};
       };
     };
 
