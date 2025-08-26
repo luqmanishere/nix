@@ -160,7 +160,6 @@
       url = "github:Skxxtz/sherlock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     # Niri window manager
     niri-flake.url = "github:sodiboo/niri-flake";
