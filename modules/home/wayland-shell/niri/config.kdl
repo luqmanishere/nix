@@ -313,13 +313,13 @@ window-rule {
     clip-to-geometry true
 
     draw-border-with-background false
-    opacity 0.7
+    opacity 0.9
 }
 
 window-rule {
     match is-active=true
 
-    opacity 0.9
+    opacity 0.95
 }
 
 binds {
