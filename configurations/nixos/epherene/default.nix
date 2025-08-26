@@ -50,7 +50,20 @@ in {
     };
   };
   # TODO: centralize overlays
-  nixpkgs.overlays = [nixos-apple-silicon.overlays.apple-silicon-overlay inputs.niri-flake.overlays.niri];
+  nixpkgs.overlays = [
+    nixos-apple-silicon.overlays.apple-silicon-overlay
+    inputs.niri-flake.overlays.niri
+
+    (self: super: {
+      virglrenderer = super.virglrenderer.overrideAttrs (oldAttrs: {
+        src = super.fetchurl {
+          url = "https://gitlab.freedesktop.org/asahi/virglrenderer/-/archive/asahi-20250424/virglrenderer-asahi-20250424.tar.bz2";
+          hash = "sha256-9qFOsSv8o6h9nJXtMKksEaFlDP1of/LXsg3LCRL79JM=";
+        };
+        mesonFlags = oldAttrs.mesonFlags ++ [(super.lib.mesonOption "drm-renderers" "asahi-experimental")];
+      });
+    })
+  ];
 
   networking.hostName = "epherene"; # Define your hostname.
   # disable ipv6 because its annoying
