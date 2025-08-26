@@ -24,6 +24,7 @@ in {
     services.wayper = {
       enable = true;
       enableFuzzelIntegration = true;
+      enableFishCompletions = true;
       config = {
         default-profile = "default";
         monitorConfigs = [
