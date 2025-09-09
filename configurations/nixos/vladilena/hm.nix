@@ -8,6 +8,7 @@ in {
 
     modules.terminals.zellij.enable = true;
     modules.editors.nixCats.setDefault = true;
+    modules.editors.helix.enable = true;
     modules.tools.fonts.enable = false;
   };
 }
