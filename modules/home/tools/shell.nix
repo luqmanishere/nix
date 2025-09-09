@@ -265,6 +265,22 @@ with lib; {
       lazygit.enable = true;
 
       ripgrep.enable = true;
+
+      ssh = {
+        enable = true;
+        enableDefaultConfig = false;
+        matchBlocks = {
+          "git.solemnattic.dev" = {
+            host = "git.solemnattic.dev";
+            port = 2222;
+            identityFile = "${config.home.homeDirectory}/.ssh/gitmain";
+          };
+          "github.com" = {
+            hostname = "github.com";
+            identityFile = "${config.home.homeDirectory}/.ssh/gitmain";
+          };
+        };
+      };
     };
   };
 }
