@@ -24,7 +24,7 @@ in {
           add_newline = true;
           continuation_prompt = "▶▶ ";
           format = concatStrings [
-            "[╭─](white)$username$hostname$directory$nix_shell$package$java$python$git_branch$git_state$git_status$battery$cmd_duration$time$line_break"
+            "[╭─](white)$username$hostname$directory$nix_shell$package$java$python$git_branch$git_state$git_status$\{custom.jj\}$battery$cmd_duration$time$line_break"
             "[╰─](white) $shell$character "
           ];
           line_break = {
@@ -55,6 +55,11 @@ in {
           };
           git_status = {
             disabled = false;
+          };
+
+          custom.jj = {
+            detect_folders = [".jj"];
+            format = "jujutsu";
           };
         };
       }

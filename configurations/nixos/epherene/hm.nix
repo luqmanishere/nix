@@ -27,6 +27,7 @@ in {
     modules.browsers.zen.enable = true;
 
     modules.editors = {
+      cursor.enable = true;
       helix.enable = true;
       neovide.enable = true;
       vscode.enable = true;
@@ -53,6 +54,7 @@ in {
     };
 
     modules.tools = {
+      claudecode.enable = true;
       fonts.enable = true;
       mpd = {
         enable = true;

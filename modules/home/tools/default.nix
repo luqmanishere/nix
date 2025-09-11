@@ -1,6 +1,7 @@
 {
   imports = [
     ./a2ln.nix
+    ./claudecode.nix
     ./fonts.nix
     ./misc.nix
     ./mpd.nix
