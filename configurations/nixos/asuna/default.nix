@@ -240,7 +240,6 @@ in {
 
   virtualisation = {
     waydroid.enable = true;
-    lxd.enable = true;
     podman = {
       enable = true;
       defaultNetwork.settings.dns_enabled = true;
