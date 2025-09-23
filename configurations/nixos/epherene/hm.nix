@@ -79,7 +79,7 @@ in {
 
       sherlock.enable = true;
       waybar = {
-        enable = true;
+        enable = false;
         width = 1700;
       };
       quickshell.enable = true;
