@@ -70,6 +70,7 @@ in {
   networking.hostName = "epherene"; # Define your hostname.
   # disable ipv6 because its annoying
   networking.enableIPv6 = false;
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
