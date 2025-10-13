@@ -19,6 +19,7 @@ with lib; {
     home.packages = with pkgs; [
       age
       coreutils
+      dust
     ];
     programs = {
       starship = {
@@ -68,6 +69,14 @@ with lib; {
             ujafu = "journalctl --user -afu";
           })
         ];
+        functions = {
+          reset_keychain = ''
+            set -e SSH_AGENT_PID
+            set -e SSH_AUTH_SOCK
+            rm -rf ~/.keychain/*
+            exec fish
+          '';
+        };
         shellInit = ''
           set -U fish_greeting "Welcome SolemnAttic. System initialized."
         '';
