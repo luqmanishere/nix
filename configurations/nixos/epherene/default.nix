@@ -133,8 +133,8 @@ in {
     alacritty
     xwayland-satellite
     blueberry
-    muvm
-    fex
+    # muvm
+    # fex
     bash
     config.boot.kernelPackages.perf
   ];
