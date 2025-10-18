@@ -58,8 +58,9 @@ in {
           };
 
           custom.jj = {
+            command = "jj log -r @ --no-pager --no-graph --color never --template 'self.change_id().shortest()'";
             detect_folders = [".jj"];
-            format = "jujutsu";
+            format = "jj on [$output]($style) ";
           };
         };
       }
