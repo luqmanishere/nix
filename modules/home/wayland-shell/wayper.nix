@@ -27,12 +27,18 @@ in {
       enableFishCompletions = true;
       config = {
         default-profile = "default";
+        transitions = {enable = true;};
         monitorConfigs = [
           {
             name = "eDP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/notseiso/horizontal";
             run_command = "matugen image {image}";
+            transitions = {
+              enable = true;
+              duration = 2000;
+              fps = 60;
+            };
           }
           {
             name = "HDMI-A-1";
