@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable {
     age = {
-      identityPaths = ["/home/luqman/.ssh/agenix" "/home/luqman/.ssh/general"];
+      identityPaths = ["${config.home.homeDirectory}/.ssh/agenix" "${config.home.homeDirectory}/.ssh/general"];
       secretsDir = "${config.home.homeDirectory}/.agenix/agenix";
       secretsMountPoint = "${config.home.homeDirectory}/.agenix/agenix.d";
 
