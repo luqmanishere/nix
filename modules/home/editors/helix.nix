@@ -12,7 +12,13 @@ in {
   config = mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      extraPackages = with pkgs; [kdePackages.qtdeclarative];
+      extraPackages = with pkgs;
+        []
+        ++ (
+          if pkgs.system != "aarch64-darwin"
+          then [kdePackages.qtdeclarative]
+          else []
+        );
       settings = {
         theme = "catppuccin_mocha";
         editor = {
