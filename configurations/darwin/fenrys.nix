@@ -41,6 +41,11 @@ in {
     modules.terminals.zellij.enable = true;
     modules.terminals.kitty.enable = true;
     modules.tools.fonts.enable = true;
+    modules.tools.taskwarrior.enable = true;
+    modules.secrets = {
+      enable = true;
+      taskd.enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [pandoc];
