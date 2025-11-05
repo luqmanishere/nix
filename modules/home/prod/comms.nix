@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      tdesktop
+      telegram-desktop
       zapzap
       (
         if system == "aarch64-linux"

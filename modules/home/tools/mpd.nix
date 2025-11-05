@@ -24,7 +24,7 @@ in {
   config = mkIf (cfg.enable
     && pkgs.stdenv.isLinux) {
     home.packages = with pkgs; [
-      mpc-cli
+      mpc
       playerctl
     ];
     services.mpd = {
