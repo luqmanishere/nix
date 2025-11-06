@@ -50,9 +50,9 @@ in {
             "luqman"
           ];
 
-          # substituters = ["https://hyprland.cachix.org"];
-          # trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-          # trusted-substituters = ["https://hyprland.cachix.org"];
+          substituters = ["https://nixos-apple-silicon.cachix.org"];
+          trusted-public-keys = ["nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="];
+          trusted-substituters = ["https://nixos-apple-silicon.cachix.org"];
         };
         optimise.automatic = true;
       };

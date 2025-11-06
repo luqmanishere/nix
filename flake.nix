@@ -55,11 +55,13 @@
       "https://nix-community.cachix.org"
       "https://nix-conf.cachix.org"
       "https://ezkea.cachix.org"
+      "https://nixos-apple-silicon.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-conf.cachix.org-1:ckJrXG+dLoz1zMLNce35EDFGlWcigKdrDlqdmv9kPbE="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
     ];
   };
 
