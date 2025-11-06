@@ -87,10 +87,6 @@ in {
     daemon.settings = {
       # dns = ["1.1.1.1"];
     };
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
   };
 
   # reject some areas of the trackpad smartly
@@ -137,6 +133,7 @@ in {
     # fex
     bash
     config.boot.kernelPackages.perf
+    distrobox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
