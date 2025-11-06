@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [code-cursor nodejs];
+    home.packages = with pkgs; [code-cursor nodejs nixd alejandra];
 
     assertions = [
       {
