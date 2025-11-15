@@ -28,6 +28,7 @@ in {
 
     modules.editors = {
       cursor.enable = true;
+      emacs.enable = true;
       helix.enable = true;
       neovide.enable = true;
       vscode.enable = true;

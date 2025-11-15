@@ -19,6 +19,7 @@ in {
         then vesktop # there is no aarch64_linux discord
         else discord
       )
+      teams-for-linux
     ];
 
     assertions = [

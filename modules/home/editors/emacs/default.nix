@@ -16,18 +16,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      rust-analyzer
-      fd
-      ripgrep
-      silver-searcher
-      coreutils
-      clang
-      git
-    ];
+    # home.packages = with pkgs; [
+    #   rust-analyzer
+    #   fd
+    #   ripgrep
+    #   silver-searcher
+    #   coreutils
+    #   clang
+    #   git
+    # ];
     programs.emacs = {
       enable = true;
-      package = pkgs.emacs29;
+      package = pkgs.emacs;
       extraPackages = epkgs: [epkgs.treesit-grammars.with-all-grammars];
     };
 

@@ -71,6 +71,7 @@ in {
   # disable ipv6 because its annoying
   networking.enableIPv6 = false;
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
+  networking.wireguard.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Kuala_Lumpur";
@@ -134,6 +135,7 @@ in {
     bash
     config.boot.kernelPackages.perf
     distrobox
+    wireguard-tools
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
