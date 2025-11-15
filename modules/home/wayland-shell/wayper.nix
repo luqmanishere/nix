@@ -27,17 +27,23 @@ in {
       enableFishCompletions = true;
       config = {
         default-profile = "default";
-        transitions = {enable = true;};
+        transitions_enabled = false;
         monitorConfigs = [
           {
             name = "eDP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/notseiso/horizontal";
             run_command = "matugen image {image}";
-            transitions = {
-              enable = true;
-              duration = 2000;
+
+            transitions_enabled = true;
+            transition = {
+              type = "sweep";
+              duration_ms = 2000;
               fps = 60;
+
+              sweep = {
+                direction = "left-to-right";
+              };
             };
           }
           {
