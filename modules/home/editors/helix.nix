@@ -13,7 +13,11 @@ in {
     programs.helix = {
       enable = true;
       extraPackages = with pkgs;
-        []
+        [
+          svelte-language-server
+          typescript-language-server
+          tailwindcss-language-server
+        ]
         ++ (
           if pkgs.system != "aarch64-darwin"
           then [kdePackages.qtdeclarative]
