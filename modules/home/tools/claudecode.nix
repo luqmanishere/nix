@@ -11,6 +11,6 @@ in {
     enable = mkEnableOption "Enable the Claude Code agent";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [claude-code];
+    home.packages = with pkgs; [claude-code opencode];
   };
 }
