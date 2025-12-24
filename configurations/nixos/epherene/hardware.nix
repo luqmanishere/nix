@@ -13,6 +13,7 @@
   ];
 
   boot.initrd.availableKernelModules = ["usb_storage"];
+  boot.supportedFilesystems = ["bcachefs"];
   boot.kernelParams = lib.mkForce [
     "quiet"
     "earlycon"
@@ -35,40 +36,19 @@
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
-    fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd" "noatime"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
-    fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd" "noatime"];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
-    fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
-  };
-
-  fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/2824402a-e7b4-4f93-88ae-7f691ad049e4";
-    fsType = "btrfs";
-    options = ["subvol=swap" "noatime"];
+    device = "UUID=22b0afa2-23b7-4e79-8ad7-f4a122f161ee";
+    fsType = "bcachefs";
+    options = ["noatime"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/9693-1719";
+    device = "/dev/disk/by-uuid/226D-1EF3";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
   swapDevices = [
-    {
-      device = "/swap/swapfile";
-      size = 12 * 1024;
-    }
+    {device = "/dev/disk/by-uuid/a56e536e-9cfe-489a-8208-c79ee73c08e3";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

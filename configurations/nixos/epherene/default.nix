@@ -84,7 +84,6 @@ in {
   # virtualisation.docker.enable = true;
   virtualisation.docker = {
     enable = true;
-    storageDriver = "btrfs";
     daemon.settings = {
       # dns = ["1.1.1.1"];
     };
@@ -136,6 +135,8 @@ in {
     config.boot.kernelPackages.perf
     distrobox
     wireguard-tools
+    libnotify
+    jq
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
