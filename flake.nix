@@ -69,6 +69,7 @@
   inputs = {
     # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -193,5 +194,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     titdb.url = "github:luqmanishere/trackpad-is-too-damn-big-flake";
+    vscode-server.url = "github:Hyffer/nixos-vscode-server/fix-vsce-sign";
   };
 }
