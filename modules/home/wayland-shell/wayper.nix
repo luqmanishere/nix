@@ -67,6 +67,13 @@ in {
             path = "/home/luqman/wallpapers/seiso/horizontal";
             run_command = "matugen image {image}";
           }
+          {
+            name = "DP-1";
+            profile = "safe";
+            duration = 60;
+            path = "/home/luqman/wallpapers/seiso/horizontal";
+            run_command = "matugen image {image}";
+          }
         ];
       };
     };

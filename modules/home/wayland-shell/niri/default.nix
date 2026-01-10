@@ -30,6 +30,9 @@ in {
       # enable = true;
       config = readFile ./config.kdl;
     };
+
+    services.shikane.enable = true;
+
     assertions = [
       {
         assertion = pkgs.system == "aarch64-linux" || pkgs.system == "x86_64-linux";

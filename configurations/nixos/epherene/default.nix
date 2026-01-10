@@ -23,6 +23,7 @@ in {
     nixos-apple-silicon.nixosModules.default
     ./hm.nix
     inputs.titdb.nixosModules.default
+    inputs.vscode-server.nixosModules.default
   ];
 
   modules.nix.latest = true;
@@ -80,6 +81,7 @@ in {
 
   services.logind.powerKey = "suspend";
   services.tailscale.enable = true;
+  services.vscode-server.enable = true;
 
   # virtualisation.docker.enable = true;
   virtualisation.docker = {

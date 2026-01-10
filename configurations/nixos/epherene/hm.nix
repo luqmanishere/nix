@@ -19,7 +19,10 @@ in {
       moonlight-qt
       prismlauncher
       chromium
+      dbeaver-bin
+      # inputs.nixpkgs-master.legacyPackages.${pkgs.stdenv.hostPlatform.system}.antares
     ];
+    home.sessionVariables.MPD_HOST = "localhost";
 
     modules.core.gui.enable = true;
 
@@ -69,7 +72,7 @@ in {
     modules.wayland-shell = {
       niri.enable = true;
 
-      anyrun.enable = true;
+      anyrun.enable = false;
       hypridle = {
         enable = true;
         keyboardLed = {enable = true;};
