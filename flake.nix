@@ -156,7 +156,7 @@
     # };
     # FIXME: wait for this pr #284 to merge
     nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
+      url = "github:tpwrules/nixos-apple-silicon/44713d6b3a3071e9320b16c698687b6b65791746";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sherlock = {
