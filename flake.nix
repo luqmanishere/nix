@@ -3,20 +3,13 @@
 
   outputs = inputs @ {
     self,
-    # flake-parts,
-    # flake-root,
-    # home-manager,
-    # nixpkgs,
-    # treefmt-nix,
-    # devenv,
-    # nixos-unified,
+    flake-parts,
+    import-tree,
     ...
   }: let
-    # Use our custom lib enhanced with nixpkgs and home-manager
   in
     inputs.flake-parts.lib.mkFlake {
       inherit inputs;
-      # specialArgs = {inherit lib;};
     } {
       systems = [
         "aarch64-linux"
@@ -25,10 +18,10 @@
         "x86_64-linux"
       ];
 
-      # debug = true;
-      imports = with builtins;
-        map (fn: ./modules/flake-parts/${fn})
-        (attrNames (readDir ./modules/flake-parts));
+      imports = [
+        flake-parts.flakeModules.modules
+        (import-tree [./modules])
+      ];
 
       perSystem = {
         lib,
@@ -36,17 +29,11 @@
         pkgs,
         ...
       }: {
-        # make pkgs available to all `perSystem` functions
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = lib.attrValues self.overlays;
           config.allowUnfree = true;
         };
-
-        # make custom lib available to all `perSystem` functions
-        # _module.args.lib = lib;
-        #
-        packages = import ./pkgs {inherit pkgs;};
       };
     };
 
@@ -97,6 +84,7 @@
     };
     flake-root.url = "github:srid/flake-root";
     nixos-unified.url = "github:srid/nixos-unified";
+    import-tree.url = "github:vic/import-tree";
 
     # utilities
     nixos-generators = {
