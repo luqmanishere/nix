@@ -5,7 +5,7 @@
         enable = true;
         font = {
           name = "Maple Mono NF";
-          size = 16.0;
+          size = 11.0;
         };
         themeFile = "Catppuccin-Mocha";
         extraConfig = mkMerge [

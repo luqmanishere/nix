@@ -56,6 +56,7 @@ in {
               wayper
               task
               ai
+              dev-tools
             ];
           };
         }
