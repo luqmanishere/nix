@@ -19,6 +19,7 @@
         curl
         bash
         jq
+        btop
       ];
 
       programs.nh = {enable = true;};

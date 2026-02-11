@@ -57,6 +57,8 @@ in {
               task
               ai
               dev-tools
+              vscode
+              emacs
             ];
           };
         }
