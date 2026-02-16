@@ -59,6 +59,7 @@ in {
               dev-tools
               vscode
               emacs
+              zed
             ];
           };
         }
