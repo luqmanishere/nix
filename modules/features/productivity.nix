@@ -3,7 +3,7 @@
     home.packages = with pkgs; [
       obsidian
       zathura
-      # anytype
+      anytype
       # disabled due to pnpm deps thing
       # self.packages.${pkgs.system}.siyuan-unlock
     ];

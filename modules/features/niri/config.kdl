@@ -585,7 +585,7 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
     Alt+Space { spawn "anyrun"; }
-    Mod+Space { spawn "sherlock"; }
+    Mod+Space { spawn "vicinae" "open"; }
     Mod+Ctrl+W { spawn "wayperctl" "change-profile" "safe"; }
 }
 

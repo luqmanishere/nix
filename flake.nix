@@ -137,18 +137,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: revisit this fork as needed - ensure its updated
-    # nixos-apple-silicon = {
-    #   url = "github:oliverbestmann/nixos-apple-silicon";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # FIXME: wait for this pr #284 to merge
     nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon/44713d6b3a3071e9320b16c698687b6b65791746";
+      url = "github:luqmanishere/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sherlock = {
       url = "github:Skxxtz/sherlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

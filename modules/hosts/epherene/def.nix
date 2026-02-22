@@ -48,7 +48,7 @@ in {
               zellij
               fonts
               niri
-              sherlock
+              # sherlock
               hypridle
               hyprlock
               quickshell
@@ -60,6 +60,7 @@ in {
               vscode
               emacs
               zed
+              vicinae
             ];
           };
         }
