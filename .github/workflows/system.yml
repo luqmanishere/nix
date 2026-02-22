@@ -9,6 +9,7 @@ jobs:
   build-linux-systems:
     runs-on: ubuntu-latest
     environment: systemconfig
+    if: false
     strategy:
       matrix:
         system: [asuna, sinon]
@@ -42,7 +43,8 @@ jobs:
     environment: systemconfig
     strategy:
       matrix:
-        system: [vladilena, epherene]
+        system: [epherene]
+        # system: [vladilena, epherene]
     steps:
       - name: Maximize build space
         uses: AdityaGarg8/remove-unwanted-software@v5
@@ -71,6 +73,7 @@ jobs:
   build-macos-systems:
     runs-on: macos-14
     environment: systemconfig
+    if: false
     strategy:
       matrix:
         system: [fenrys]

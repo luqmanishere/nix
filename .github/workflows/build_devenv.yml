@@ -8,6 +8,7 @@ on:
 
 jobs:
   build-devenv:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Maximize build space
