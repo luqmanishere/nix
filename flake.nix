@@ -136,6 +136,7 @@
       # Mismatched system dependencies will lead to crashes and other issues.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     nixos-apple-silicon = {
       url = "github:luqmanishere/nixos-apple-silicon";
