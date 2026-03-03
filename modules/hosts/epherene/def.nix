@@ -61,6 +61,7 @@ in {
               emacs
               zed
               vicinae
+              sync
             ];
           };
         }
