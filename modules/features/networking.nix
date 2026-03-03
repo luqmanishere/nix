@@ -4,6 +4,7 @@
     systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
     networking.wireguard.enable = true;
     services.tailscale.enable = true;
+    services.tailscale.useRoutingFeatures = "client";
 
     networking.firewall.enable = lib.mkDefault false;
 
