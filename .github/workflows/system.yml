@@ -9,10 +9,9 @@ jobs:
   build-linux-systems:
     runs-on: ubuntu-latest
     environment: systemconfig
-    if: false
     strategy:
       matrix:
-        system: [asuna, sinon]
+        system: [sinon]
     steps:
       - name: Maximize build space
         uses: AdityaGarg8/remove-unwanted-software@v3
@@ -41,6 +40,7 @@ jobs:
   build-aarch64-linux-systems:
     runs-on: ubuntu-24.04-arm
     environment: systemconfig
+    if: false
     strategy:
       matrix:
         system: [epherene]
