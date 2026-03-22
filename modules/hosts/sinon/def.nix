@@ -44,12 +44,13 @@ in {
     programs.command-not-found.enable = true;
     services.logrotate.enable = false;
     services.udisks2.enable = false;
+    services.vscode-server.enable = true;
 
     # TODO: decide what module this belongs in
-    systemd.tmpfiles.rules = [
-      "L+ /lib/${baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}"
-      "L+ /lib64 - - - - /lib"
-    ];
+    # systemd.tmpfiles.rules = [
+    #   "L+ /lib/${baseNameOf pkgs.stdenv.cc.bintools.dynamicLinker} - - - - ${pkgs.stdenv.cc.bintools.dynamicLinker}"
+    #   "L+ /lib64 - - - - /lib"
+    # ];
 
     wsl = {
       enable = true;
@@ -65,6 +66,13 @@ in {
       wslConf = {
         network.hostname = "sinon";
         automount.root = "/mnt";
+      };
+    };
+
+    virtualisation.docker = {
+      enable = true;
+      daemon.settings = {
+        # dns = ["1.1.1.1"];
       };
     };
   };

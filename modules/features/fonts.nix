@@ -18,6 +18,7 @@
       # self.packages.${pkgs.system}.iosevka-solemnattic
 
       maple-mono.NF
+      maple-mono.Normal-NF
 
       fontconfig
     ];
