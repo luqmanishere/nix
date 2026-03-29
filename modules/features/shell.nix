@@ -19,6 +19,8 @@
         dust
       ];
       programs = {
+        aria2.enable = true;
+
         starship = {
           enable = true;
           enableFishIntegration = true;
@@ -31,6 +33,8 @@
             "--preview 'bat --color=always {}'"
           ];
         };
+
+        fd.enable = true;
 
         fish = {
           enable = true;
