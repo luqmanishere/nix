@@ -69,6 +69,11 @@ in {
       };
     };
 
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
     virtualisation.docker = {
       enable = true;
       daemon.settings = {
