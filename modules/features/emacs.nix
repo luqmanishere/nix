@@ -3,7 +3,7 @@
     programs.emacs = {
       enable = true;
       # package = pkgs.emacs-pgtk;
-      package = pkgs.emacs;
+      package = pkgs.emacs-pgtk;
       extraPackages = epkgs: [epkgs.treesit-grammars.with-all-grammars];
     };
   };
