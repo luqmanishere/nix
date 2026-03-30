@@ -1,5 +1,31 @@
 # NixOS configuration
+Refactored to dendritic configurations.
 
+I see the appeal, but it is a lot of brainpower trying to divide features.
+
+## To Install
+
+```bash
+git clone https://github.com/luqmanishere/nix
+cd nix
+
+# enable flakes temporarily
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
+# tweak to satisfaction
+
+# switch for NixOS
+sudo nixos-rebuild switch --flake .#hostname
+
+# or, to install
+nixos-install --root /mnt --flake .#hostname
+```
+
+## (Maintained) Machine names:
+
+- sinon - Honor MagicBook Art 14 (NixOS-WSL)
+
+# Old, Irrelevant details
 ## WIP Fresh Install
 
 1. Install minimal profile
@@ -12,24 +38,4 @@
 sudo sbctl create-keys
 ```
 
-## To Install
 
-```bash
-git clone https://github.com/luqmanishere/nix
-cd nix
-
-# enable flakes temporarily
-export NIX_CONFIG="experimental-features = nix-command flakes"
-
-# tweak to satisfaction
-# for home-manager only
-nix run nixpkgs#home-manager switch --flake .#user@hostname
-
-# for NixOS
-sudo nixos-rebuild switch --flake .#hostname
-```
-
-## Machine names:
-
-- asuna - Honor MagicBook Pro
-- kurumi - VirtualBox VM
