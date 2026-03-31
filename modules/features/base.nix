@@ -20,6 +20,7 @@
         bash
         jq
         btop
+        _1password-cli
       ];
 
       programs.nh = {enable = true;};
@@ -48,6 +49,8 @@
         userDirs.enable = true;
         configHome = "${config.home.homeDirectory}/.config";
       };
+
+      programs.password-store.enable = true;
 
       home.stateVersion = lib.mkDefault "22.11";
     };

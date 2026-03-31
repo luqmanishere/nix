@@ -116,6 +116,8 @@
           nix-direnv.enable = true;
         };
 
+        gpg = {enable = true;};
+
         git = {
           enable = true;
           userName = "Luqmanul Hakim";
@@ -301,6 +303,12 @@
             };
           };
         };
+      };
+      services.gpg-agent = {
+        enable = true;
+        enableSshSupport = true;
+        enableFishIntegration = true;
+        pinentryPackage = pkgs.pinentry-qt;
       };
     };
 }

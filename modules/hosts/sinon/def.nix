@@ -33,6 +33,7 @@ in {
               ai
               emacs
               sync
+              email
             ];
           };
         }

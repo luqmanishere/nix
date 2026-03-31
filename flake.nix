@@ -137,6 +137,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     llm-agents.url = "github:numtide/llm-agents.nix";
+    eca.url = "github:editor-code-assistant/eca";
 
     nixos-apple-silicon = {
       url = "github:luqmanishere/nixos-apple-silicon";
