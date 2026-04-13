@@ -15,18 +15,75 @@ in {
       inherit (flake) inputs;
       inherit (inputs) self;
     in {
-      imports = [
-        # ./hm.nix
-        # self.nixosModules.common
-        # self.nixosModules.default-linux
-        # self.nixosModules.linux-server
-        # ./hardware.nix
+      imports = with config-flake.flake.modules.nixos; [
+        base
+        polkit
+        users
+        containers
+        nix
       ];
+
+      home-manager.users.luqman = {
+        imports = with config-flake.flake.modules.homeManager; [
+          base
+          secrets
+          shell
+          helix
+          fonts
+          zellij
+          ai
+          task
+          emacs
+        ];
+      };
 
       networking.hostName = "vladilena";
       networking.networkmanager.enable = true;
       # firewall is handled by the cloud platform
       networking.firewall.enable = false;
+      networking.nat = {
+        enable = true;
+        externalInterface = "enp0s6";
+        internalInterfaces = ["wg0"];
+      };
+      networking.wireguard.enable = true;
+      networking.wireguard.interfaces = {
+        wg0 = {
+          ips = ["10.45.10.1/24"];
+          listenPort = 53;
+          mtu = 1280;
+
+          postSetup = ''
+            ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -j ACCEPT
+            ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.45.10.0/24 -o enp0s6 -j MASQUERADE
+          '';
+
+          # Undo the above
+          postShutdown = ''
+            ${pkgs.iptables}/bin/iptables -D FORWARD -i wg0 -j ACCEPT
+            ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.45.10.0/24 -o enp0s6 -j MASQUERADE
+          '';
+
+          privateKey = "oBEH1sE5qpOQgUIFuWvHrVfASiIsHyv7rV6I0yfk6WA=";
+          peers = [
+            {
+              publicKey = "RZoF54SJaUInC5kG2NGLYieMvlshXb2yM82l4ObsEkc=";
+              allowedIPs = [
+                "10.45.10.2/32"
+              ];
+            }
+            {
+              publicKey = "nT2z7PLICcfw4k5rTmax95DprD5TdgHM1kJpsKZTtwA=";
+
+              allowedIPs = [
+                "10.45.10.3/32"
+                "192.10.23.0/24"
+                "190.1.108.0/24"
+              ];
+            }
+          ];
+        };
+      };
 
       users.users."luqman".linger = true;
 
@@ -42,6 +99,7 @@ in {
         fish
         gcc
         clang
+        wireguard-tools
       ];
 
       boot = {
@@ -86,33 +144,40 @@ in {
         };
       };
 
+      virtualisation.docker = {enable = true;};
+
       # Disable autologin.
       services.getty.autologinUser = null;
 
       boot.kernel.sysctl = {"net.ipv4.ip_unprivileged_port_start" = 80;};
 
-      # Open ports in the firewall.
+      boot.initrd.availableKernelModules = ["xhci_pci" "virtio_scsi"];
+      boot.initrd.kernelModules = [];
+      boot.kernelModules = [];
+      boot.extraModulePackages = [];
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/2aa6a786-04c8-4506-a3b7-a1457e202bec";
+        fsType = "ext4";
+      };
+
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/9E63-CAF8";
+        fsType = "vfat";
+        options = ["fmask=0022" "dmask=0022"];
+      };
+
+      fileSystems."/mnt/data" = {
+        device = "/dev/disk/by-uuid/7a9cae89-f723-466d-9185-61e1b948fbf8";
+        fsType = "xfs";
+        options = ["defaults" "users" "_netdev" "rw" "exec"];
+      };
+
+      swapDevices = [];
 
       # Disable documentation for minimal install.
       documentation.enable = false;
 
-      # This option defines the first version of NixOS you have installed on this particular machine,
-      # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-      #
-      # Most users should NEVER change this value after the initial install, for any reason,
-      # even if you've upgraded your system to a new NixOS release.
-      #
-      # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-      # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-      # to actually do that.
-      #
-      # This value being lower than the current NixOS release does NOT mean your system is
-      # out of date, out of support, or vulnerable.
-      #
-      # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-      # and migrated your data accordingly.
-      #
-      # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
       system.stateVersion = "24.11"; # Did you read the comment?
     };
 }

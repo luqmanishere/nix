@@ -7,7 +7,7 @@ in {
       codex
       codex-acp
       # editor code assistant
-      inputs.eca.packages.${pkgs.stdenv.hostPlatform.system}.eca
+      # inputs.eca.packages.${pkgs.stdenv.hostPlatform.system}.eca
       # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
     ];
     programs.claude-code.enable = true;
