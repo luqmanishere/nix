@@ -4,7 +4,13 @@
     programs.emacs = {
       enable = true;
       package = pkgs.emacs-pgtk;
-      extraPackages = epkgs: with epkgs; [treesit-grammars.with-all-grammars eca];
+      extraPackages = epkgs:
+        with epkgs; [
+          treesit-grammars.with-all-grammars
+          eca
+          vterm
+          # TODO: package libghostel
+        ];
     };
     services.emacs = {
       enable = true;
