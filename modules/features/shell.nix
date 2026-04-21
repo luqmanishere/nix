@@ -306,7 +306,7 @@
       };
       services.gpg-agent = {
         enable = true;
-        enableSshSupport = true;
+        enableSshSupport = false;
         enableFishIntegration = true;
         pinentryPackage = pkgs.pinentry-qt;
       };
