@@ -34,6 +34,7 @@ in {
               emacs
               sync
               email
+              music
             ];
           };
         }
