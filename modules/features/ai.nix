@@ -5,7 +5,7 @@ in {
     home.packages = with pkgs; [
       opencode
       codex
-      codex-acp
+      # codex-acp
       # editor code assistant
       # inputs.eca.packages.${pkgs.stdenv.hostPlatform.system}.eca
       # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
