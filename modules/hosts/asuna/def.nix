@@ -62,6 +62,7 @@ in {
               zed
               vicinae
               sync
+              zen
             ];
           };
         }
