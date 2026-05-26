@@ -29,6 +29,7 @@ in {
         onepassword
         niri
         tuigreet
+        steam
         # TODO: refactor these into its own modules
         inputs.vscode-server.nixosModules.default
         # inputs.titdb.nixosModules.default
@@ -115,19 +116,6 @@ in {
       libnotify
       jq
     ];
-
-    programs.steam = {
-      enable = true;
-      package = pkgs.steam.override {
-        extraArgs = "-system-composer";
-      };
-    };
-    programs = {
-      gamescope = {
-        enable = true;
-        capSysNice = true;
-      };
-    };
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
