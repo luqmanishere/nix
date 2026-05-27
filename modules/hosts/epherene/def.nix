@@ -127,7 +127,7 @@ in {
       curl
       alacritty
       xwayland-satellite
-      blueberry
+      blueman
       # muvm
       # fex
       bash

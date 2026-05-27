@@ -46,7 +46,10 @@
 
       xdg = {
         enable = true;
-        userDirs.enable = true;
+        userDirs = {
+          enable = true;
+          setSessionVariables = true;
+        };
         configHome = "${config.home.homeDirectory}/.config";
       };
 
