@@ -65,6 +65,7 @@ in {
               vicinae
               sync
               zen
+              music
             ];
           };
         }
@@ -116,10 +117,16 @@ in {
       wireguard-tools
       libnotify
       jq
+      pwvucontrol
+      linuxPackages.cpupower
+      usbutils
     ];
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
+
+    virtualisation.waydroid.enable = true;
+    virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
     services.openssh.enable = true;
 
