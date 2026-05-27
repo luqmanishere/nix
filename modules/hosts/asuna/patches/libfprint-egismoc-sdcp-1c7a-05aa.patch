@@ -1,0 +1,138 @@
+diff --git a/data/autosuspend.hwdb b/data/autosuspend.hwdb
+index 5879b403..28256fff 100644
+--- a/data/autosuspend.hwdb
++++ b/data/autosuspend.hwdb
+@@ -83,6 +83,8 @@ usb:v1C7Ap0583*
+ usb:v1C7Ap0584*
+ usb:v1C7Ap0586*
+ usb:v1C7Ap0587*
+ usb:v1C7Ap05A1*
++usb:v1C7Ap05A5*
++usb:v1C7Ap05AA*
+  ID_AUTOSUSPEND=1
+  ID_PERSIST=0
+diff --git a/libfprint/drivers/egismoc/egismoc.c b/libfprint/drivers/egismoc/egismoc.c
+index ab0a19a9..a5bf867d 100644
+--- a/libfprint/drivers/egismoc/egismoc.c
++++ b/libfprint/drivers/egismoc/egismoc.c
+@@ -58,6 +58,7 @@ static const FpIdEntry egismoc_id_table[] = {
+   { .vid = 0x1c7a, .pid = 0x0587, .driver_data = EGISMOC_DRIVER_CHECK_PREFIX_TYPE1 | EGISMOC_DRIVER_MAX_ENROLL_STAGES_20 },
+   { .vid = 0x1c7a, .pid = 0x05a1, .driver_data = EGISMOC_DRIVER_CHECK_PREFIX_TYPE2 },
+   { .vid = 0x1c7a, .pid = 0x05a5, .driver_data = EGISMOC_DRIVER_CHECK_PREFIX_TYPE2 | EGISMOC_DRIVER_MAX_ENROLL_STAGES_15 },
++  { .vid = 0x1c7a, .pid = 0x05aa, .driver_data = EGISMOC_DRIVER_CHECK_PREFIX_TYPE2 | EGISMOC_DRIVER_MAX_ENROLL_STAGES_15 | EGISMOC_DRIVER_NEEDS_INIT_SDCP | EGISMOC_DRIVER_SKIP_CONTROL_INIT },
+   { .vid = 0,      .pid = 0,      .driver_data = 0 }
+ };
+ 
+diff --git a/libfprint/drivers/egismoc/egismoc.h b/libfprint/drivers/egismoc/egismoc.h
+index f9cba5d4..d8c8323a 100644
+--- a/libfprint/drivers/egismoc/egismoc.h
++++ b/libfprint/drivers/egismoc/egismoc.h
+@@ -38,6 +38,8 @@ G_DECLARE_FINAL_TYPE (FpiDeviceEgisMoc, fpi_device_egismoc, FPI, DEVICE_EGISMOC
+ #define EGISMOC_DRIVER_CHECK_PREFIX_TYPE2 (1 << 1)
+ #define EGISMOC_DRIVER_MAX_ENROLL_STAGES_20 (1 << 2)
+ #define EGISMOC_DRIVER_MAX_ENROLL_STAGES_15 (1 << 3)
++#define EGISMOC_DRIVER_NEEDS_INIT_SDCP (1 << 4)
++#define EGISMOC_DRIVER_SKIP_CONTROL_INIT (1 << 5)
+ 
+ #define EGISMOC_EP_CMD_OUT (0x02 | FPI_USB_ENDPOINT_OUT)
+ #define EGISMOC_EP_CMD_IN (0x81 | FPI_USB_ENDPOINT_IN)
+@@ -88,6 +88,9 @@ static gsize rsp_sensor_has_finger_suffix_len = sizeof (rsp_sensor_has_finger_su
+ static guchar cmd_list[] = {0x00, 0x00, 0x00, 0x07, 0x50, 0x19, 0x04, 0x00, 0x00, 0x01, 0x40};
+ static gsize cmd_list_len = sizeof (cmd_list) / sizeof (cmd_list[0]);
+ 
++static guchar cmd_sdcp_init[] = {0x00, 0x00, 0x00, 0x07, 0x50, 0x19, 0x04, 0x00, 0x00, 0x01, 0x40};
++static gsize cmd_sdcp_init_len = sizeof (cmd_sdcp_init) / sizeof (cmd_sdcp_init[0]);
++
+ static guchar cmd_sensor_reset[] = {0x00, 0x00, 0x00, 0x04, 0x50, 0x1a, 0x00, 0x00};
+ static gsize cmd_sensor_reset_len = sizeof (cmd_sensor_reset) / sizeof (cmd_sensor_reset[0]);
+ 
+@@ -223,6 +226,7 @@ typedef enum {
+ } WaitFingerStates;
+ 
+ typedef enum {
++  IDENTIFY_SDCP_INIT,
+   IDENTIFY_SDCP_CONNECT,
+   IDENTIFY_GET_ENROLLED_IDS,
+   IDENTIFY_CHECK_ENROLLED_NUM,
+@@ -238,6 +242,7 @@ typedef enum {
+ } IdentifyStates;
+ 
+ typedef enum {
++  ENROLL_SDCP_INIT,
+   ENROLL_SDCP_CONNECT,
+   ENROLL_GET_ENROLLED_IDS,
+   ENROLL_CHECK_ENROLLED_NUM,
+diff --git a/libfprint/drivers/egismoc/egismoc.c b/libfprint/drivers/egismoc/egismoc.c
+index a5bf867d..f6ac8c35 100644
+--- a/libfprint/drivers/egismoc/egismoc.c
++++ b/libfprint/drivers/egismoc/egismoc.c
+@@ -491,6 +491,24 @@ egismoc_get_enrolled_prints (FpDevice *device)
+  * verify identities as per SDCP.
+  */
+ static void
++egismoc_sdcp_init_cb (FpDevice *device,
++                      guchar   *buffer_in,
++                      gsize     length_in,
++                      GError   *error)
++{
++  fp_dbg ("SDCP Init callback");
++  FpiDeviceEgisMoc *self = FPI_DEVICE_EGISMOC (device);
++
++  if (error)
++    {
++      fpi_ssm_mark_failed (self->task_ssm, error);
++      return;
++    }
++
++  fpi_ssm_next_state (self->task_ssm);
++}
++
++static void
+ egismoc_sdcp_connect_cb (FpDevice *device,
+                          guchar   *buffer_in,
+                          gsize     length_in,
+@@ -1308,6 +1308,14 @@ egismoc_enroll_run_state (FpiSsm   *ssm,
+ 
+   switch (fpi_ssm_get_cur_state (ssm))
+     {
++    case ENROLL_SDCP_INIT:
++      if (fpi_device_get_driver_data (device) & EGISMOC_DRIVER_NEEDS_INIT_SDCP)
++        egismoc_exec_cmd (device, cmd_sdcp_init, cmd_sdcp_init_len,
++                          NULL, egismoc_sdcp_init_cb);
++      else
++        fpi_ssm_next_state (ssm);
++      break;
++
+     case ENROLL_SDCP_CONNECT:
+       if (fpi_sdcp_device_is_connected (sdcp_dev))
+         {
+@@ -1588,6 +1596,14 @@ egismoc_identify_run_state (FpiSsm   *ssm,
+ 
+   switch (fpi_ssm_get_cur_state (ssm))
+     {
++    case IDENTIFY_SDCP_INIT:
++      if (fpi_device_get_driver_data (device) & EGISMOC_DRIVER_NEEDS_INIT_SDCP)
++        egismoc_exec_cmd (device, cmd_sdcp_init, cmd_sdcp_init_len,
++                          NULL, egismoc_sdcp_init_cb);
++      else
++        fpi_ssm_next_state (ssm);
++      break;
++
+     case IDENTIFY_SDCP_CONNECT:
+       if (fpi_sdcp_device_is_connected (sdcp_dev))
+         {
+@@ -1754,6 +1769,14 @@ egismoc_dev_init_handler (FpiSsm   *ssm,
+ {
+   g_autoptr(FpiUsbTransfer) transfer = fpi_usb_transfer_new (device);
+ 
++  /* Skip USB control init for devices that don't support it (e.g. 0x05aa) */
++  if ((fpi_device_get_driver_data (device) & EGISMOC_DRIVER_SKIP_CONTROL_INIT) &&
++      fpi_ssm_get_cur_state (ssm) < DEV_GET_FW_VERSION)
++    {
++      fpi_ssm_next_state (ssm);
++      return;
++    }
++
+   switch (fpi_ssm_get_cur_state (ssm))
+     {
+     case DEV_INIT_CONTROL1:

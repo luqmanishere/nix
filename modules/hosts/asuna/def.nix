@@ -18,6 +18,7 @@ in {
         base
         asuna-boot
         asuna-bt
+        asuna-fingerprint
         containers
         networking
         laptop
