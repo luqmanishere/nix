@@ -10,12 +10,14 @@
       config = {
         default-profile = "default";
         transitions_enabled = false;
-        monitorConfigs = [
+        monitorConfigs = let
+          matugen_command = "matugen --source-color-index 0 image {image}";
+        in [
           {
             name = "eDP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/notseiso/horizontal";
-            run_command = "matugen image {image}";
+            run_command = matugen_command;
 
             transitions_enabled = true;
             transition = {
@@ -32,13 +34,13 @@
             name = "HDMI-A-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = "matugen image {image}";
+            run_command = matugen_command;
           }
           {
             name = "DP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = "matugen image {image}";
+            run_command = matugen_command;
           }
 
           # safe
@@ -47,14 +49,14 @@
             profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = "matugen image {image}";
+            run_command = matugen_command;
           }
           {
             name = "DP-1";
             profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = "matugen image {image}";
+            run_command = matugen_command;
           }
         ];
       };
