@@ -71,10 +71,6 @@
 
     nvim-nixcats.url = "github:luqmanishere/nvim-nixcats";
     nil.url = "github:oxalica/nil";
-    alejandra = {
-      url = "github:kamadorueda/alejandra/3.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     xremap-flake.url = "github:xremap/nix-flake";
 
     # flake-parts

@@ -1,4 +1,5 @@
 # NixOS configuration
+
 Refactored to dendritic configurations.
 
 I see the appeal, but it is a lot of brainpower trying to divide features.
@@ -26,6 +27,7 @@ nixos-install --root /mnt --flake .#hostname
 - sinon - Honor MagicBook Art 14 (NixOS-WSL)
 
 # Old, Irrelevant details
+
 ## WIP Fresh Install
 
 1. Install minimal profile
@@ -37,5 +39,3 @@ nixos-install --root /mnt --flake .#hostname
 ```bash
 sudo sbctl create-keys
 ```
-
-
