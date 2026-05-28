@@ -1520,16 +1520,17 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1779384774,
-        "narHash": "sha256-2ZOJofQwalZjjC7/VPJ3OjOpbY5XYtlL5aTgsGj+uBk=",
-        "owner": "hyprwm",
+        "lastModified": 1779178634,
+        "narHash": "sha256-S5HxjqhKPd2d17jz965IDSmvNxuBk5ZIlzyfd+jT1w8=",
+        "owner": "JeremieRodon",
         "repo": "hyprlock",
-        "rev": "ae901a3eb2b2a507bbf213adfacac363433034da",
+        "rev": "617bcf71395c0a44e8938ded27249e599febdd24",
         "type": "github"
       },
       "original": {
-        "owner": "hyprwm",
+        "owner": "JeremieRodon",
         "repo": "hyprlock",
+        "rev": "617bcf71395c0a44e8938ded27249e599febdd24",
         "type": "github"
       }
     },

@@ -111,8 +111,13 @@
     hypridle = {
       url = "github:hyprwm/hypridle";
     };
+    # hyprlock = {
+    #   url = "github:hyprwm/hyprlock";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    #
     hyprlock = {
-      url = "github:hyprwm/hyprlock";
+      url = "github:JeremieRodon/hyprlock/617bcf71395c0a44e8938ded27249e599febdd24";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wayper.url = "github:luqmanishere/wayper";

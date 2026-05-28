@@ -7,7 +7,11 @@ in {
       package = hyprlock.packages.${pkgs.system}.hyprlock;
       settings = {
         general = {
-          disable_loading_bar = false;
+          # disable_loading_bar = false;
+        };
+        auth = {
+          "fingerprint:enabled" = true;
+          "fingerprint:inactive_timeout" = 8;
         };
         background = [
           {
@@ -57,6 +61,23 @@ in {
             font_family = "Maple Mono NF";
             halign = "center";
             valign = "center";
+          }
+          {
+            position = "0, -40%";
+            halign = "center";
+            valign = "center";
+            font_size = 25;
+            font_family = "Maple Mono NF";
+            text = "$FPRINTPROMPT";
+          }
+          {
+            position = "0, -42%";
+            halign = "center";
+            valign = "center";
+            font_size = 25;
+            font_family = "Maple Mono NF";
+            color = "rgb(255,0,0)";
+            text = "$FPRINTFAIL";
           }
         ];
       };
