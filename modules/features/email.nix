@@ -6,7 +6,10 @@
       enable = true;
       hooks = {
         preNew = "${pkgs.isync}/bin/mbsync --all";
-        postNew = "${pkgs.afew}/bin/afew -tn";
+        postNew = ''
+          ${pkgs.afew}/bin/afew -tn
+          notmuch search tag:unread | wc -l | xargs -I{} notify-send -a "Email Sync Service" "Email Refreshed" "You have {} new messages."
+        '';
       };
       new.tags = ["new"];
     };
