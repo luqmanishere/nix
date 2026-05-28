@@ -66,6 +66,7 @@ in {
               sync
               zen
               music
+              email
             ];
           };
         }
