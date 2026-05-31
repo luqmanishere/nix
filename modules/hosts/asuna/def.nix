@@ -31,6 +31,7 @@ in {
         niri
         tuigreet
         steam
+        aagl
         # TODO: refactor these into its own modules
         inputs.vscode-server.nixosModules.default
         # inputs.titdb.nixosModules.default
