@@ -16,6 +16,7 @@
   };
 
   flake.modules.homeManager.niri = {...}: {
+    # NOTE: home manager module is auto imported by the nixos module
     # modules.core.gui = {
     #   enable = mkForce true;
     #   wmType = "wayland";
