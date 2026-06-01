@@ -61,6 +61,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; # DO NOT OVERRIDE NIXPKGS FOR ME
 
     # nix darwin when we need it only
     nix-darwin.url = "github:LnL7/nix-darwin";

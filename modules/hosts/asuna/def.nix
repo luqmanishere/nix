@@ -32,6 +32,8 @@ in {
         tuigreet
         steam
         aagl
+
+        inputs.chaotic.nixosModules.default
         # TODO: refactor these into its own modules
         inputs.vscode-server.nixosModules.default
         # inputs.titdb.nixosModules.default
@@ -120,8 +122,9 @@ in {
       libnotify
       jq
       pwvucontrol
-      linuxPackages.cpupower
+      config.boot.kernelPackages.cpupower
       usbutils
+      tpm2-tss
     ];
 
     hardware.graphics.enable = true;
@@ -136,6 +139,7 @@ in {
 
     boot.initrd.systemd.enable = true;
 
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
     boot.initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod"];
     boot.initrd.kernelModules = [];
     boot.kernelModules = ["kvm-intel"];
