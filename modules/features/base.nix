@@ -1,5 +1,5 @@
 # defaults for all
-{...}: {
+{inputs, ...}: {
   flake.modules = {
     nixos.base = {
       lib,
@@ -21,6 +21,7 @@
         jq
         btop
         _1password-cli
+        inputs.agenix.packages.${pkgs.system}.default
       ];
 
       programs.nh = {enable = true;};

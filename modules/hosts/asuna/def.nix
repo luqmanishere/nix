@@ -20,6 +20,7 @@ in {
         asuna-bt
         asuna-fingerprint
         containers
+        secrets
         networking
         laptop
         bootanim
@@ -129,13 +130,54 @@ in {
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
+    hardware.graphics.extraPackages = with pkgs; [vpl-gpu-rt];
 
     virtualisation.waydroid.enable = true;
     virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
     services.openssh.enable = true;
+    services.sunshine = {
+      enable = true;
+      autoStart = false; # optional: starts Sunshine automatically on login
+      capSysAdmin = true;
+      openFirewall = true;
+    };
 
     services.logind.powerKey = "suspend";
+
+    age.secrets.wg-asuna = {
+      file = ./wg-asuna.age;
+      mode = "640";
+      owner = "systemd-network";
+      group = "systemd-network";
+    };
+    systemd.network = {
+      networks."50-wg0" = {
+        matchConfig = {Name = "wg0";};
+
+        address = ["10.45.10.4/32"];
+      };
+
+      netdevs."50-wg0" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          Name = "wg0";
+          MTUBytes = 1280;
+        };
+
+        wireguardConfig = {
+          RouteTable = "main";
+          PrivateKeyFile = config.age.secrets.wg-asuna.path;
+        };
+        wireguardPeers = [
+          {
+            PublicKey = "2x1QVzbgjvnSlTmb4/9o9MnExnn+CTF4JVKO7NcYrlY=";
+            AllowedIPs = ["10.45.10.0/24" "190.1.108.30"];
+            Endpoint = "solemnattic.dev:53";
+          }
+        ];
+      };
+    };
 
     boot.initrd.systemd.enable = true;
 
@@ -183,7 +225,16 @@ in {
       options = ["fmask=0022" "dmask=0022"];
     };
 
-    swapDevices = [];
+    swapDevices = [
+      {
+        device = "/swaps/swapfile";
+        size = 8 * 1024; # Creates an 8GB swap file
+      }
+      {
+        device = "/swaps/swapfile2";
+        size = 8 * 1024; # Creates an 8GB swap file
+      }
+    ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.intel.npu.enable = true;
