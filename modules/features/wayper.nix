@@ -34,7 +34,8 @@
             name = "HDMI-A-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = matugen_command;
+            # TODO: per monitor wallpapers gen
+            # run_command = matugen_command;
           }
           {
             name = "DP-1";
