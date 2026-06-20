@@ -8,6 +8,7 @@
     ];
 
     programs.niri.enable = true;
+    programs.niri.package = pkgs.niri;
     programs.dconf.enable = true;
 
     nixpkgs.overlays = [
@@ -15,7 +16,7 @@
     ];
   };
 
-  flake.modules.homeManager.niri = {...}: {
+  flake.modules.homeManager.niri = {pkgs, ...}: {
     # NOTE: home manager module is auto imported by the nixos module
     # modules.core.gui = {
     #   enable = mkForce true;
@@ -28,6 +29,7 @@
     programs.niri = {
       # enable = true;
       config = builtins.readFile ./config.kdl;
+      package = pkgs.niri;
     };
 
     services.shikane.enable = true;
