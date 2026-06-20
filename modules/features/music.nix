@@ -56,27 +56,29 @@
 
     programs.rmpc = {enable = true;};
 
-    # # mpris2 support for mpd
-    # services.mpdris2 = {
-    #   enable = cfg.mpdris2.enable;
-    #   notifications = true;
-    #   mpd = {
-    #     host = "localhost";
-    #     port = 6600;
-    #   };
-    # };
+    # mpris2 support for mpd
+    services.mpdris2 = {
+      enable = true;
+      notifications = true;
+      mpd = {
+        host = "localhost";
+        port = 6600;
+      };
+    };
 
-    # # show current playing in discord
-    # services.mpd-discord-rpc.enable = cfg.mpd-discord-rpc.enable;
-    # services.mpd-discord-rpc.settings = {
-    #   id = 1084861522888642661;
-    #   format = {
-    #     large_image = "suisei";
-    #     small_image = "suisei3";
-    #     large_text = "Sui-chan wa, kyou mo kawaii!!";
-    #     small_text = "Hoshiyomi gang";
-    #   };
-    # };
+    services.mpd-discord-rpc = {
+      # # show current playing in discord
+      enable = true;
+      settings = {
+        id = 1084861522888642661;
+        format = {
+          large_image = "suisei";
+          small_image = "suisei3";
+          large_text = "Sui-chan wa, kyou mo kawaii!!";
+          small_text = "Hoshiyomi gang";
+        };
+      };
+    };
 
     services.playerctld.enable = true;
   };
