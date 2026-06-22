@@ -6,7 +6,10 @@
       };
 
       # put nixos overlays here
-      overlays = [inputs.emacs-overlay.overlays.package];
+      overlays = [
+        inputs.emacs-overlay.overlays.package
+        inputs.self.overlays.default
+      ];
     };
     nix = {
       package = pkgs.nixVersions.latest;

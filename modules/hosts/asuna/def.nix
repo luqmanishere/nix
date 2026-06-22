@@ -33,6 +33,7 @@ in {
         tuigreet
         steam
         aagl
+        iloader
 
         inputs.chaotic.nixosModules.default
         # TODO: refactor these into its own modules
