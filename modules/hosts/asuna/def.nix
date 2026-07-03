@@ -128,6 +128,7 @@ in {
       config.boot.kernelPackages.cpupower
       usbutils
       tpm2-tss
+      uxplay
     ];
 
     hardware.graphics.enable = true;
