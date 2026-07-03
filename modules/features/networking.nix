@@ -10,6 +10,16 @@
 
     # TODO: explore wireless flake option
 
+    services.resolved = {
+      enable = true;
+      dnsovertls = "true";
+      fallbackDns = [
+        "1.1.1.1#cloudflare-dns.com"
+        "1.0.0.1#cloudflare-dns.com"
+        "9.9.9.9#dns.quad9.net"
+      ];
+    };
+
     systemd.network = {
       enable = true;
       wait-online.anyInterface = true;
@@ -18,7 +28,10 @@
         matchConfig.Name = "wl*";
         networkConfig = {
           DHCP = "ipv4";
-          DNS = ["1.1.1.1" "8.8.8.8"];
+          DNS = [
+            "1.1.1.1#cloudflare-dns.com"
+            "1.0.0.1#cloudflare-dns.com"
+          ];
           MulticastDNS = "yes";
           IPv6AcceptRA = "no";
         };
