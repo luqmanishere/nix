@@ -72,6 +72,7 @@ in {
               zen
               music
               email
+              muds
             ];
           };
         }
