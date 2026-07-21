@@ -36,11 +36,11 @@
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "mudforge";
-    version = "1.2.1774";
+    version = "1.2.1865";
 
     src = fetchurl {
       url = "https://github.com/Coffee-Nerd/MudForge/releases/download/v${finalAttrs.version}/MudForge_${finalAttrs.version}_amd64.deb";
-      hash = "sha256-WV9s4N+FuOeOQhqdqZpPTOdnuP4kyKKjUoFOPgZLiUI=";
+      hash = "";
     };
 
     unpackCmd = "dpkg -x $curSrc source";

@@ -185,5 +185,7 @@
     };
     titdb.url = "github:luqmanishere/trackpad-is-too-damn-big-flake";
     vscode-server.url = "github:Hyffer/nixos-vscode-server/fix-vsce-sign";
+
+    blightmud.url = "github:Blightmud/Blightmud";
   };
 }
