@@ -13,6 +13,7 @@
             svelte-language-server
             typescript-language-server
             tailwindcss-language-server
+            lua-language-server
           ]
           ++ (
             if pkgs.system != "aarch64-darwin"
@@ -90,6 +91,10 @@
             {
               name = "toml";
               language-servers = ["tombi" "taplo"];
+              auto-format = true;
+            }
+            {
+              name = "lua";
               auto-format = true;
             }
           ];

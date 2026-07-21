@@ -1,5 +1,11 @@
 {...}: {
-  flake.modules.homeManager.zed = {
-    programs.zed-editor.enable = true;
+  flake.modules.homeManager.zed = {pkgs, ...}: {
+    programs.zed-editor = {
+      enable = true;
+      extraPackages = with pkgs; [
+        nixd
+        alejandra
+      ];
+    };
   };
 }

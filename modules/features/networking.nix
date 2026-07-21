@@ -41,6 +41,21 @@
         };
         dhcpV4Config = {UseDNS = false;};
       };
+
+      networks."30-tethering" = {
+        matchConfig.name = "enp0s20f0u1c4i2";
+
+        networkConfig = {
+          DHCP = "ipv4";
+          DNS = [
+            "1.1.1.1#cloudflare-dns.com"
+            "1.0.0.1#cloudflare-dns.com"
+          ];
+          MulticastDNS = "yes";
+          IPv6AcceptRA = "no";
+        };
+        dhcpV4Config = {UseDNS = false;};
+      };
     };
 
     # TODO: when nixos finally adds an iwd module use it

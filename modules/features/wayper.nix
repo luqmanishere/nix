@@ -21,11 +21,11 @@
 
             transitions_enabled = true;
             transition = {
-              type = "sweep";
-              duration_ms = 2000;
+              type = "slide";
+              duration_ms = 3000;
               fps = 60;
 
-              sweep = {
+              slide = {
                 direction = "left-to-right";
               };
             };
@@ -34,6 +34,17 @@
             name = "HDMI-A-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
+
+            transitions_enabled = true;
+            transition = {
+              type = "slide";
+              duration_ms = 3000;
+              fps = 60;
+
+              slide = {
+                direction = "left-to-right";
+              };
+            };
             # TODO: per monitor wallpapers gen
             # run_command = matugen_command;
           }

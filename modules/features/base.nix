@@ -22,6 +22,7 @@
         btop
         _1password-cli
         inputs.agenix.packages.${pkgs.system}.default
+        inetutils
       ];
 
       programs.nh = {enable = true;};
