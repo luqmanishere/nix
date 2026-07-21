@@ -103,6 +103,7 @@ in {
 
     # TODO: feature
     services.printing.enable = true;
+    services.flatpak.enable = true;
 
     # TODO: refactor as feature
     # List packages installed in system profile. To search, run:
@@ -179,6 +180,21 @@ in {
             Endpoint = "solemnattic.dev:53";
           }
         ];
+      };
+    };
+
+    # Enable auto-cpufreq
+    services.auto-cpufreq.enable = true;
+
+    # Optionally define settings for battery and plugged-in states
+    services.auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
       };
     };
 
