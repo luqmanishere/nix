@@ -187,5 +187,10 @@
     vscode-server.url = "github:Hyffer/nixos-vscode-server/fix-vsce-sign";
 
     blightmud.url = "github:Blightmud/Blightmud";
+
+    nfrune = {
+      url = "git+ssh://git@git.solemnattic.dev/luqman/nfrune.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

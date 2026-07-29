@@ -5,4 +5,8 @@ let
 in {
   "taskv3_sync.age".publicKeys = [general_pub agenix_pub];
   "wg-asuna.age".publicKeys = [general_pub agenix_pub asuna];
+  "nfrune-telegram.age".publicKeys = [
+    general_pub
+    agenix_pub
+  ];
 }

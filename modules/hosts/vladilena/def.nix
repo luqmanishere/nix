@@ -34,6 +34,7 @@ in {
           ai
           task
           emacs
+          nfrune
         ];
       };
 
@@ -73,6 +74,21 @@ in {
               ];
             }
             {
+              publicKey = "SrUQsx4ZOsLS+cDjtVMUxS7HcUE0o5oF8+AuGy6Yqgc=";
+              allowedIPs = ["10.45.10.4/32"];
+            }
+            {
+              # phone
+              publicKey = "HmqFilxeSEWUzT2vmkcGCS7RBFsWJOVfReIb1EzJ9Rk=";
+              allowedIPs = ["10.45.10.5/32"];
+            }
+            {
+              # client
+              publicKey = "VqNRz2Fzt24wWtWE25V3WQ8+Ooa9DI9jrVUMwZ9pnEQ=";
+              allowedIPs = ["10.45.10.6/32"];
+            }
+            {
+              # vendor
               publicKey = "nT2z7PLICcfw4k5rTmax95DprD5TdgHM1kJpsKZTtwA=";
 
               allowedIPs = [
