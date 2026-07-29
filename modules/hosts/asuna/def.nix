@@ -178,6 +178,7 @@ in {
             PublicKey = "2x1QVzbgjvnSlTmb4/9o9MnExnn+CTF4JVKO7NcYrlY=";
             AllowedIPs = ["10.45.10.0/24" "190.1.108.30"];
             Endpoint = "solemnattic.dev:53";
+            PersistentKeepalive = 25;
           }
         ];
       };
