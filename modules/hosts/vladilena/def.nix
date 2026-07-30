@@ -34,8 +34,9 @@ in {
           ai
           task
           emacs
-          nfrune
+          nfrune-server
         ];
+        home.packages = with pkgs; [rune-mud];
       };
 
       networking.hostName = "vladilena";
