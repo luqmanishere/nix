@@ -192,5 +192,7 @@
       url = "git+ssh://git@git.solemnattic.dev/luqman/nfrune.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixcord.url = "github:4evy/nixcord";
   };
 }
