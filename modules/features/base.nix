@@ -29,6 +29,7 @@
 
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "backup";
 
       system.stateVersion = lib.mkDefault "25.05";
     };
