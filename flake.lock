@@ -1967,11 +1967,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785946650,
+        "lastModified": 1786068749,
         "narHash": "sha256-KX8JTMu7OUo0MH98fyhOGZY/OABtocxLWv61FF2BX74=",
         "ref": "refs/heads/main",
-        "rev": "f74c8cadb012082230b6e9a4c3b52a90b4b4ef89",
-        "revCount": 58,
+        "rev": "fc3393d2e577f262fac57cd1e42e21446fcef74e",
+        "revCount": 61,
         "type": "git",
         "url": "ssh://git@git.solemnattic.dev/luqman/nfrune.git"
       },
