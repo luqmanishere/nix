@@ -73,6 +73,7 @@ in {
               music
               email
               muds
+              nfrune-client
               discord
             ];
           };
