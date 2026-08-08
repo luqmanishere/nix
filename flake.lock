@@ -1973,11 +1973,11 @@
         "rev": "fc3393d2e577f262fac57cd1e42e21446fcef74e",
         "revCount": 61,
         "type": "git",
-        "url": "ssh://git@git.solemnattic.dev/luqman/nfrune.git"
+        "url": "ssh://git@git.solemnattic.dev:2222/luqman/nfrune.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@git.solemnattic.dev/luqman/nfrune.git"
+        "url": "ssh://git@git.solemnattic.dev:2222/luqman/nfrune.git"
       }
     },
     "nh-darwin": {

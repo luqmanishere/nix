@@ -189,7 +189,7 @@
     blightmud.url = "github:Blightmud/Blightmud";
 
     nfrune = {
-      url = "git+ssh://git@git.solemnattic.dev/luqman/nfrune.git";
+      url = "git+ssh://git@git.solemnattic.dev:2222/luqman/nfrune.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
