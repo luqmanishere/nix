@@ -12,6 +12,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v11
+      - name: Configure SSH for private nfrune input
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan git.solemnattic.dev >> ~/.ssh/known_hosts 2>/dev/null
+          echo "${{ secrets.NFRUNE_DEPLOY_KEY }}" > ~/.ssh/nfrune_deploy_key
+          chmod 600 ~/.ssh/nfrune_deploy_key
+          printf 'Host git.solemnattic.dev\n  IdentityFile ~/.ssh/nfrune_deploy_key\n  IdentitiesOnly yes\n' >> ~/.ssh/config
       - name: Update flake.lock
         id: update
         uses: DeterminateSystems/update-flake-lock@v23
