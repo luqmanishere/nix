@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan git.solemnattic.dev >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -p 2222 git.solemnattic.dev >> ~/.ssh/known_hosts 2>/dev/null
           echo "${{ secrets.NFRUNE_DEPLOY_KEY }}" > ~/.ssh/nfrune_deploy_key
           chmod 600 ~/.ssh/nfrune_deploy_key
           eval "$(ssh-agent -s)"
