@@ -16,7 +16,7 @@
 
     services.nfrune-relay = {
       enable = true;
-      bind = "127.0.0.1:8787";
+      bind = "10.45.10.1:8787";
       credentialsFile = "%h/.config/nfrune/relay-credentials.json";
     };
 
