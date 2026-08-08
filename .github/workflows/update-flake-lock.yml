@@ -7,6 +7,8 @@ on:
 jobs:
   lockfile:
     runs-on: ubuntu-latest
+    env:
+      GIT_SSH_COMMAND: "ssh -i ~/.ssh/nfrune_deploy_key -o IdentitiesOnly=yes"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,7 +21,6 @@ jobs:
           ssh-keyscan git.solemnattic.dev >> ~/.ssh/known_hosts 2>/dev/null
           echo "${{ secrets.NFRUNE_DEPLOY_KEY }}" > ~/.ssh/nfrune_deploy_key
           chmod 600 ~/.ssh/nfrune_deploy_key
-          printf 'Host git.solemnattic.dev\n  IdentityFile ~/.ssh/nfrune_deploy_key\n  IdentitiesOnly yes\n' >> ~/.ssh/config
       - name: Update flake.lock
         id: update
         uses: DeterminateSystems/update-flake-lock@v23
