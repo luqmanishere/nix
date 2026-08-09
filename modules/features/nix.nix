@@ -11,21 +11,6 @@
           # example = prev.example.overrideAttrs (oldAttrs: rec {
           # ...
           # });
-          #
-          # FIXME Temporary until nixos-unstable includes nixpkgs c088236, which pins Niri
-          # to the newest libdisplay-info version supported by libdisplay-info-rs.
-          niri = prev.niri.override {
-            libdisplay-info = prev.libdisplay-info.overrideAttrs (_oldAttrs: rec {
-              version = "0.3.0";
-              src = final.fetchFromGitLab {
-                domain = "gitlab.freedesktop.org";
-                owner = "emersion";
-                repo = "libdisplay-info";
-                rev = version;
-                hash = "sha256-nXf2KGovNKvcchlHlzKBkAOeySMJXgxMpbi5z9gLrdc=";
-              };
-            });
-          };
         };
       in [
         inputs.emacs-overlay.overlays.package

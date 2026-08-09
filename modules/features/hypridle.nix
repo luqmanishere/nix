@@ -11,14 +11,14 @@ in {
         ${pkgs.systemd}/bin/systemctl suspend
       fi
     '';
-    screen_off_cmd = "${pkgs.niri-stable}/bin/niri msg action power-off-monitors";
-    screen_on_cmd = "${pkgs.niri-stable}/bin/niri msg action power-on-monitors";
+    screen_off_cmd = "${pkgs.niri}/bin/niri msg action power-off-monitors";
+    screen_on_cmd = "${pkgs.niri}/bin/niri msg action power-on-monitors";
     # screen_off_cmd = match {wmName = gui_config.wmName;} [
-    #   [{wmName = "niri";} "${pkgs.niri-stable}/bin/niri msg action power-off-monitors"]
+    #   [{wmName = "niri";} "${pkgs.niri}/bin/niri msg action power-off-monitors"]
     #   [{wmName = "hyprland";} "${pkgs.hyprland}/bin/hyprctl dispatch dpms off"]
     # ];
     # screen_on_cmd = match {wmName = gui_config.wmName;} [
-    #   [{wmName = "niri";} "${pkgs.niri-stable}/bin/niri msg action power-on-monitors"]
+    #   [{wmName = "niri";} "${pkgs.niri}/bin/niri msg action power-on-monitors"]
     #   [{wmName = "hyprland";} "${pkgs.hyprland}/bin/hyprctl dispatch dpms on"]
     # ];
   in {
