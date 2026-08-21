@@ -178,10 +178,62 @@ in {
           {
             PublicKey = "2x1QVzbgjvnSlTmb4/9o9MnExnn+CTF4JVKO7NcYrlY=";
             AllowedIPs = ["10.45.10.0/24" "190.1.108.30"];
-            Endpoint = "solemnattic.dev:53";
+            # vladilena VPS IP (solemnattic.dev A record, checked 2026-08-15).
+            # Hardcoded so networkd never has to resolve at netdev-create time.
+            Endpoint = "213.35.111.130:53";
             PersistentKeepalive = 25;
           }
         ];
+      };
+    };
+
+    # wg0 watchdog: if the tunnel goes silent while an uplink exists, bounce it.
+    # networkd resolves hostname endpoints only when the netdev is (re)created
+    # and silently drops them on resolution failure, so the tunnel can die with
+    # no recovery path. The hardcoded endpoint above removes the root cause;
+    # this catches anything else.
+    systemd.services.wg0-watchdog = {
+      description = "Restart wg0 if the tunnel is unresponsive";
+      path = [pkgs.iputils pkgs.iproute2 pkgs.systemd];
+      serviceConfig = {
+        Type = "oneshot";
+        RuntimeDirectory = "wg0-watchdog";
+      };
+      script = ''
+        # Not a tunnel problem if the netdev doesn't exist
+        ip link show wg0 >/dev/null 2>&1 || exit 0
+
+        # No default route means the uplink is down; nothing to fix yet
+        if ! ip route show default | grep -q .; then
+          exit 0
+        fi
+
+        if ping -I wg0 -c 1 -W 2 10.45.10.1 >/dev/null 2>&1; then
+          rm -f /run/wg0-watchdog/failures
+          exit 0
+        fi
+
+        n=0
+        [ -f /run/wg0-watchdog/failures ] && n=$(cat /run/wg0-watchdog/failures)
+        n=$((n + 1))
+        echo "$n" > /run/wg0-watchdog/failures
+
+        if [ "$n" -ge 3 ]; then
+          echo "wg0 unreachable for $n consecutive checks; bouncing interface"
+          networkctl down wg0
+          networkctl up wg0
+          rm -f /run/wg0-watchdog/failures
+        fi
+      '';
+    };
+
+    systemd.timers.wg0-watchdog = {
+      description = "Periodic wg0 tunnel health check";
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "2min";
+        OnUnitActiveSec = "1min";
+        AccuracySec = "10s";
       };
     };
 
