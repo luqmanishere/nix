@@ -4,4 +4,5 @@
   mudforge-appimage = pkgs.callPackage ./mudforge-appimage.nix {};
   mudlet-custom = pkgs.callPackage ./mudlet.nix {};
   rune-mud = pkgs.callPackage ./rune.nix {};
+  smudgy = pkgs.callPackage ./smudgy.nix {};
 }
