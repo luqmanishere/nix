@@ -18,13 +18,12 @@
 
   flake.modules.homeManager.niri = {pkgs, ...}: {
     # NOTE: home manager module is auto imported by the nixos module
-    # modules.core.gui = {
-    #   enable = mkForce true;
-    #   wmType = "wayland";
-    #   wmName = "niri";
-    # };
-
-    # modules.wayland-shell.utils.enable = mkForce true;
+    # Mark this host as graphical so GUI-only packages (e.g. smudgy) load here.
+    modules.core.gui = {
+      enable = true;
+      wmType = "wayland";
+      wmName = "niri";
+    };
 
     programs.niri = {
       # enable = true;

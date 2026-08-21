@@ -38,27 +38,43 @@
       lib,
       ...
     }: {
-      home.sessionVariables = {
-        # TODO: are these necessary?
-        # username = "luqman";
-        # homeDirectory = "/home/luqman";
-        COLORTERM = "truecolor";
-        XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
-        MEOW = "cat";
-      };
-
-      xdg = {
-        enable = true;
-        userDirs = {
-          enable = true;
-          setSessionVariables = true;
+      options.modules.core.gui = {
+        enable = lib.mkEnableOption "GUI modules (window manager + graphical session)";
+        wmType = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "Type of the window manager session (e.g. \"wayland\").";
         };
-        configHome = "${config.home.homeDirectory}/.config";
+        wmName = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+          description = "Window manager name for the current graphical session (e.g. \"niri\").";
+        };
       };
 
-      programs.password-store.enable = true;
+      config = {
+        home.sessionVariables = {
+          # TODO: are these necessary?
+          # username = "luqman";
+          # homeDirectory = "/home/luqman";
+          COLORTERM = "truecolor";
+          XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+          MEOW = "cat";
+        };
 
-      home.stateVersion = lib.mkDefault "22.11";
+        xdg = {
+          enable = true;
+          userDirs = {
+            enable = true;
+            setSessionVariables = true;
+          };
+          configHome = "${config.home.homeDirectory}/.config";
+        };
+
+        programs.password-store.enable = true;
+
+        home.stateVersion = lib.mkDefault "22.11";
+      };
     };
   };
 }
