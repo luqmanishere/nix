@@ -138,6 +138,12 @@
       # Mismatched system dependencies will lead to crashes and other issues.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    caelestia-niri = {
+      url = "github:luqmanishere/caelestia-niri";
+      # Build against our quickshell + nixpkgs, not caelestia's own pinned copies
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
     llm-agents.url = "github:numtide/llm-agents.nix";
     eca.url = "github:editor-code-assistant/eca";
 

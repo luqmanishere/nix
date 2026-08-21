@@ -281,6 +281,55 @@
         "type": "github"
       }
     },
+    "caelestia-cli": {
+      "inputs": {
+        "caelestia-shell": [
+          "caelestia-niri"
+        ],
+        "nixpkgs": [
+          "caelestia-niri",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786071436,
+        "narHash": "sha256-/CQJ781dRGWWUMrJ34vIj1PQnNEEWgnEEuod0r5LKGk=",
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "rev": "751fbc555a83faba5dd589270d14eeb22afab174",
+        "type": "github"
+      },
+      "original": {
+        "owner": "caelestia-dots",
+        "repo": "cli",
+        "type": "github"
+      }
+    },
+    "caelestia-niri": {
+      "inputs": {
+        "caelestia-cli": "caelestia-cli",
+        "m3shapes": "m3shapes",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "quickshell": [
+          "quickshell"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786606225,
+        "narHash": "sha256-RWV8eEXc8enk/oDq2Z0vflAGMErqspOkud8wlBcC+8s=",
+        "owner": "luqmanishere",
+        "repo": "caelestia-niri",
+        "rev": "0337b2926ddf5cf7b5a1d8bb01108d05fe22e47b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "luqmanishere",
+        "repo": "caelestia-niri",
+        "type": "github"
+      }
+    },
     "chaotic": {
       "inputs": {
         "flake-schemas": "flake-schemas",
@@ -1846,6 +1895,23 @@
         "type": "github"
       }
     },
+    "m3shapes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781017666,
+        "narHash": "sha256-kfHyzZaPHgqZML48OA+5JwBOsLdQJ2ci/aGPShvUB4Y=",
+        "owner": "soramanew",
+        "repo": "m3shapes",
+        "rev": "bdc327b29f95394a732baf3c9b19658ba23755b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "soramanew",
+        "repo": "m3shapes",
+        "rev": "bdc327b29f95394a732baf3c9b19658ba23755b6",
+        "type": "github"
+      }
+    },
     "mk-naked-shell": {
       "flake": false,
       "locked": {
@@ -3277,6 +3343,7 @@
         "anyrun": "anyrun",
         "auto-cpufreq": "auto-cpufreq",
         "blightmud": "blightmud",
+        "caelestia-niri": "caelestia-niri",
         "chaotic": "chaotic",
         "devenv": "devenv",
         "disko": "disko",

@@ -56,7 +56,6 @@ in {
               zellij
               fonts
               niri
-              hypridle
               hyprlock
               quickshell
               wayland-utils

@@ -159,7 +159,7 @@ binds {
     Mod+T { spawn "kitty"; }
     Mod+Shift+t { spawn "kitten" "quick-access-terminal" "--detach"; }
     Mod+D { spawn "fuzzel"; }
-    Super+Alt+L { spawn "hyprlock"; }
+    Super+Alt+L { spawn "loginctl" "lock-session"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -168,8 +168,8 @@ binds {
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "s" "5%-"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "s" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "caelestia" "shell" "brightness" "set" "5%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "caelestia" "shell" "brightness" "set" "+5%"; }
     // keyboard backlight control
     XF86LaunchA allow-when-locked=true { spawn "brightnessctl" "-d" "kbd_backlight" "s" "5%-"; }
     XF86Search allow-when-locked=true { spawn "brightnessctl" "-d" "kbd_backlight" "s" "+5%"; }

@@ -2,7 +2,7 @@
   flake.modules.homeManager.wayper = {pkgs, ...}: {
     imports = [inputs.wayper.homeManagerModules.default];
 
-    home.packages = with pkgs; [matugen];
+    # home.packages = with pkgs; [matugen];
     services.wayper = {
       enable = true;
       enableFuzzelIntegration = true;
@@ -11,13 +11,16 @@
         default-profile = "default";
         transitions_enabled = false;
         monitorConfigs = let
-          matugen_command = "matugen --source-color-index 0 image {image}";
+          # caelestia generates the colour scheme from the wallpaper; -N (no-smart)
+          # keeps the current light/dark mode instead of auto-flipping it.
+          caelestia_command = "caelestia wallpaper -N -f {image}";
+          # matugen_command = "matugen --source-color-index 0 image {image}";
         in [
           {
             name = "eDP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/notseiso/horizontal";
-            run_command = matugen_command;
+            run_command = caelestia_command;
 
             transitions_enabled = true;
             transition = {
@@ -46,13 +49,13 @@
               };
             };
             # TODO: per monitor wallpapers gen
-            # run_command = matugen_command;
+            run_command = caelestia_command;
           }
           {
             name = "DP-1";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = matugen_command;
+            run_command = caelestia_command;
           }
 
           # safe
@@ -61,14 +64,14 @@
             profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = matugen_command;
+            run_command = caelestia_command;
           }
           {
             name = "DP-1";
             profile = "safe";
             duration = 60;
             path = "/home/luqman/wallpapers/seiso/horizontal";
-            run_command = matugen_command;
+            run_command = caelestia_command;
           }
         ];
       };
