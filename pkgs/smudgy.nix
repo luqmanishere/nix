@@ -10,10 +10,11 @@
   libxkbcommon,
   libGL,
   vulkan-loader,
+  alsa-lib,
   makeWrapper,
 }:
 let
-  version = "0.5.5-rc";
+  version = "0.5.5-rc2";
 
   # The `v8` crate (via deno_core/deno_runtime) normally downloads a prebuilt
   # librusty_v8 archive from GitHub at build time, which fails in the sandbox.
@@ -39,6 +40,14 @@ let
       url = "https://static.crates.io/crates/iced_graphics/iced_graphics-0.14.0.crate";
       hash = "sha256-I0yhws7EFVBV9o+l+tG1JCxJasgjjYCiWbyjgvtEoQI=";
     };
+    "iced_runtime-0.14.0" = fetchurl {
+      url = "https://static.crates.io/crates/iced_runtime/iced_runtime-0.14.0.crate";
+      hash = "sha256-0YibgZzkwGZ0GDJC4zbI1JRlZlRBOWkU3AfMhvRPqNQ=";
+    };
+    "iced_winit-0.14.0" = fetchurl {
+      url = "https://static.crates.io/crates/iced_winit/iced_winit-0.14.0.crate";
+      hash = "sha256-i32+3EdWLR3juXB9k59ni4jDggBLerWhj3p91yMWLXU=";
+    };
     "cosmic-text-0.15.0" = fetchurl {
       url = "https://static.crates.io/crates/cosmic-text/cosmic-text-0.15.0.crate";
       hash = "sha256-FzhSKDqaV6PL42XYbnTcQooJxQQhR31a1v6dlQnjdzc=";
@@ -51,6 +60,14 @@ let
       url = "https://static.crates.io/crates/deno_permissions/deno_permissions-0.116.0.crate";
       hash = "sha256-df2WD2ljndv4DOC84wlGcpW7U6P7lEPrBum5I1JeCDY=";
     };
+    "deno_runtime-0.265.0" = fetchurl {
+      url = "https://static.crates.io/crates/deno_runtime/deno_runtime-0.265.0.crate";
+      hash = "sha256-/g4DECd3a8hoOqywMNThGOysvz0GPfJKfuGUduCfzE8=";
+    };
+    "deno_core-0.410.0" = fetchurl {
+      url = "https://static.crates.io/crates/deno_core/deno_core-0.410.0.crate";
+      hash = "sha256-BNGkOicWxoGKhF8kSa5lnaVHaHwMSyfDTSQkad1ZErs=";
+    };
   };
 in
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -61,13 +78,20 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "smudgy-mud";
     repo = "smudgy";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-V3f4Df+YiY6Uybgc74hL6r4RTpR9+X3YclWBxTBXAYE=";
+    hash = "sha256-eEqifj7ZsOgtaHmTezw3mozeyNzbcV+vRE+Aglb23wE=";
   };
 
   # All deps come from the lockfile (no cargo vendor pass, so the
   # [patch.crates-io] path overrides below don't need to exist yet).
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = "${finalAttrs.src}/Cargo.lock";
+    # v0.5.5-rc2 pulls two workspaces over git (the Web Audio stack):
+    # deno_audio and web-audio-api (smudgy-mud/web-audio-api-rs). Their
+    # NAR hashes come from nix-prefetch-git at the exact lockfile revs.
+    outputHashes = {
+      "deno_audio-0.1.0-alpha.1" = "sha256-W28UZ7NfjgV7ZSDr+N5ZfaIwHH/R2Ssrbl6KppzYiVE=";
+      "web-audio-api-1.7.0" = "sha256-M+EKhB6nL26/4ec3OMQhFPHChEJFwXB02dNzVLC5olU=";
+    };
   };
 
   nativeBuildInputs = [
@@ -81,6 +105,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     openssl # reqwest default-tls (native-tls)
     wayland # winit (wayland-backend client_system links libwayland-client)
     dbus # libdbus-sys via dbus-secret-service (keyring) and tao (iced windowing)
+    alsa-lib # alsa-sys via the web-audio-cpal physical output path (cpal/alsa)
   ];
 
   env = {
@@ -101,11 +126,15 @@ rustPlatform.buildRustPackage (finalAttrs: {
     mkdir -p target/patch
     declare -A patch_src=(
       [iced_graphics-0.14.0]='${patchedCrates."iced_graphics-0.14.0"}'
+      [iced_runtime-0.14.0]='${patchedCrates."iced_runtime-0.14.0"}'
+      [iced_winit-0.14.0]='${patchedCrates."iced_winit-0.14.0"}'
       [cosmic-text-0.15.0]='${patchedCrates."cosmic-text-0.15.0"}'
       [vtparse-0.7.0]='${patchedCrates."vtparse-0.7.0"}'
       [deno_permissions-0.116.0]='${patchedCrates."deno_permissions-0.116.0"}'
+      [deno_runtime-0.265.0]='${patchedCrates."deno_runtime-0.265.0"}'
+      [deno_core-0.410.0]='${patchedCrates."deno_core-0.410.0"}'
     )
-    for spec in iced_graphics+0.14.0 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0; do
+    for spec in iced_graphics+0.14.0 iced_runtime+0.14.0 iced_winit+0.14.0 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0 deno_runtime+0.265.0 deno_core+0.410.0; do
       crate=''${spec%%+*}
       ver=''${spec##*+}
       dir="target/patch/$crate-$ver"
