@@ -51,7 +51,7 @@ in {
       networking.wireguard.enable = true;
       networking.wireguard.interfaces = {
         wg0 = {
-          ips = ["10.45.10.1/24"];
+          ips = ["10.45.10.1/24" "100.100.10.1/24"];
           listenPort = 53;
           mtu = 1280;
 
@@ -76,12 +76,12 @@ in {
             }
             {
               publicKey = "SrUQsx4ZOsLS+cDjtVMUxS7HcUE0o5oF8+AuGy6Yqgc=";
-              allowedIPs = ["10.45.10.4/32"];
+              allowedIPs = ["10.45.10.4/32" "100.100.10.4/32"];
             }
             {
               # phone
               publicKey = "HmqFilxeSEWUzT2vmkcGCS7RBFsWJOVfReIb1EzJ9Rk=";
-              allowedIPs = ["10.45.10.5/32"];
+              allowedIPs = ["10.45.10.5/32" "100.100.10.5/32"];
             }
             {
               # client
