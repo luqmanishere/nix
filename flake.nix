@@ -199,6 +199,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-containers = {
+      url = "git+ssh://git@git.solemnattic.dev/luqman/nix-containers.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.agenix.follows = "agenix";
+    };
+
     nixcord.url = "github:4evy/nixcord";
   };
 }

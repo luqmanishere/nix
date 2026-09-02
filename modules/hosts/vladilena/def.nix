@@ -35,6 +35,7 @@ in {
           task
           emacs
           nfrune-server
+          nix-containers
         ];
         home.packages = with pkgs; [rune-mud];
       };

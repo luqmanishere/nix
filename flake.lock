@@ -2183,6 +2183,32 @@
         "type": "github"
       }
     },
+    "nix-containers": {
+      "inputs": {
+        "agenix": [
+          "agenix"
+        ],
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786379999,
+        "narHash": "sha256-QbpMhiu8h22XVqrI/2ZHK3jLHInS7ah+f/GjrTKbq7M=",
+        "ref": "refs/heads/main",
+        "rev": "7a4d9c6900546c4d162f2939247ea1b1a8a3f87b",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@git.solemnattic.dev/luqman/nix-containers.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@git.solemnattic.dev/luqman/nix-containers.git"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -3359,6 +3385,7 @@
         "nh-darwin": "nh-darwin",
         "nil": "nil",
         "niri-flake": "niri-flake",
+        "nix-containers": "nix-containers",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nix2container": "nix2container",
