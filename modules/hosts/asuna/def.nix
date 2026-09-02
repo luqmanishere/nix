@@ -177,7 +177,7 @@ in {
         wireguardPeers = [
           {
             PublicKey = "2x1QVzbgjvnSlTmb4/9o9MnExnn+CTF4JVKO7NcYrlY=";
-            AllowedIPs = ["10.45.10.0/24" "190.1.108.30" "100.100.10.1/32" "100.100.10.5/32"];
+            AllowedIPs = ["10.45.10.0/24" "190.1.108.30" "100.100.10.1/32" "100.100.10.5/32" "100.100.10.6/32"];
             # vladilena VPS IP (solemnattic.dev A record, checked 2026-08-15).
             # Hardcoded so networkd never has to resolve at netdev-create time.
             Endpoint = "213.35.111.130:53";

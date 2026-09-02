@@ -84,9 +84,9 @@ in {
               allowedIPs = ["10.45.10.5/32" "100.100.10.5/32"];
             }
             {
-              # client
+              # client / iPad
               publicKey = "VqNRz2Fzt24wWtWE25V3WQ8+Ooa9DI9jrVUMwZ9pnEQ=";
-              allowedIPs = ["10.45.10.6/32"];
+              allowedIPs = ["10.45.10.6/32" "100.100.10.6/32"];
             }
             {
               # vendor
