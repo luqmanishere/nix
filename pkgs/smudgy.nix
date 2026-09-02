@@ -14,7 +14,7 @@
   makeWrapper,
 }:
 let
-  version = "0.5.5-rc2";
+  version = "0.5.5-rc3";
 
   # The `v8` crate (via deno_core/deno_runtime) normally downloads a prebuilt
   # librusty_v8 archive from GitHub at build time, which fails in the sandbox.
@@ -77,8 +77,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "smudgy-mud";
     repo = "smudgy";
+    # Release tag (2026-08-28): rc2 + audio fixes #143/#144 + version bump.
     rev = "v${finalAttrs.version}";
-    hash = "sha256-eEqifj7ZsOgtaHmTezw3mozeyNzbcV+vRE+Aglb23wE=";
+    hash = "sha256-wZIqpEMCQhA6uvnFjMenh0PJ3yt7jP6+dfGFYkBLeOY=";
   };
 
   # All deps come from the lockfile (no cargo vendor pass, so the
