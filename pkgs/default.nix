@@ -5,4 +5,5 @@
   mudlet-custom = pkgs.callPackage ./mudlet.nix {};
   rune-mud = pkgs.callPackage ./rune.nix {};
   smudgy = pkgs.callPackage ./smudgy.nix {};
+  pi-coding-agent = pkgs.callPackage ./pi-coding-agent.nix {};
 }
