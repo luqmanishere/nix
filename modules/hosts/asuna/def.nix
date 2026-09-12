@@ -106,6 +106,32 @@ in {
     services.printing.enable = true;
     services.flatpak.enable = true;
 
+    # HP scan-to-network-folder destination.
+    systemd.tmpfiles.rules = [
+      "d /home/luqman/Scans 0750 luqman users -"
+    ];
+    services.samba = {
+      enable = true;
+      settings = {
+        global = {
+          security = "user";
+          "server min protocol" = "SMB2";
+          "map to guest" = "Never";
+        };
+        Scans = {
+          path = "/home/luqman/Scans";
+          browseable = "yes";
+          "read only" = "no";
+          "valid users" = ["luqman"];
+          "force user" = "luqman";
+          "create mask" = "0640";
+          "directory mask" = "0750";
+        };
+      };
+    };
+
+    networking.firewall.allowedTCPPorts = [445];
+
     # TODO: refactor as feature
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -206,6 +232,14 @@ in {
         # No default route means the uplink is down; nothing to fix yet
         if ! ip route show default | grep -q .; then
           exit 0
+        fi
+
+        # networkd can lose the primary address during an uplink-triggered
+        # reconfiguration while leaving the WireGuard netdev and peer alive.
+        # Restore it in place; do not bounce the tunnel for an address-only loss.
+        if ! ip -4 addr show dev wg0 | grep -q 'inet 10.45.10.4/32'; then
+          echo "wg0 is missing 10.45.10.4/32; restoring address"
+          ip addr add 10.45.10.4/32 dev wg0
         fi
 
         if ping -I wg0 -c 1 -W 2 10.45.10.1 >/dev/null 2>&1; then
