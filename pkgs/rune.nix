@@ -7,16 +7,16 @@
 }:
 (buildGoModule.override {go = go_1_26;}) rec {
   pname = "rune-mud";
-  version = "0.11.0-beta.1";
+  version = "0.11.1";
 
   src = fetchFromGitHub {
     owner = "mmcdole";
     repo = "rune";
     rev = "v${version}";
-    hash = "sha256-HYolyd0XcjlbcrdGpwUZRdbh6lr/kjL+/grEvyUSuwk=";
+    hash = "sha256-Vyqx/Dee79aZ3igWOLnIPy0+zfRAj3TXHd24qlYT79A=";
   };
 
-  vendorHash = "sha256-q1TUvSEtvBdihZCyW1yD4rL4I4Bc27xpj/CT5UB+HHk=";
+  vendorHash = "sha256-5j2lhHI8Dyzn3iXY8ofRJN27kOcH7q5o/jl7zEMPm6U=";
 
   modRoot = ".";
   subPackages = ["cmd/rune"];
