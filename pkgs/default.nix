@@ -6,4 +6,5 @@
   rune-mud = pkgs.callPackage ./rune.nix {};
   smudgy = pkgs.callPackage ./smudgy.nix {};
   pi-coding-agent = pkgs.callPackage ./pi-coding-agent.nix {};
+  xtool = pkgs.callPackage ./xtool.nix {};
 }
