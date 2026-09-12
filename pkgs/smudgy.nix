@@ -14,7 +14,7 @@
   makeWrapper,
 }:
 let
-  version = "0.5.5-rc3";
+  version = "0.5.7-ptb.9";
 
   # The `v8` crate (via deno_core/deno_runtime) normally downloads a prebuilt
   # librusty_v8 archive from GitHub at build time, which fails in the sandbox.
@@ -68,6 +68,16 @@ let
       url = "https://static.crates.io/crates/deno_core/deno_core-0.410.0.crate";
       hash = "sha256-BNGkOicWxoGKhF8kSa5lnaVHaHwMSyfDTSQkad1ZErs=";
     };
+    "regex-filtered-0.2.1" = fetchurl {
+      url = "https://static.crates.io/crates/regex-filtered/regex-filtered-0.2.1.crate";
+      hash = "sha256-rF97MfvvdIzEZkPB+boX9tXHxvC6XjcvycSNMa0chhI=";
+    };
+  };
+  icedCodeEditorSource = fetchFromGitHub {
+    owner = "LuDog71FR";
+    repo = "iced-code-editor";
+    rev = "337ec6b08ebdb13edda6b8353256fe7fcb64352e";
+    hash = "sha256-N8JnHy+2VC4brCs91wwRys/Qzhe1UYOZtgLL5EjYa9Y=";
   };
 in
 rustPlatform.buildRustPackage (finalAttrs: {
@@ -77,21 +87,22 @@ rustPlatform.buildRustPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "smudgy-mud";
     repo = "smudgy";
-    # Release tag (2026-08-28): rc2 + audio fixes #143/#144 + version bump.
+    # Nightly tag (2026-09-10): inner triggers, state exposure, Mudlet DB,
+    # raw-byte sends, streaming audio, and trigger/runtime performance work.
     rev = "v${finalAttrs.version}";
-    hash = "sha256-wZIqpEMCQhA6uvnFjMenh0PJ3yt7jP6+dfGFYkBLeOY=";
+    hash = "sha256-P8SjFcjtNkOapEjTSPfFJL6YglYeC7yQlELp8W+WqnA=";
   };
 
   # All deps come from the lockfile (no cargo vendor pass, so the
   # [patch.crates-io] path overrides below don't need to exist yet).
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = "${finalAttrs.src}/Cargo.lock";
-    # v0.5.5-rc2 pulls two workspaces over git (the Web Audio stack):
-    # deno_audio and web-audio-api (smudgy-mud/web-audio-api-rs). Their
-    # NAR hashes come from nix-prefetch-git at the exact lockfile revs.
+    # v0.5.7-ptb.9 pulls three workspaces over git: the Web Audio stack
+    # (deno_audio and web-audio-api) plus iced-code-editor. Their NAR hashes
+    # come from nix-prefetch-git at the exact lockfile revisions.
     outputHashes = {
-      "deno_audio-0.1.0-alpha.1" = "sha256-W28UZ7NfjgV7ZSDr+N5ZfaIwHH/R2Ssrbl6KppzYiVE=";
-      "web-audio-api-1.7.0" = "sha256-M+EKhB6nL26/4ec3OMQhFPHChEJFwXB02dNzVLC5olU=";
+      "deno_audio-0.1.0-alpha.1" = "sha256-cBTFL2k1PpGKyKswxl95TbUdu4r9hn+oVicdiooYPWU=";
+      "web-audio-api-1.7.0" = "sha256-HHeBmLPki/uc3H50ISvHP+/dp+jNY5LkBgaIm+3ETNM=";
     };
   };
 
@@ -134,8 +145,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
       [deno_permissions-0.116.0]='${patchedCrates."deno_permissions-0.116.0"}'
       [deno_runtime-0.265.0]='${patchedCrates."deno_runtime-0.265.0"}'
       [deno_core-0.410.0]='${patchedCrates."deno_core-0.410.0"}'
+      [regex-filtered-0.2.1]='${patchedCrates."regex-filtered-0.2.1"}'
     )
-    for spec in iced_graphics+0.14.0 iced_runtime+0.14.0 iced_winit+0.14.0 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0 deno_runtime+0.265.0 deno_core+0.410.0; do
+    mkdir -p target/patch/iced-code-editor
+    cp -R ${icedCodeEditorSource}/iced-code-editor/. target/patch/iced-code-editor/
+    chmod -R u+w target/patch/iced-code-editor
+    patch -d target/patch/iced-code-editor -p1 --forward --batch < patches/iced-code-editor+0.5.1.patch || true
+    for spec in iced_graphics+0.14.0 iced_runtime+0.14.0 iced_winit+0.14.0 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0 deno_runtime+0.265.0 deno_core+0.410.0 regex-filtered+0.2.1; do
       crate=''${spec%%+*}
       ver=''${spec##*+}
       dir="target/patch/$crate-$ver"
