@@ -55,6 +55,7 @@ in {
               kitty
               zellij
               fonts
+              games
               niri
               hyprlock
               quickshell
@@ -161,7 +162,7 @@ in {
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
-    hardware.graphics.extraPackages = with pkgs; [vpl-gpu-rt];
+    hardware.graphics.extraPackages = with pkgs; [intel-media-driver vpl-gpu-rt];
 
     virtualisation.waydroid.enable = true;
     virtualisation.waydroid.package = pkgs.waydroid-nftables;
@@ -345,6 +346,8 @@ in {
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.intel.npu.enable = true;
+    # Level Zero discovers the NPU driver through this NixOS graphics path.
+    environment.sessionVariables.LD_LIBRARY_PATH = "/run/opengl-driver/lib";
     hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
