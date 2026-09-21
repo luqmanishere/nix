@@ -14,7 +14,7 @@
   makeWrapper,
 }:
 let
-  version = "0.5.7-ptb.9";
+  version = "0.5.7";
 
   # The `v8` crate (via deno_core/deno_runtime) normally downloads a prebuilt
   # librusty_v8 archive from GitHub at build time, which fails in the sandbox.
@@ -44,9 +44,9 @@ let
       url = "https://static.crates.io/crates/iced_runtime/iced_runtime-0.14.0.crate";
       hash = "sha256-0YibgZzkwGZ0GDJC4zbI1JRlZlRBOWkU3AfMhvRPqNQ=";
     };
-    "iced_winit-0.14.0" = fetchurl {
-      url = "https://static.crates.io/crates/iced_winit/iced_winit-0.14.0.crate";
-      hash = "sha256-i32+3EdWLR3juXB9k59ni4jDggBLerWhj3p91yMWLXU=";
+    "iced_winit-0.14.1" = fetchurl {
+      url = "https://static.crates.io/crates/iced_winit/iced_winit-0.14.1.crate";
+      hash = "sha256-dYmIjI6VGJnMaIJHppkzu3oFEfC0suEirD/NXayzf3I=";
     };
     "cosmic-text-0.15.0" = fetchurl {
       url = "https://static.crates.io/crates/cosmic-text/cosmic-text-0.15.0.crate";
@@ -87,17 +87,17 @@ rustPlatform.buildRustPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "smudgy-mud";
     repo = "smudgy";
-    # Nightly tag (2026-09-10): inner triggers, state exposure, Mudlet DB,
-    # raw-byte sends, streaming audio, and trigger/runtime performance work.
+    # Stable v0.5.7: inner triggers, state exposure, Mudlet DB, raw-byte sends,
+    # streaming audio, and trigger/runtime performance work.
     rev = "v${finalAttrs.version}";
-    hash = "sha256-P8SjFcjtNkOapEjTSPfFJL6YglYeC7yQlELp8W+WqnA=";
+    hash = "sha256-T6zzJQEa2tSC0FAa0eH8aoIw1HNqp4VGpTVKMRMqAw8=";
   };
 
   # All deps come from the lockfile (no cargo vendor pass, so the
   # [patch.crates-io] path overrides below don't need to exist yet).
   cargoDeps = rustPlatform.importCargoLock {
     lockFile = "${finalAttrs.src}/Cargo.lock";
-    # v0.5.7-ptb.9 pulls three workspaces over git: the Web Audio stack
+    # v0.5.7 pulls three workspaces over git: the Web Audio stack
     # (deno_audio and web-audio-api) plus iced-code-editor. Their NAR hashes
     # come from nix-prefetch-git at the exact lockfile revisions.
     outputHashes = {
@@ -139,7 +139,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     declare -A patch_src=(
       [iced_graphics-0.14.0]='${patchedCrates."iced_graphics-0.14.0"}'
       [iced_runtime-0.14.0]='${patchedCrates."iced_runtime-0.14.0"}'
-      [iced_winit-0.14.0]='${patchedCrates."iced_winit-0.14.0"}'
+      [iced_winit-0.14.1]='${patchedCrates."iced_winit-0.14.1"}'
       [cosmic-text-0.15.0]='${patchedCrates."cosmic-text-0.15.0"}'
       [vtparse-0.7.0]='${patchedCrates."vtparse-0.7.0"}'
       [deno_permissions-0.116.0]='${patchedCrates."deno_permissions-0.116.0"}'
@@ -151,7 +151,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     cp -R ${icedCodeEditorSource}/iced-code-editor/. target/patch/iced-code-editor/
     chmod -R u+w target/patch/iced-code-editor
     patch -d target/patch/iced-code-editor -p1 --forward --batch < patches/iced-code-editor+0.5.1.patch || true
-    for spec in iced_graphics+0.14.0 iced_runtime+0.14.0 iced_winit+0.14.0 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0 deno_runtime+0.265.0 deno_core+0.410.0 regex-filtered+0.2.1; do
+    for spec in iced_graphics+0.14.0 iced_runtime+0.14.0 iced_winit+0.14.1 cosmic-text+0.15.0 vtparse+0.7.0 deno_permissions+0.116.0 deno_runtime+0.265.0 deno_core+0.410.0 regex-filtered+0.2.1; do
       crate=''${spec%%+*}
       ver=''${spec##*+}
       dir="target/patch/$crate-$ver"
