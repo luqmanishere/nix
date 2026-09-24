@@ -60,7 +60,7 @@
         alejandra
         nh
         ripgrep
-        inputs'.nh-darwin.packages.default
+        # inputs'.nh-darwin.packages.default
       ];
       scripts = {
         menu = {
